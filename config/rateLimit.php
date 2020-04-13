@@ -1,5 +1,7 @@
 <?php
 session_start();
+// session_destroy();
+
 date_default_timezone_set ('Australia/Brisbane');
   //set access counter
   if(!isset($_SESSION['accessCount'])){
@@ -53,7 +55,6 @@ date_default_timezone_set ('Australia/Brisbane');
     }
     $_SESSION['LAST_CALL'] = date("Y-m-d H:i:s");
 
-    // session_destroy();
 
     //dont mind the rest
   // $d1=new DateTime("2012-07-08 11:14:15.638276");
