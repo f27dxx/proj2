@@ -1,5 +1,6 @@
 <?php
   require_once('../../config/rateLimit.php');
+  require_once('../../config/whitelist.php');
 
   //header
   header('Access-Control-Allow-Origin:*');
