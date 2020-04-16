@@ -76,6 +76,7 @@
     //Trun to JSON & output
     echo json_encode($recipes_arr);
   } else {
+    http_response_code(404);
     //No posts
     echo json_encode(
       array('message' => 'No Posts Found')

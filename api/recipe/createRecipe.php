@@ -33,6 +33,7 @@
       array('message' => 'recipe added')
     );
   } else {
+    http_response_code(501);
     echo json_encode(
       array('message' => 'recipe not added')
     );
