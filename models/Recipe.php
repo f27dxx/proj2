@@ -249,7 +249,19 @@
     public function deleteRecipe(){
       $this->conn->beginTransaction();
 
-      
+      $query = 'DELETE FROM method
+                WHERE recipe_id = :recipe_id';
+
+      $stmt = $this->conn->prepare($query);
+
+
+      //input filter
+      $this->recipe_id = htmlspecialchars(strip_tags($this->recipe_id));
+
+      //bind data
+      $stmt->bindParam(':recipe_id', $this->recipe_id);
+
+      $stmt->execute();
       
       //get the recipeID
       $query = 'DELETE FROM ingredient
