@@ -15,9 +15,14 @@
 
   //Instantiate blog post obj
   $recipe = new Recipe($db);
+  ///
+  if(isset($_GET['id'])){
+    $id = $_GET['id'];
+    $result = $recipe->read_single($id);
+  } else {
+    $result = $recipe->getRecipe();
+  }
 
-  // Blog post query
-  $result = $recipe->getRecipe();
   //Get row count
   $num = $result->rowCount();
 
