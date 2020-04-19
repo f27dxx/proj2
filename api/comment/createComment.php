@@ -21,22 +21,17 @@
   //get raw posted data
   $data = json_decode(file_get_contents("php://input"));
 
-  $recipe->name = $data->name;
-  $recipe->description = $data->description;
+  $recipe->recipe_id = $data->recipe_id;
+  $recipe->content = $data->content;
   $recipe->user_id = $data->user_id;
-  $recipe->quantity = $data->quantity;
-  $recipe->measurement = $data->measurement;
-  $recipe->item = $data->item;
-  $recipe->step = $data->step;
 
 
-  if($recipe->createRecipe()){
+  if($recipe->createComment()){
     echo json_encode(
-      array('message' => 'recipe added')
+      array('message' => 'Comment added')
     );
   } else {
-    http_response_code(501);
     echo json_encode(
-      array('message' => 'recipe not added')
+      array('message' => 'Comment not added')
     );
   }

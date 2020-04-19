@@ -2,7 +2,7 @@
 session_start();
 // session_destroy();
 
-// date_default_timezone_set ('Australia/Brisbane');
+date_default_timezone_set ('Australia/Brisbane');
   //set access counter
   if(!isset($_SESSION['accessCount'])){
     $_SESSION['accessCount'] = 0;
@@ -45,8 +45,11 @@ session_start();
   // Rate limit Web Service to one request per second per user session
   if (isset($_SESSION['LAST_CALL'])) {
     $last = strtotime($_SESSION['LAST_CALL']);
+    // echo $last . "last";
     $curr = strtotime(date("Y-m-d h:i:s"));
+    // echo $curr . "curr";
     $sec =  abs($last - $curr);
+    // echo $sec;
     if ($sec <= 1) {
       $data = 'Rate Limit Exceeded';  // rate limit
       header('Content-Type: application/json');
@@ -54,7 +57,7 @@ session_start();
     }
   }
   $_SESSION['LAST_CALL'] = date("Y-m-d H:i:s");
-
+  // echo $_SESSION['LAST_CALL'];
 
     //dont mind the rest
   // $d1=new DateTime("2012-07-08 11:14:15.638276");

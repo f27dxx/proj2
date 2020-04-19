@@ -12,7 +12,7 @@
     public $quantity;
     public $measurement;
     public $item;
- 
+    public $content;
 
 
     //Construstor with DB
@@ -293,6 +293,67 @@
       $stmt->execute();
 
       if($this->conn->commit()){
+        return true;
+      }
+
+      //print error if something goes wrong
+      printf('Error: %s.\n', $stmt->error);
+
+      return false;
+    
+    }
+
+
+    /////////////// Comment
+    public function createComment(){
+     
+      //insert to recipe
+      $query = 'INSERT INTO comment 
+              SET
+              recipe_id = :recipe_id,
+              content = :content,
+              user_id = :user_id';
+
+      //prepate statement
+      $stmt = $this->conn->prepare($query);
+
+      //input filter
+      $this->recipe_id = htmlspecialchars(strip_tags($this->recipe_id));
+      $this->content = htmlspecialchars(strip_tags($this->content));
+      $this->user_id = htmlspecialchars(strip_tags($this->user_id));
+
+      //bind data
+      $stmt->bindParam(':recipe_id', $this->recipe_id);
+      $stmt->bindParam(':content', $this->content);
+      $stmt->bindParam(':user_id', $this->user_id);
+
+      //save into database
+      if($stmt->execute()){
+
+        return true;
+      }
+
+      //print error if something goes wrong
+      printf('Error: %s.\n', $stmt->error);
+
+      return false;
+    }
+
+    public function deleteComment(){
+
+      $query = 'DELETE FROM comment
+                WHERE c_id = :c_id';
+
+      $stmt = $this->conn->prepare($query);
+
+
+      //input filter
+      $this->c_id = htmlspecialchars(strip_tags($this->c_id));
+
+      //bind data
+      $stmt->bindParam(':c_id', $this->c_id);
+
+      if($stmt->execute()){
         return true;
       }
 

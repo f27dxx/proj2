@@ -5,7 +5,7 @@
   //header
   header('Access-Control-Allow-Origin:*');
   header('Content-Type: application/json');
-  header('Access-Control-Allow-Methods: POST');
+  header('CAccess-Control-Allow-Methods: DELETE');
   header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type,Access-Control-Allow_Methods, Authorization, X-Requested-With');
 
   include_once '../../config/Database.php';
@@ -21,22 +21,15 @@
   //get raw posted data
   $data = json_decode(file_get_contents("php://input"));
 
-  $recipe->name = $data->name;
-  $recipe->description = $data->description;
-  $recipe->user_id = $data->user_id;
-  $recipe->quantity = $data->quantity;
-  $recipe->measurement = $data->measurement;
-  $recipe->item = $data->item;
-  $recipe->step = $data->step;
+  $recipe->c_id = $data->c_id;
 
 
-  if($recipe->createRecipe()){
+  if($recipe->deleteComment()){
     echo json_encode(
-      array('message' => 'recipe added')
+      array('message' => 'Comment Delete')
     );
   } else {
-    http_response_code(501);
     echo json_encode(
-      array('message' => 'recipe not added')
+      array('message' => 'Comment not Delete')
     );
   }
