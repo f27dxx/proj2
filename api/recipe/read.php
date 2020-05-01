@@ -28,6 +28,7 @@
 
   //Check if any posts
   if($num > 0){
+    $i = 0 ;
     //Post array
     $recipes_arr = array();
     $recipes_arr['data'] = array();
@@ -55,11 +56,11 @@
       if($ingreNum>0){
         while($ingreRow = $ingreResult->fetch(PDO::FETCH_ASSOC)){
           extract($ingreRow);
-
+          
           $recipe_item = array(
             'ingredients' => $ingredients,
           );
-          array_push($recipes_arr['data'], $recipe_item);
+          array_push($recipes_arr['data'][$i]['ingre_arr'], $recipe_item['ingredients']);
         };
       }
       
@@ -74,11 +75,12 @@
           $recipe_step = array(
             'step' => $step
           );
-          array_push($recipes_arr['data'], $recipe_step);
+          array_push($recipes_arr['data'][$i]['step_arr'], $recipe_step['step']);
         };
       }
+      
+      $i++;
     };
-
     //Trun to JSON & output
     echo json_encode($recipes_arr);
   } else {
