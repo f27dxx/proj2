@@ -57,12 +57,12 @@
 
       if($ingreNum>0){
         while($ingreRow = $ingreResult->fetch(PDO::FETCH_ASSOC)){
-          extract($ingreRow);
+          // extract($ingreRow);
           
-          $recipe_item = array(
-            'ingredients' => $ingredients,
-          );
-          array_push($recipes_arr['data'][$i]['ingre_arr'], $recipe_item['ingredients']);
+          // $recipe_item = array(
+          //   'ingredients' => $ingredients,
+          // );
+          array_push($recipes_arr['data'][$i]['ingre_arr'], $ingreRow);
         };
       }
       
