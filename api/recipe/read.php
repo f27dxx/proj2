@@ -34,6 +34,7 @@
     $recipes_arr['data'] = array();
     $ingre_arr = array();
     $step_arr = array();
+    $comm_arr = array();
 
     // getRecipe
     while($row = $result->fetch(PDO::FETCH_ASSOC)){
@@ -44,7 +45,8 @@
         'description' => $description,
         'user_id' => $user_id,
         'ingre_arr' => $ingre_arr,
-        'step_arr'=> $step_arr
+        'step_arr'=> $step_arr,
+        'comm_arr' => $comm_arr
       );
       
       array_push($recipes_arr['data'], $recipe_info);
@@ -79,6 +81,17 @@
         };
       }
       
+      $commResult = $recipe->getComment((int)$recipe_id);
+      $commNum = $commResult->rowCount();
+
+      if($commNum>0){
+        while($commRow = $commResult->fetch(PDO::FETCH_ASSOC)){
+
+          array_push($recipes_arr['data'][$i]['comm_arr'], $commRow);
+        };
+      }
+
+
       $i++;
     };
     //Trun to JSON & output

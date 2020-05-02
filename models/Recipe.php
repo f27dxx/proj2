@@ -70,6 +70,18 @@
       return $stmt;
     }
 
+    //get comment
+    public function getComment($recipe_id){
+      $query = 'SELECT c.c_id, c.content, l.username 
+                FROM comment c
+                JOIN login l on c.user_id = l.user_id
+                WHERE recipe_id = ' . $recipe_id;
+
+      $stmt = $this->conn->prepare($query);
+      $stmt->execute();
+      return $stmt;
+    }
+
     //get single post
     public function read_single($id){
       $query = 'SELECT * FROM recipe
@@ -665,6 +677,18 @@
 
       $stmt->execute();
     
+      $query = 'DELETE FROM comment
+                WHERE recipe_id = :recipe_id';
+
+      $stmt = $this->conn->prepare($query);
+
+      $this->recipe_id = htmlspecialchars(strip_tags($this->recipe_id));
+
+      $stmt->bindParam(':recipe_id', $this->recipe_id);
+
+      $stmt->execute();
+
+
       //Delete recipe
       $query = 'DELETE FROM recipe 
       WHERE recipe_id = :recipe_id';
