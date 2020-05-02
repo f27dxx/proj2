@@ -1,8 +1,7 @@
 <?php
 session_start();
-// session_destroy();
 
-date_default_timezone_set ('Australia/Brisbane');
+// date_default_timezone_set ('Australia/Brisbane');
   //set access counter
   if(!isset($_SESSION['accessCount'])){
     $_SESSION['accessCount'] = 0;
@@ -59,13 +58,6 @@ date_default_timezone_set ('Australia/Brisbane');
   $_SESSION['LAST_CALL'] = date("Y-m-d H:i:s");
   // echo $_SESSION['LAST_CALL'];
 
-    //dont mind the rest
-  // $d1=new DateTime("2012-07-08 11:14:15.638276");
-  // $d2=new DateTime("2012-07-09 22:14:15.889342");
-  // $diff=$d2->diff($d1);
-  // print_r( $diff ) ;
-  // normal usage
-  // $data = "Data Returned from API";
-  // header('Content-Type: application/json');
-  // die(json_encode($data)); 
+// session_destroy();
+
 ?>
