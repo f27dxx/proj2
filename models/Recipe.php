@@ -39,7 +39,7 @@
     public function getIngre($recipe_id){
       //Query
       // $query = 'SELECT CONCAT(i.quantity, " ", m.type, " " ,i.item) AS ingredients
-      $query = 'SELECT i.quantity, m.type, i.item
+      $query = 'SELECT i.i_id, i.quantity, m.type, i.item
       FROM recipe r 
       JOIN ingredient i on i.recipe_id = r.recipe_id 
       JOIN measurement m on m.mea_id = i.measurement 
