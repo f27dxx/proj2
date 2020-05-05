@@ -837,4 +837,15 @@
 
       return false;
     }
+
+    public function checkRecipeOwnership($id){
+      $query = 'SELECT user_id FROM recipe
+                WHERE recipe_id = :recipe_id';
+      $stmt = $this->conn->prepare($query);
+      $stmt->bindParam(':recipe_id', $id);
+      $stmt->execute();
+      $row = $stmt->fetch();
+      // echo $row['user_id'];
+      return $row['user_id'];
+    }
   }
