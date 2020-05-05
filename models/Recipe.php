@@ -775,4 +775,39 @@
       return false;
     
     }
+
+    public function createUser(){
+      $query = 'SELECT username FROM login
+                WHERE username = :username';
+
+      $stmt = $this->conn->prepare($query);
+      $stmt->bindParam(':username', $this->username);
+      $stmt->execute();
+      if($stmt->rowCount()<1) {
+        $query = 'INSERT INTO login
+        SET
+        username = :username,
+        password = :password,
+        privilege = :privilege';
+
+        $stmt = $this->conn->prepare($query);
+
+        //encrypt
+        $this->password = password_hash($this->password, PASSWORD_DEFAULT);
+        $stmt->bindParam(':username', $this->username);
+        $stmt->bindParam(':password', $this->password);
+        $stmt->bindParam(':privilege', $this->privilege);
+
+        if($stmt->execute()){
+
+        return true;
+        }
+
+        //print error if something goes wrong
+        printf('Error: %s.\n', $stmt->error);
+
+        return false;
+      }
+    }
+
   }
