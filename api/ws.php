@@ -154,11 +154,15 @@
         }
       break;
       case 'logout':
-        echo  $_SESSION['username'];
-        echo $_SESSION['user_id'];
-        echo $_SESSION['privilege'];
-        echo $_SESSION['logged_in'];
-        session_destroy();
+        unset($_SESSION['username']);
+        unset($_SESSION['user_id']);
+        unset($_SESSION['privilege']);
+        unset($_SESSION['logged_in']);
+        // echo  $_SESSION['username'];
+        // echo $_SESSION['user_id'];
+        // echo $_SESSION['privilege'];
+        // echo $_SESSION['logged_in'];
+        // session_destroy();
       break;
       case 'crecipe':
         if(isset($_SESSION['logged_in'])){
@@ -297,31 +301,36 @@
       case 'drecipe':
         if(isset($_GET['id']) && isset($_SESSION['logged_in'])){
           if(
+            //if the logged in user own the recipe
             $recipe->checkRecipeOwnership($_GET['id']) == $_SESSION['user_id'] ||
+            // or the logged in user have admin privilege
             $_SESSION['privilege'] == 1
             ){
             $data = json_decode(file_get_contents("php://input"));
 
             $recipe->recipe_id = $_GET['id'];
-
+            //delete recipe
             if($recipe->deleteRecipe()){
               echo json_encode(
                 array('message' => 'recipe Delete')
               );
             } else {
+              //if somehow the user own the recipe cannot delete it
               echo json_encode(
                 array('message' => 'recipe not Delete')
               );
             }
+            
           } else {
+            //if logged in but user does not own the recipe
             http_response_code(403);
             echo json_encode(
               array('message' => 'Access denied')
             );
           }
 
-
         } else {
+          //if get access to delete recipe but not logged in
           http_response_code(401);
           echo json_encode(
             array('message' => 'Not authorized.')
