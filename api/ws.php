@@ -158,6 +158,9 @@
         unset($_SESSION['user_id']);
         unset($_SESSION['privilege']);
         unset($_SESSION['logged_in']);
+        echo json_encode(
+          array('message' => 'You have logged out')
+        );
         // echo  $_SESSION['username'];
         // echo $_SESSION['user_id'];
         // echo $_SESSION['privilege'];
@@ -304,8 +307,8 @@
             //if the logged in user own the recipe
             $recipe->checkRecipeOwnership($_GET['id']) == $_SESSION['user_id'] ||
             // or the logged in user have admin privilege
-            $_SESSION['privilege'] == 1
-            ){
+            $_SESSION['privilege'] == 1){
+              
             $data = json_decode(file_get_contents("php://input"));
 
             $recipe->recipe_id = $_GET['id'];
@@ -338,6 +341,174 @@
         }
 
       break;
+      case 'urecipe':
+        if(isset($_GET['id']) && isset($_SESSION['logged_in'])){
+          if(
+            //if the logged in user own the recipe
+            $recipe->checkRecipeOwnership($_GET['id']) == $_SESSION['user_id'] ||
+            // or the logged in user have admin privilege
+            $_SESSION['privilege'] == 1){
+              
+            $data = json_decode(file_get_contents("php://input"));
+            
+            $recipe->name = $data->name;
+            $recipe->description = $data->description;  
+            $recipe->recipe_id = $_GET['id'];
+
+            $recipe->quantity1 = $data->quantity1;
+            $recipe->measurement1 = $data->measurement1;
+            $recipe->item1 = $data->item1;
+            $recipe->i_id1 = $data->i_id1;
+            $recipe->quantity2 = $data->quantity2;
+            $recipe->measurement2 = $data->measurement2;
+            $recipe->item2 = $data->item2;
+            $recipe->i_id2 = $data->i_id2;
+  
+            if(isset($data->quantity3) && isset($data->measurement3) && isset($data->item3) && isset($data->i_id3)){
+              $recipe->quantity3 = $data->quantity3;
+              $recipe->measurement3 = $data->measurement3;
+              $recipe->item3 = $data->item3;
+              $recipe->i_id3 = $data->i_id3;
+            }
+  
+            if(isset($data->quantity4) && isset($data->measurement4) && isset($data->item4) && isset($data->i_id4)){
+              $recipe->quantity4 = $data->quantity4;
+              $recipe->measurement4 = $data->measurement4;
+              $recipe->item4 = $data->item4;
+              $recipe->i_id4 = $data->i_id4;
+            }
+  
+            if(isset($data->quantity5) && isset($data->measurement5) && isset($data->item5) && isset($data->i_id5)){
+              $recipe->quantity5 = $data->quantity5;
+              $recipe->measurement5 = $data->measurement5;
+              $recipe->item5 = $data->item5;
+              $recipe->i_id5 = $data->i_id5;
+            }
+  
+            if(isset($data->quantity6) && isset($data->measurement6) && isset($data->item6) && isset($data->i_id6)){
+              $recipe->quantity6 = $data->quantity6;
+              $recipe->measurement6 = $data->measurement6;
+              $recipe->item6 = $data->item6;
+              $recipe->i_id6 = $data->i_id6;
+            }
+  
+            if(isset($data->quantity7) && isset($data->measurement7) && isset($data->item7) && isset($data->i_id7)){
+              $recipe->quantity7 = $data->quantity7;
+              $recipe->measurement7 = $data->measurement7;
+              $recipe->item7 = $data->item7;
+              $recipe->i_id7 = $data->i_id7;
+            }
+  
+            if(isset($data->quantity8) && isset($data->measurement8) && isset($data->item8) && isset($data->i_id8)){
+              $recipe->quantity8 = $data->quantity8;
+              $recipe->measurement8 = $data->measurement8;
+              $recipe->item8 = $data->item8;
+              $recipe->i_id8 = $data->i_id8;
+            }
+  
+            if(isset($data->quantity9) && isset($data->measurement9) && isset($data->item9) && isset($data->i_id9)){
+              $recipe->quantity9 = $data->quantity9;
+              $recipe->measurement9 = $data->measurement9;
+              $recipe->item9 = $data->item9;
+              $recipe->i_id9 = $data->i_id9;
+            }
+  
+            if(isset($data->quantity10) && isset($data->measurement10) && isset($data->item10) && isset($data->i_id10)){
+              $recipe->quantity10 = $data->quantity10;
+              $recipe->measurement10 = $data->measurement10;
+              $recipe->item10 = $data->item10;
+              $recipe->i_id10 = $data->i_id10;
+            }
+  
+            if(isset($data->quantity11) && isset($data->measurement11) && isset($data->item11) && isset($data->i_id11)){
+              $recipe->quantity11 = $data->quantity11;
+              $recipe->measurement11 = $data->measurement11;
+              $recipe->item11 = $data->item11;
+              $recipe->i_id11 = $data->i_id11;
+            }
+  
+            if(isset($data->quantity12) && isset($data->measurement12) && isset($data->item12) && isset($data->i_id12)){
+              $recipe->quantity12 = $data->quantity12;
+              $recipe->measurement12 = $data->measurement12;
+              $recipe->item12 = $data->item12;
+              $recipe->i_id12 = $data->i_id12;
+            }
+  
+            if(isset($data->quantity13) && isset($data->measurement13) && isset($data->item13) && isset($data->i_id13)){
+              $recipe->quantity13 = $data->quantity13;
+              $recipe->measurement13 = $data->measurement13;
+              $recipe->item13 = $data->item13;
+              $recipe->i_id13 = $data->i_id13;
+            }
+  
+            if(isset($data->quantity14) && isset($data->measurement14) && isset($data->item14) && isset($data->i_id14)){
+              $recipe->quantity14 = $data->quantity14;
+              $recipe->measurement14 = $data->measurement14;
+              $recipe->item14 = $data->item14;
+              $recipe->i_id14 = $data->i_id14;
+            }
+  
+            if(isset($data->quantity15) && isset($data->measurement15) && isset($data->item15) && isset($data->i_id15)){
+              $recipe->quantity15 = $data->quantity15;
+              $recipe->measurement15 = $data->measurement15;
+              $recipe->item15 = $data->item15;
+              $recipe->i_id15 = $data->i_id15;
+            }
+  
+            //////////////////  step /////////////////
+            $recipe->step1 = $data->step1;
+            $recipe->met_id1 = $data->met_id1;
+  
+            if(isset($data->step2) && isset($data->met_id2)){
+              $recipe->step2 = $data->step2;
+              $recipe->met_id2 = $data->met_id2;
+            }
+  
+            if(isset($data->step3) && isset($data->met_id3)){
+              $recipe->step3 = $data->step3;
+              $recipe->met_id3 = $data->met_id3;
+            }
+  
+            if(isset($data->step4) && isset($data->met_id4)){
+              $recipe->step4 = $data->step4;
+              $recipe->met_id4 = $data->met_id4;
+            }
+  
+            if(isset($data->step5) && isset($data->met_id5)){
+              $recipe->step5 = $data->step5;
+              $recipe->met_id5 = $data->met_id5;
+            }
+
+            if($recipe->updateRecipe()){
+              echo json_encode(
+                array('message' => 'recipe updated')
+              );
+            } else {
+              echo json_encode(
+                array('message' => 'recipe NOT updated')
+              );
+            }
+
+
+          ////////////////////////////////////////////////////////
+            
+          } else {
+            //if logged in but user does not own the recipe
+            http_response_code(403);
+            echo json_encode(
+              array('message' => 'Access denied')
+            );
+          }
+
+        } else {
+          //if get access to delete recipe but not logged in
+          http_response_code(401);
+          echo json_encode(
+            array('message' => 'Not authorized.')
+          );
+        }
+      break;
+
     }
   }
 
