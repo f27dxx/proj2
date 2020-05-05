@@ -57,7 +57,7 @@
     //get step
     public function getStep($recipe_id){
       //Query
-      $query = 'SELECT m.step
+      $query = 'SELECT  m.met_id, m.step
       FROM recipe r 
       JOIN method m on m.recipe_id = r.recipe_id 
       WHERE r.recipe_id = ' . $recipe_id ;

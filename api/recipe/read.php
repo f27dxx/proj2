@@ -72,12 +72,12 @@
 
       if($stepNum>0){
         while($stepRow = $stepResult->fetch(PDO::FETCH_ASSOC)){
-          extract($stepRow);
+          // extract($stepRow);
 
-          $recipe_step = array(
-            'step' => $step
-          );
-          array_push($recipes_arr['data'][$i]['step_arr'], $recipe_step['step']);
+          // $recipe_step = array(
+          //   'step' => $step
+          // );
+          array_push($recipes_arr['data'][$i]['step_arr'], $stepRow);
         };
       }
       
