@@ -1299,4 +1299,30 @@
       // echo $row['user_id'];
       return $row['user_id'];
     }
+
+    public function searchCocktail(){
+      $query = 'SELECT recipe_id FROM recipe
+                WHERE name = :name';
+
+      //Prepare statment
+      $stmt = $this->conn->prepare($query);
+      $stmt->bindParam(':name', $this->searchItem);
+      //Execute query
+      $stmt->execute();
+      if($stmt->rowCount() > 0){
+        return $stmt;
+      }
+
+
+      $query = 'SELECT recipe_id FROM ingredient
+                WHERE item = :item';
+
+      $stmt = $this->conn->prepare($query);
+      $stmt->bindParam(':item', $this->searchItem);
+      //Execute query
+      $stmt->execute();
+
+      return $stmt;
+      
+    }
   }
