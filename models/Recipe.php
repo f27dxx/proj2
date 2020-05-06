@@ -1302,8 +1302,9 @@
 
     public function searchCocktail(){
       $query = 'SELECT recipe_id FROM recipe
-                WHERE name = :name';
+                WHERE name LIKE :name';
 
+      $this->searchItem = '%'.$this->searchItem.'%';
       //Prepare statment
       $stmt = $this->conn->prepare($query);
       $stmt->bindParam(':name', $this->searchItem);
@@ -1315,7 +1316,7 @@
 
 
       $query = 'SELECT recipe_id FROM ingredient
-                WHERE item = :item';
+                WHERE item LIKE :item';
 
       $stmt = $this->conn->prepare($query);
       $stmt->bindParam(':item', $this->searchItem);
