@@ -508,6 +508,72 @@
           );
         }
       break;
+      case 'ccomment':
+        if(isset($_GET['id']) && isset($_SESSION['logged_in'])){
+
+              
+          $data = json_decode(file_get_contents("php://input"));
+
+          $recipe->recipe_id = $_GET['id'];
+          $recipe->content = $data->content;
+          $recipe->user_id = $_SESSION['user_id'];
+        
+        
+          if($recipe->createComment()){
+            echo json_encode(
+              array('message' => 'Comment added')
+            );
+          } else {
+            echo json_encode(
+              array('message' => 'Comment not added')
+            );
+          }
+
+        } else {
+          //if get access to delete recipe but not logged in
+          http_response_code(401);
+          echo json_encode(
+            array('message' => 'Not authorized.')
+          );
+        }
+      break;
+      case 'dcomment':
+        if(isset($_GET['id']) && isset($_SESSION['logged_in'])){
+          $data = json_decode(file_get_contents("php://input"));
+          if(
+            //if the logged in user own the comment
+            $recipe->checkCommentOwnership($data->c_id) == $_SESSION['user_id'] ||
+            // or the logged in user have admin privilege
+            $_SESSION['privilege'] == 1){
+
+            $recipe->c_id = $data->c_id;
+          
+            if($recipe->deleteComment()){
+              echo json_encode(
+                array('message' => 'Comment Delete')
+              );
+            } else {
+              echo json_encode(
+                array('message' => 'Comment not Delete')
+              );
+            }
+            
+          } else {
+            //if logged in but user does not own the recipe
+            http_response_code(403);
+            echo json_encode(
+              array('message' => 'Access denied')
+            );
+          }
+
+        } else {
+          //if get access to delete recipe but not logged in
+          http_response_code(401);
+          echo json_encode(
+            array('message' => 'Not authorized.')
+          );
+        }
+      break;
 
     }
   }

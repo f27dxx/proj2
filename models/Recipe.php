@@ -1288,4 +1288,15 @@
       // echo $row['user_id'];
       return $row['user_id'];
     }
+
+    public function checkCommentOwnership($id){
+      $query = 'SELECT user_id FROM comment
+                WHERE c_id = :c_id';
+      $stmt = $this->conn->prepare($query);
+      $stmt->bindParam(':c_id', $id);
+      $stmt->execute();
+      $row = $stmt->fetch();
+      // echo $row['user_id'];
+      return $row['user_id'];
+    }
   }
