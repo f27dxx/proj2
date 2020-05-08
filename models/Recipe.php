@@ -12,6 +12,7 @@
     public $quantity;
     public $measurement;
     public $item;
+    public $imgUrl;
     public $content;
 
 
@@ -108,6 +109,7 @@
               SET
               name = :name,
               description = :description,
+              imgUrl = :imgUrl,
               user_id = :user_id';
 
       //prepate statement
@@ -116,11 +118,13 @@
       //input filter
       $this->name = htmlspecialchars(strip_tags($this->name));
       $this->description = htmlspecialchars(strip_tags($this->description));
+      $this->imgUrl = htmlspecialchars(strip_tags($this->imgUrl));
       $this->user_id = htmlspecialchars(strip_tags($this->user_id));
 
       //bind data
       $stmt->bindParam(':name', $this->name);
       $stmt->bindParam(':description', $this->description);
+      $stmt->bindParam(':imgUrl', $this->imgUrl);
       $stmt->bindParam(':user_id', $this->user_id);
       $stmt->execute();
       
@@ -570,10 +574,11 @@
 
       //insert to recipe
       $query = 'UPDATE recipe 
-              SET
-              name = :name,
-              description = :description
-              WHERE recipe_id = :recipe_id';
+                SET
+                name = :name,
+                description = :description,
+                imgUrl = :imgUrl
+                WHERE recipe_id = :recipe_id';
 
       //prepate statement
       $stmt = $this->conn->prepare($query);
@@ -581,12 +586,14 @@
       //input filter
       $this->name = htmlspecialchars(strip_tags($this->name));
       $this->description = htmlspecialchars(strip_tags($this->description));
+      $this->imgUrl = htmlspecialchars(strip_tags($this->imgUrl));
       $this->recipe_id = htmlspecialchars(strip_tags($this->recipe_id));
       
 
       //bind data
       $stmt->bindParam(':name', $this->name);
       $stmt->bindParam(':description', $this->description);
+      $stmt->bindParam(':imgUrl', $this->imgUrl);
       $stmt->bindParam(':recipe_id', $this->recipe_id);
 
       $stmt->execute();

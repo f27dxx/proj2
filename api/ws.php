@@ -53,6 +53,7 @@
             'recipe_id' => $recipe_id,
             'name' => $name,
             'description' => $description,
+            'imgUrl' => $imgUrl,
             'user_id' => $user_id,
             'ingre_arr' => $ingre_arr,
             'step_arr'=> $step_arr,
@@ -173,6 +174,7 @@
 
           $recipe->name = $data->name;
           $recipe->description = $data->description;
+          $recipe->imgUrl = $data->imgUrl;
           $recipe->user_id = $_SESSION['user_id'];
 
 
@@ -352,7 +354,8 @@
             $data = json_decode(file_get_contents("php://input"));
             
             $recipe->name = $data->name;
-            $recipe->description = $data->description;  
+            $recipe->description = $data->description;
+            $recipe->imgUrl = $data->imgUrl;  
             $recipe->recipe_id = $_GET['id'];
 
             $recipe->quantity1 = $data->quantity1;
@@ -599,6 +602,7 @@
                   'recipe_id' => $recipe_id,
                   'name' => $name,
                   'description' => $description,
+                  'imgUrl' => $imgUrl,
                   'user_id' => $user_id,
                   'ingre_arr' => $ingre_arr,
                   'step_arr'=> $step_arr,
