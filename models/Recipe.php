@@ -14,6 +14,7 @@
     public $item;
     public $imgUrl;
     public $content;
+    public $thumbsUp;
 
 
     //Construstor with DB
@@ -25,7 +26,7 @@
     public function getRecipe(){
       //Query
       $query = 'SELECT * FROM recipe
-                ORDER BY recipe_id ASC';
+                ORDER BY thumbsUp DESC';
 
       //Prepare statment
       $stmt = $this->conn->prepare($query);
@@ -1309,7 +1310,8 @@
 
     public function searchCocktail(){
       $query = 'SELECT recipe_id FROM recipe
-                WHERE name LIKE :name';
+                WHERE name LIKE :name
+                ORDER BY thumbsUp DESC';
 
       $this->searchItem = '%'.$this->searchItem.'%';
       //Prepare statment
@@ -1322,8 +1324,10 @@
       }
 
 
-      $query = 'SELECT recipe_id FROM ingredient
-                WHERE item LIKE :item';
+      $query = 'SELECT i.recipe_id FROM ingredient i
+                JOIN recipe r
+                WHERE item LIKE :item and i.recipe_id = r.recipe_id
+                ORDER BY thumbsUp DESC';
 
       $stmt = $this->conn->prepare($query);
       $stmt->bindParam(':item', $this->searchItem);
