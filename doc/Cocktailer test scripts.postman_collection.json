@@ -1,0 +1,1390 @@
+{
+	"info": {
+		"_postman_id": "e128feab-5387-4833-bc73-a8a50f52e048",
+		"name": "Cocktailer test scripts",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8888/PROJ2/api/ws.php?method=rrecipe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f649aa0c-db75-4b5d-b5f6-b82b912bbe57",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/PROJ2/api/ws.php?method=rrecipe",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"PROJ2",
+						"api",
+						"ws.php"
+					],
+					"query": [
+						{
+							"key": "method",
+							"value": "rrecipe"
+						}
+					]
+				},
+				"description": "this is the read recipe"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8888/PROJ2/api/ws.php?method=shouldnotwork",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "74c2aeab-8ac7-4084-9ad1-0cb82326e138",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/PROJ2/api/ws.php?method=shouldnotwork",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"PROJ2",
+						"api",
+						"ws.php"
+					],
+					"query": [
+						{
+							"key": "method",
+							"value": "shouldnotwork"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8888/PROJ2/api/ws.php?method=rrecipe&id=1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9e08a567-1080-4b13-a38e-f1e3b542fb3f",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/PROJ2/api/ws.php?method=rrecipe&id=14",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"PROJ2",
+						"api",
+						"ws.php"
+					],
+					"query": [
+						{
+							"key": "method",
+							"value": "rrecipe"
+						},
+						{
+							"key": "id",
+							"value": "14"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8888/PROJ2/api/ws.php?method=rrecipe&id=1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9e08a567-1080-4b13-a38e-f1e3b542fb3f",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/PROJ2/api/ws.php?method=rrecipe&id=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"PROJ2",
+						"api",
+						"ws.php"
+					],
+					"query": [
+						{
+							"key": "method",
+							"value": "rrecipe"
+						},
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8888/PROJ2/api/ws.php?method=logout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9e0e597d-d78e-44fa-8189-ec11966776ca",
+						"exec": [
+							"pm.test(\"Status code is 403\", function () {",
+							"    pm.response.to.have.status(403);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"name\" : \"unit testing crecipe\",\r\n\t\"description\" : \"crecipe wihout login should not work\",\r\n\t\"imgUrl\" : \"https://via.placeholder.com/150\",\r\n\t\"quantity1\": \"1\",\r\n    \"measurement1\": \"1\",\r\n    \"item1\": \"multi1\",\r\n    \"quantity2\": \"2\",\r\n    \"measurement2\": \"1\",\r\n    \"item2\": \"multi2\",\r\n    \"step1\" : \"step1\"\r\n\r\n}\r\n"
+				},
+				"url": {
+					"raw": "http://localhost:8888/PROJ2/api/ws.php?method=crecipe",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"PROJ2",
+						"api",
+						"ws.php"
+					],
+					"query": [
+						{
+							"key": "method",
+							"value": "crecipe"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8888/PROJ2/api/ws.php?method=urecipe&id=5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "67db6a57-03c4-4ebe-8beb-3d241c9b420c",
+						"exec": [
+							"pm.test(\"Status code is 401\", function () {",
+							"    pm.response.to.have.status(401);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/PROJ2/api/ws.php?method=urecipe&id=14",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"PROJ2",
+						"api",
+						"ws.php"
+					],
+					"query": [
+						{
+							"key": "method",
+							"value": "urecipe"
+						},
+						{
+							"key": "id",
+							"value": "14"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8888/PROJ2/api/ws.php?method=drecipe&id=5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "532e6d25-d213-4695-983a-542c2ee48f7c",
+						"exec": [
+							"pm.test(\"Status code is 401\", function () {",
+							"    pm.response.to.have.status(401);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/PROJ2/api/ws.php?method=drecipe&id=14",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"PROJ2",
+						"api",
+						"ws.php"
+					],
+					"query": [
+						{
+							"key": "method",
+							"value": "drecipe"
+						},
+						{
+							"key": "id",
+							"value": "14"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8888/PROJ2/api/ws.php?method=register",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b9d40481-beae-4bab-86f6-ae4ccdc7a99a",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\" : \"b\",\n\t\"password\" : \"b\"\n\t}"
+				},
+				"url": {
+					"raw": "http://localhost:8888/PROJ2/api/ws.php?method=register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"PROJ2",
+						"api",
+						"ws.php"
+					],
+					"query": [
+						{
+							"key": "method",
+							"value": "register"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8888/PROJ2/api/ws.php?method=login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "df728b76-5b1b-42b2-a787-8b0cb17e2fa4",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\" : \"b\",\n\t\"password\" : \"b\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8888/PROJ2/api/ws.php?method=login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"PROJ2",
+						"api",
+						"ws.php"
+					],
+					"query": [
+						{
+							"key": "method",
+							"value": "login"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8888/PROJ2/api/ws.php?method=crecipe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ef2ed660-c17f-4f60-bd7e-727ff91ee57e",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\" : \"test script 3 created by user b\",\n\t\"description\" : \"created 15 ingre and 5 step by user b\",\n\t\"imgUrl\" : \"https://via.placeholder.com/150\",\n\t\n    \"quantity1\" : \"1\",\n    \"measurement1\" : \"1\",\n    \"item1\" : \"item 1\",\n    \n    \"quantity2\" : \"1\",\n    \"measurement2\" : \"1\",\n    \"item2\" : \"item 2\",\n    \n    \"quantity3\" : \"1\",\n    \"measurement3\" : \"1\",\n    \"item3\" : \"item 3\",\n    \n    \"quantity4\" : \"1\",\n    \"measurement4\" : \"1\",\n    \"item4\": \"item 4\",\n    \n    \"quantity5\" : \"5\",\n    \"measurement5\" : \"1\",\n    \"item5\" : \"item 5\",\n    \n    \"quantity6\" : \"6\",\n    \"measurement6\" : \"1\",\n    \"item6\" : \"item 6\",\n    \n    \"quantity7\" : \"7\",\n    \"measurement7\" : \"1\",\n    \"item7\" : \"item 7\",\n    \n    \"quantity8\" : \"8\",\n    \"measurement8\" : \"1\",\n    \"item8\" : \"item 8\",\n    \n    \"quantity9\" : \"9\",\n    \"measurement9\" : \"1\",\n    \"item9\" : \"item 9\",\n    \n    \"quantity10\" : \"10\",\n    \"measurement10\" : \"1\",\n    \"item10\" : \"item 10\",\n    \n    \"quantity11\" : \"11\",\n    \"measurement11\" : \"1\",\n    \"item11\" : \"item 11\",\n    \n    \"quantity12\" : \"12\",\n    \"measurement12\" : \"1\",\n\t\"item12\" : \"item 12\",\n\t\n    \"quantity13\" : \"13\",\n    \"measurement13\" : \"1\",\n    \"item13\" : \"item 13\",\n    \n    \"quantity14\" : \"14\",\n    \"measurement14\" : \"1\",\n    \"item14\" : \"item 14\",\n    \n    \"quantity15\" : \"15\",\n    \"measurement15\" : \"1\",\n    \"item15\" : \"item 15\",\n    \n    \"step1\" : \"step1 by user b\",\n    \"step2\" : \"step2 by user b\",\n    \"step3\" : \"step3 by user b\",\n    \"step4\" : \"step4 by user b\",\n    \"step5\" : \"step5 by user b\"\n\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8888/PROJ2/api/ws.php?method=crecipe",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"PROJ2",
+						"api",
+						"ws.php"
+					],
+					"query": [
+						{
+							"key": "method",
+							"value": "crecipe"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8888/PROJ2/api/ws.php?method=urecipe&id=109",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "77481dfb-81c4-4a8d-a5c7-bb281d80f5cb",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\" : \"updated test script 3 created by user b\",\n\t\"description\" : \"created 15 ingre and 5 step by user b\",\n\t\"imgUrl\" : \"https://via.placeholder.com/150\",\n\t\"i_id1\" : \"279\",\n    \"quantity1\" : \"1\",\n    \"measurement1\" : \"1\",\n    \"item1\" : \"updated item 1\",\n    \"i_id2\" : \"280\",\n    \"quantity2\" : \"1\",\n    \"measurement2\" : \"1\",\n    \"item2\" : \"updated item 2\",\n    \"i_id3\" : \"281\",\n    \"quantity3\" : \"1\",\n    \"measurement3\" : \"1\",\n    \"item3\" : \"updated item 3\",\n    \"i_id4\" : \"282\",\n    \"quantity4\" : \"1\",\n    \"measurement4\" : \"1\",\n    \"item4\": \"updated item 4\",\n    \"i_id5\" : \"283\",\n    \"quantity5\" : \"5\",\n    \"measurement5\" : \"1\",\n    \"item5\" : \"updated item 5\",\n    \"i_id6\" : \"284\",\n    \"quantity6\" : \"6\",\n    \"measurement6\" : \"1\",\n    \"item6\" : \"updated item 6\",\n    \"i_id7\" : \"285\",\n    \"quantity7\" : \"7\",\n    \"measurement7\" : \"1\",\n    \"item7\" : \"updated item 7\",\n    \"i_id8\" : \"286\",\n    \"quantity8\" : \"8\",\n    \"measurement8\" : \"1\",\n    \"item8\" : \"updated item 8\",\n    \"i_id9\" : \"287\",\n    \"quantity9\" : \"9\",\n    \"measurement9\" : \"1\",\n    \"item9\" : \"updated item 9\",\n    \"i_id10\" : \"288\",\n    \"quantity10\" : \"10\",\n    \"measurement10\" : \"1\",\n    \"item10\" : \"updated item 10\",\n    \"i_id11\" : \"289\",\n    \"quantity11\" : \"11\",\n    \"measurement11\" : \"1\",\n    \"item11\" : \"updated item 11\",\n    \"i_id12\" : \"290\",\n    \"quantity12\" : \"12\",\n    \"measurement12\" : \"1\",\n\t\"item12\" : \"updated item 12\",\n\t\"i_id13\" : \"291\",\n    \"quantity13\" : \"13\",\n    \"measurement13\" : \"1\",\n    \"item13\" : \"updated item 13\",\n    \"i_id14\" : \"292\",\n    \"quantity14\" : \"14\",\n    \"measurement14\" : \"1\",\n    \"item14\" : \"updated item 14\",\n    \"i_id15\" : \"293\",\n    \"quantity15\" : \"15\",\n    \"measurement15\" : \"1\",\n    \"item15\" : \"updated item 15\",\n    \"met_id1\" : \"71\",\n    \"step1\" : \"updated step1 by user b\",\n    \"met_id2\" : \"72\",\n    \"step2\" : \"updated step2 by user b\",\n    \"met_id3\" : \"73\",\n    \"step3\" : \"updated step3 by user b\",\n    \"met_id4\" : \"74\",\n    \"step4\" : \"updated step4 by user b\",\n    \"met_id5\" : \"75\",\n    \"step5\" : \"updated step5 by user b\"\n\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8888/PROJ2/api/ws.php?method=urecipe&id=109",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"PROJ2",
+						"api",
+						"ws.php"
+					],
+					"query": [
+						{
+							"key": "method",
+							"value": "urecipe"
+						},
+						{
+							"key": "id",
+							"value": "109"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8888/PROJ2/api/ws.php?method=drecipe&id=109",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1eac50b5-a46b-4aba-8ffc-18304fb8772d",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8888/PROJ2/api/ws.php?method=drecipe&id=108",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"PROJ2",
+						"api",
+						"ws.php"
+					],
+					"query": [
+						{
+							"key": "method",
+							"value": "drecipe"
+						},
+						{
+							"key": "id",
+							"value": "108"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8888/PROJ2/api/ws.php?method=ccomment&id=107",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "41c4a018-e21a-4100-86f9-8b970499794c",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"content\" : \"comment created by user b\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8888/PROJ2/api/ws.php?method=ccomment&id=107",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"PROJ2",
+						"api",
+						"ws.php"
+					],
+					"query": [
+						{
+							"key": "method",
+							"value": "ccomment"
+						},
+						{
+							"key": "id",
+							"value": "107"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8888/PROJ2/api/ws.php?method=ccomment&id=107 Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "41c4a018-e21a-4100-86f9-8b970499794c",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"content\" : \"comment created by user b\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8888/PROJ2/api/ws.php?method=ccomment&id=107",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"PROJ2",
+						"api",
+						"ws.php"
+					],
+					"query": [
+						{
+							"key": "method",
+							"value": "ccomment"
+						},
+						{
+							"key": "id",
+							"value": "107"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8888/PROJ2/api/ws.php?method=dcomment&id=107",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "655abe46-84ee-44f0-9d36-c610a7b3778f",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"c_id\" : \"23\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8888/PROJ2/api/ws.php?method=dcomment&id=107",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"PROJ2",
+						"api",
+						"ws.php"
+					],
+					"query": [
+						{
+							"key": "method",
+							"value": "dcomment"
+						},
+						{
+							"key": "id",
+							"value": "107"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8888/PROJ2/api/ws.php?method=logout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "68a470ad-e789-4134-b08d-06f0f9077810",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/PROJ2/api/ws.php?method=logout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"PROJ2",
+						"api",
+						"ws.php"
+					],
+					"query": [
+						{
+							"key": "method",
+							"value": "logout"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8888/PROJ2/api/ws.php?method=login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "99f20e87-ff6d-4d69-b41b-4d427dbd373b",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\" : \"a\",\n\t\"password\" : \"a\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8888/PROJ2/api/ws.php?method=login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"PROJ2",
+						"api",
+						"ws.php"
+					],
+					"query": [
+						{
+							"key": "method",
+							"value": "login"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8888/PROJ2/api/ws.php?method=urecipe&id=109 Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "77481dfb-81c4-4a8d-a5c7-bb281d80f5cb",
+						"exec": [
+							"pm.test(\"Status code is 403\", function () {",
+							"    pm.response.to.have.status(403);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\" : \"updated test script 3 created by user b\",\n\t\"description\" : \"created 15 ingre and 5 step by user b\",\n\t\"imgUrl\" : \"https://via.placeholder.com/150\",\n\t\"i_id1\" : \"279\",\n    \"quantity1\" : \"1\",\n    \"measurement1\" : \"1\",\n    \"item1\" : \"updated item 1\",\n    \"i_id2\" : \"280\",\n    \"quantity2\" : \"1\",\n    \"measurement2\" : \"1\",\n    \"item2\" : \"updated item 2\",\n    \"i_id3\" : \"281\",\n    \"quantity3\" : \"1\",\n    \"measurement3\" : \"1\",\n    \"item3\" : \"updated item 3\",\n    \"i_id4\" : \"282\",\n    \"quantity4\" : \"1\",\n    \"measurement4\" : \"1\",\n    \"item4\": \"updated item 4\",\n    \"i_id5\" : \"283\",\n    \"quantity5\" : \"5\",\n    \"measurement5\" : \"1\",\n    \"item5\" : \"updated item 5\",\n    \"i_id6\" : \"284\",\n    \"quantity6\" : \"6\",\n    \"measurement6\" : \"1\",\n    \"item6\" : \"updated item 6\",\n    \"i_id7\" : \"285\",\n    \"quantity7\" : \"7\",\n    \"measurement7\" : \"1\",\n    \"item7\" : \"updated item 7\",\n    \"i_id8\" : \"286\",\n    \"quantity8\" : \"8\",\n    \"measurement8\" : \"1\",\n    \"item8\" : \"updated item 8\",\n    \"i_id9\" : \"287\",\n    \"quantity9\" : \"9\",\n    \"measurement9\" : \"1\",\n    \"item9\" : \"updated item 9\",\n    \"i_id10\" : \"288\",\n    \"quantity10\" : \"10\",\n    \"measurement10\" : \"1\",\n    \"item10\" : \"updated item 10\",\n    \"i_id11\" : \"289\",\n    \"quantity11\" : \"11\",\n    \"measurement11\" : \"1\",\n    \"item11\" : \"updated item 11\",\n    \"i_id12\" : \"290\",\n    \"quantity12\" : \"12\",\n    \"measurement12\" : \"1\",\n\t\"item12\" : \"updated item 12\",\n\t\"i_id13\" : \"291\",\n    \"quantity13\" : \"13\",\n    \"measurement13\" : \"1\",\n    \"item13\" : \"updated item 13\",\n    \"i_id14\" : \"292\",\n    \"quantity14\" : \"14\",\n    \"measurement14\" : \"1\",\n    \"item14\" : \"updated item 14\",\n    \"i_id15\" : \"293\",\n    \"quantity15\" : \"15\",\n    \"measurement15\" : \"1\",\n    \"item15\" : \"updated item 15\",\n    \"met_id1\" : \"71\",\n    \"step1\" : \"updated step1 by user b\",\n    \"met_id2\" : \"72\",\n    \"step2\" : \"updated step2 by user b\",\n    \"met_id3\" : \"73\",\n    \"step3\" : \"updated step3 by user b\",\n    \"met_id4\" : \"74\",\n    \"step4\" : \"updated step4 by user b\",\n    \"met_id5\" : \"75\",\n    \"step5\" : \"updated step5 by user b\"\n\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8888/PROJ2/api/ws.php?method=urecipe&id=109",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"PROJ2",
+						"api",
+						"ws.php"
+					],
+					"query": [
+						{
+							"key": "method",
+							"value": "urecipe"
+						},
+						{
+							"key": "id",
+							"value": "109"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8888/PROJ2/api/ws.php?method=drecipe&id=109 Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1eac50b5-a46b-4aba-8ffc-18304fb8772d",
+						"exec": [
+							"pm.test(\"Status code is 403\", function () {",
+							"    pm.response.to.have.status(403);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8888/PROJ2/api/ws.php?method=drecipe&id=109",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"PROJ2",
+						"api",
+						"ws.php"
+					],
+					"query": [
+						{
+							"key": "method",
+							"value": "drecipe"
+						},
+						{
+							"key": "id",
+							"value": "109"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8888/PROJ2/api/ws.php?method=dcomment&id=107 Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "655abe46-84ee-44f0-9d36-c610a7b3778f",
+						"exec": [
+							"pm.test(\"Status code is 403\", function () {",
+							"    pm.response.to.have.status(403);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"c_id\" : \"24\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8888/PROJ2/api/ws.php?method=dcomment&id=107",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"PROJ2",
+						"api",
+						"ws.php"
+					],
+					"query": [
+						{
+							"key": "method",
+							"value": "dcomment"
+						},
+						{
+							"key": "id",
+							"value": "107"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8888/PROJ2/api/ws.php?method=logout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b55995fc-3f96-4ba6-89b3-7ebd119e5fa1",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/PROJ2/api/ws.php?method=logout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"PROJ2",
+						"api",
+						"ws.php"
+					],
+					"query": [
+						{
+							"key": "method",
+							"value": "logout"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8888/PROJ2/api/ws.php?method=login Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "99f20e87-ff6d-4d69-b41b-4d427dbd373b",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\" : \"admin\",\n\t\"password\" : \"admin\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8888/PROJ2/api/ws.php?method=login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"PROJ2",
+						"api",
+						"ws.php"
+					],
+					"query": [
+						{
+							"key": "method",
+							"value": "login"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8888/PROJ2/api/ws.php?method=urecipe&id=109 Copy Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "77481dfb-81c4-4a8d-a5c7-bb281d80f5cb",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\" : \"updated test script 3 created by admin\",\n\t\"description\" : \"created 15 ingre and 5 step by admin\",\n\t\"imgUrl\" : \"https://via.placeholder.com/150\",\n\t\"i_id1\" : \"279\",\n    \"quantity1\" : \"1\",\n    \"measurement1\" : \"1\",\n    \"item1\" : \"updated item 1\",\n    \"i_id2\" : \"280\",\n    \"quantity2\" : \"1\",\n    \"measurement2\" : \"1\",\n    \"item2\" : \"updated item 2\",\n    \"i_id3\" : \"281\",\n    \"quantity3\" : \"1\",\n    \"measurement3\" : \"1\",\n    \"item3\" : \"updated item 3\",\n    \"i_id4\" : \"282\",\n    \"quantity4\" : \"1\",\n    \"measurement4\" : \"1\",\n    \"item4\": \"updated item 4\",\n    \"i_id5\" : \"283\",\n    \"quantity5\" : \"5\",\n    \"measurement5\" : \"1\",\n    \"item5\" : \"updated item 5\",\n    \"i_id6\" : \"284\",\n    \"quantity6\" : \"6\",\n    \"measurement6\" : \"1\",\n    \"item6\" : \"updated item 6\",\n    \"i_id7\" : \"285\",\n    \"quantity7\" : \"7\",\n    \"measurement7\" : \"1\",\n    \"item7\" : \"updated item 7\",\n    \"i_id8\" : \"286\",\n    \"quantity8\" : \"8\",\n    \"measurement8\" : \"1\",\n    \"item8\" : \"updated item 8\",\n    \"i_id9\" : \"287\",\n    \"quantity9\" : \"9\",\n    \"measurement9\" : \"1\",\n    \"item9\" : \"updated item 9\",\n    \"i_id10\" : \"288\",\n    \"quantity10\" : \"10\",\n    \"measurement10\" : \"1\",\n    \"item10\" : \"updated item 10\",\n    \"i_id11\" : \"289\",\n    \"quantity11\" : \"11\",\n    \"measurement11\" : \"1\",\n    \"item11\" : \"updated item 11\",\n    \"i_id12\" : \"290\",\n    \"quantity12\" : \"12\",\n    \"measurement12\" : \"1\",\n\t\"item12\" : \"updated item 12\",\n\t\"i_id13\" : \"291\",\n    \"quantity13\" : \"13\",\n    \"measurement13\" : \"1\",\n    \"item13\" : \"updated item 13\",\n    \"i_id14\" : \"292\",\n    \"quantity14\" : \"14\",\n    \"measurement14\" : \"1\",\n    \"item14\" : \"updated item 14\",\n    \"i_id15\" : \"293\",\n    \"quantity15\" : \"15\",\n    \"measurement15\" : \"1\",\n    \"item15\" : \"updated item 15\",\n    \"met_id1\" : \"71\",\n    \"step1\" : \"updated step1 by admin\",\n    \"met_id2\" : \"72\",\n    \"step2\" : \"updated step2 by admin\",\n    \"met_id3\" : \"73\",\n    \"step3\" : \"updated step3 by admin\",\n    \"met_id4\" : \"74\",\n    \"step4\" : \"updated step4 by admin\",\n    \"met_id5\" : \"75\",\n    \"step5\" : \"updated step5 by admin\"\n\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8888/PROJ2/api/ws.php?method=urecipe&id=109",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"PROJ2",
+						"api",
+						"ws.php"
+					],
+					"query": [
+						{
+							"key": "method",
+							"value": "urecipe"
+						},
+						{
+							"key": "id",
+							"value": "109"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8888/PROJ2/api/ws.php?method=drecipe&id=109 Copy Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1eac50b5-a46b-4aba-8ffc-18304fb8772d",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8888/PROJ2/api/ws.php?method=drecipe&id=110",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"PROJ2",
+						"api",
+						"ws.php"
+					],
+					"query": [
+						{
+							"key": "method",
+							"value": "drecipe"
+						},
+						{
+							"key": "id",
+							"value": "110"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8888/PROJ2/api/ws.php?method=dcomment&id=107 Copy Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "655abe46-84ee-44f0-9d36-c610a7b3778f",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"c_id\" : \"24\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8888/PROJ2/api/ws.php?method=dcomment&id=107",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"PROJ2",
+						"api",
+						"ws.php"
+					],
+					"query": [
+						{
+							"key": "method",
+							"value": "dcomment"
+						},
+						{
+							"key": "id",
+							"value": "107"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8888/PROJ2/api/ws.php?method=logout Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b55995fc-3f96-4ba6-89b3-7ebd119e5fa1",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/PROJ2/api/ws.php?method=logout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"PROJ2",
+						"api",
+						"ws.php"
+					],
+					"query": [
+						{
+							"key": "method",
+							"value": "logout"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8888/PROJ2/api/ws.php?method=search&searchfield=shouldnotwork",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bdfabb42-0427-452b-a04d-7724dc83f132",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/PROJ2/api/ws.php?method=search&searchfield=shouldnotwork",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"PROJ2",
+						"api",
+						"ws.php"
+					],
+					"query": [
+						{
+							"key": "method",
+							"value": "search"
+						},
+						{
+							"key": "searchfield",
+							"value": "shouldnotwork"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8888/PROJ2/api/ws.php?method=search&searchfield=shouldnotwork Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bdfabb42-0427-452b-a04d-7724dc83f132",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/PROJ2/api/ws.php?method=search&searchfield=vodka",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"PROJ2",
+						"api",
+						"ws.php"
+					],
+					"query": [
+						{
+							"key": "method",
+							"value": "search"
+						},
+						{
+							"key": "searchfield",
+							"value": "vodka"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "85e0a22b-efd9-49d0-aae4-a53e4817c4e0",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "dd746bec-969b-4bbb-ab4e-1ff7b4423c71",
+				"type": "text/javascript",
+				"exec": [
+					"setTimeout(function(){}, [1000]);",
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

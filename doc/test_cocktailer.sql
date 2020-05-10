@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Apr 16, 2020 at 06:31 AM
+-- Generation Time: May 10, 2020 at 10:07 AM
 -- Server version: 5.7.26
 -- PHP Version: 7.4.2
 
@@ -52,11 +52,74 @@ CREATE TABLE `ingredient` (
 --
 
 INSERT INTO `ingredient` (`i_id`, `recipe_id`, `quantity`, `measurement`, `item`) VALUES
-(5, 5, 3, 2, 'updated'),
-(6, 5, 1, 1, 'as'),
-(7, 6, 1, 1, 'tears'),
-(8, 6, 2, 2, 'sweats'),
-(15, 12, 3, 2, 'tears');
+(92, 73, 1, 1, 'updated multi1'),
+(93, 73, 2, 1, 'updated multi2'),
+(94, 73, 3, 1, 'updated multi3'),
+(95, 73, 4, 1, 'updated multi4'),
+(96, 73, 5, 1, 'update multi5'),
+(97, 73, 6, 1, 'update multi6'),
+(98, 73, 7, 1, 'update multi7'),
+(99, 73, 8, 1, 'update multi8'),
+(100, 73, 9, 1, 'update multi9'),
+(101, 73, 10, 1, 'update multi10'),
+(102, 73, 11, 1, 'update multi11'),
+(103, 73, 12, 1, 'update multi12'),
+(104, 73, 13, 1, 'update multi13'),
+(105, 73, 14, 1, 'update multi14'),
+(106, 73, 15, 1, 'update multi15'),
+(107, 74, 1, 1, 'vodka'),
+(108, 74, 2, 2, 'rum'),
+(111, 76, 1, 1, 'updated vodka'),
+(112, 76, 2, 2, 'updated rum'),
+(113, 77, 1, 1, 'milk'),
+(114, 77, 2, 1, 'bailey'),
+(115, 78, 1, 1, 'multi1'),
+(116, 78, 1, 1, 'multi2'),
+(249, 107, 1, 1, 'item 1'),
+(250, 107, 1, 1, 'item 2'),
+(251, 107, 1, 1, 'item 3'),
+(252, 107, 1, 1, 'item 4'),
+(253, 107, 5, 1, 'item 5'),
+(254, 107, 6, 1, 'item 6'),
+(255, 107, 7, 1, 'item 7'),
+(256, 107, 8, 1, 'item 8'),
+(257, 107, 9, 1, 'item 9'),
+(258, 107, 10, 1, 'item 10'),
+(259, 107, 11, 1, 'item 11'),
+(260, 107, 12, 1, 'item 12'),
+(261, 107, 13, 1, 'item 13'),
+(262, 107, 14, 1, 'item 14'),
+(263, 107, 15, 1, 'item 15'),
+(264, 108, 1, 1, 'item 1'),
+(265, 108, 1, 1, 'item 2'),
+(266, 108, 1, 1, 'item 3'),
+(267, 108, 1, 1, 'item 4'),
+(268, 108, 5, 1, 'item 5'),
+(269, 108, 6, 1, 'item 6'),
+(270, 108, 7, 1, 'item 7'),
+(271, 108, 8, 1, 'item 8'),
+(272, 108, 9, 1, 'item 9'),
+(273, 108, 10, 1, 'item 10'),
+(274, 108, 11, 1, 'item 11'),
+(275, 108, 12, 1, 'item 12'),
+(276, 108, 13, 1, 'item 13'),
+(277, 108, 14, 1, 'item 14'),
+(278, 108, 15, 1, 'item 15'),
+(279, 109, 1, 1, 'item 1'),
+(280, 109, 1, 1, 'item 2'),
+(281, 109, 1, 1, 'item 3'),
+(282, 109, 1, 1, 'item 4'),
+(283, 109, 5, 1, 'item 5'),
+(284, 109, 6, 1, 'item 6'),
+(285, 109, 7, 1, 'item 7'),
+(286, 109, 8, 1, 'item 8'),
+(287, 109, 9, 1, 'item 9'),
+(288, 109, 10, 1, 'item 10'),
+(289, 109, 11, 1, 'item 11'),
+(290, 109, 12, 1, 'item 12'),
+(291, 109, 13, 1, 'item 13'),
+(292, 109, 14, 1, 'item 14'),
+(293, 109, 15, 1, 'item 15');
 
 -- --------------------------------------------------------
 
@@ -77,8 +140,10 @@ CREATE TABLE `login` (
 
 INSERT INTO `login` (`user_id`, `username`, `password`, `privilege`) VALUES
 (1, 'a', '$2y$10$I8WHpg2TiIeJs4Qxp/o4YubAe3nbWS8Fzrhfubapirj4S/EBX3/S.', 2),
-(2, 'b', '$2y$10$FnCES6azQ081pNyh9c8iz.uhgavJ2jf7L0gc7FH5xtP5YdBmCGr1y', 2),
-(3, 'c', '$2y$10$Bu57Uo0xZXYFzKN3aWMDGOm8XOks5QYWKEWllyFIDqnStjS.YAuIG', 2);
+(4, 'admin', '$2y$10$GvIYKoNrjqELRKpdL85pXOx6AiaIrwBd1PiNPPOUHT4r6mGMrLVoe', 1),
+(6, 'fred', '$2y$10$Ayf6b.sEuJibz2qBQuioRuHu7AsQEVwGGOc87lOOtjBSEhul3JC9m', 1),
+(10, 'admin2', '$2y$10$1fS2baoL1iHjiERRY8HADeK3FqpxX0ziP8kgpFfRv0Gkj.pMyvdLK', 2),
+(11, 'b', '$2y$10$SBDclcv7rZmAetuJHNJLOu5/PAVj6hGfSFp.9OOJ.2x8zK0BaOJN2', 2);
 
 -- --------------------------------------------------------
 
@@ -97,7 +162,12 @@ CREATE TABLE `measurement` (
 
 INSERT INTO `measurement` (`mea_id`, `type`) VALUES
 (1, 'ml'),
-(2, 'dash');
+(2, 'dash(es)'),
+(3, 'oz'),
+(4, 'drop(s)'),
+(5, 'cup(s)'),
+(6, 'slice(s)'),
+(7, 'fresh');
 
 -- --------------------------------------------------------
 
@@ -116,11 +186,30 @@ CREATE TABLE `method` (
 --
 
 INSERT INTO `method` (`met_id`, `recipe_id`, `step`) VALUES
-(3, 5, 'please work'),
-(4, 5, 'as'),
-(5, 6, 'put tears and sweats in shaking'),
-(6, 6, 'shaking and serve with martini glass'),
-(7, 12, 'serve tears with ice');
+(9, 73, 'update multiStep1'),
+(10, 73, 'update multiStep2'),
+(11, 73, 'update multiStep3'),
+(12, 73, 'update multiStep4'),
+(13, 73, 'update multiStep5'),
+(14, 74, 'submitted by postman'),
+(16, 76, ' updated submitted by postman'),
+(17, 77, 'mix together'),
+(18, 78, 'step1'),
+(61, 107, 'step1 by user b'),
+(62, 107, 'step2 by user b'),
+(63, 107, 'step3 by user b'),
+(64, 107, 'step4 by user b'),
+(65, 107, 'step5 by user b'),
+(66, 108, 'step1 by user b'),
+(67, 108, 'step2 by user b'),
+(68, 108, 'step3 by user b'),
+(69, 108, 'step4 by user b'),
+(70, 108, 'step5 by user b'),
+(71, 109, 'step1 by user b'),
+(72, 109, 'step2 by user b'),
+(73, 109, 'step3 by user b'),
+(74, 109, 'step4 by user b'),
+(75, 109, 'step5 by user b');
 
 -- --------------------------------------------------------
 
@@ -132,7 +221,8 @@ CREATE TABLE `recipe` (
   `recipe_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
-  `thumbsUp` int(11) DEFAULT NULL,
+  `imgUrl` varchar(2083) NOT NULL DEFAULT 'https://via.placeholder.com/150',
+  `thumbsUp` int(11) NOT NULL DEFAULT '0',
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -140,10 +230,15 @@ CREATE TABLE `recipe` (
 -- Dumping data for table `recipe`
 --
 
-INSERT INTO `recipe` (`recipe_id`, `name`, `description`, `thumbsUp`, `user_id`) VALUES
-(5, 'update with step and ingre3', 'trying to update with step and ingre', NULL, 1),
-(6, 'Tears', 'Making php site with tears', NULL, 1),
-(12, 'posted with step', 'trying to submit with step and ingre', NULL, 2);
+INSERT INTO `recipe` (`recipe_id`, `name`, `description`, `imgUrl`, `thumbsUp`, `user_id`) VALUES
+(73, 'updated with admin15', 'updated15 crecipe by postman', 'https://via.placeholder.com/150', 0, 1),
+(74, 'crecipe', 'crecipe by postman', 'https://via.placeholder.com/150', 100, 1),
+(76, 'updated with admin', 'updated crecipe by postman', 'https://via.placeholder.com/150', 20, 1),
+(77, 'create recipe', 'create recipe without login', 'https://via.placeholder.com/150', 0, 6),
+(78, 'create recipe', 'created with empty url', 'https://via.placeholder.com/150', 0, 10),
+(107, 'test script 1 created by user b', 'created 15 ingre and 5 step by user b', 'https://via.placeholder.com/150', 0, 11),
+(108, 'test script 2 created by user b', 'created 15 ingre and 5 step by user b', 'https://via.placeholder.com/150', 0, 11),
+(109, 'test script 3 created by user b', 'created 15 ingre and 5 step by user b', 'https://via.placeholder.com/150', 0, 11);
 
 --
 -- Indexes for dumped tables
@@ -199,37 +294,37 @@ ALTER TABLE `recipe`
 -- AUTO_INCREMENT for table `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `ingredient`
 --
 ALTER TABLE `ingredient`
-  MODIFY `i_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `i_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=294;
 
 --
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `measurement`
 --
 ALTER TABLE `measurement`
-  MODIFY `mea_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `mea_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `method`
 --
 ALTER TABLE `method`
-  MODIFY `met_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `met_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT for table `recipe`
 --
 ALTER TABLE `recipe`
-  MODIFY `recipe_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `recipe_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
 
 --
 -- Constraints for dumped tables
