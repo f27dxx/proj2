@@ -3,7 +3,9 @@ $(window).on('load',function(){
   if(window.localStorage.getItem('adult') != 'yes'){
     $('#staticBackdrop').modal('show');
   }
-  
+  if(window.localStorage.getItem('user_id')){
+    showLoggedInItem(true);
+  }
 });
 
 // off-canvas menu
@@ -53,9 +55,7 @@ var stepCount = 2;
 //user interaction
 $('.navbar-brand').on('click', function(){
   $('.offcanvas-collapse').removeClass('open');
-  $('.form').attr('hidden', 'hidden');
-  $('.content').removeClass('hidden');
-  $('.searchResult').addClass('hidden');
+  showContent(true);
 })
 
 $('.showForm').on('click', function(){
@@ -101,7 +101,12 @@ $('#ingreButton').on('click', function(){
                   <label for="measurement${ingredientsCount}">Measurement</label>
                   <select class="form-control" id="measurement${ingredientsCount}" name="measurement${ingredientsCount}">
                     <option value="1">ml</option>
-                    <option value="2">dash</option>
+                    <option value="2">dash(es)</option>
+                    <option value="3">oz</option>
+                    <option value="4">drop(s)</option>
+                    <option value="5">cup(s)</option>
+                    <option value="6">slice(s)</option>
+                    <option value="7">fresh</option>
                   </select>
                 </div>
                 <div class="form-group col-12">
@@ -140,22 +145,29 @@ $('#stepButton').on('click', function(){
 
 ///////// register form 
 document.getElementById('registerUser').addEventListener('submit', registerUser);
-function registerUser(e){
+async function registerUser(e){
   e.preventDefault();
 
   let username = document.getElementById('r-username').value;
   let password = document.getElementById('r-password').value;
 
-  fetch('./api/ws.php?method=register', {
+  let response = await fetch('./api/ws.php?method=register', {
     method: 'POST',
     headers: {
       'Accept': 'applcation/json',
       'Content-type': 'application/json'
     },
     body:JSON.stringify({username:username, password:password})
-  })
-  .then((res)=>res.json())
-  .then((data)=>console.log(data))
+  });
+  let data = await response.json();
+  if(response.ok){
+    registerFormDiv.setAttribute('hidden', 'hidden');
+    loginFormDiv.removeAttribute('hidden');
+  }
+  friendlyReminder(response.ok, data.message);
+  document.getElementById('r-password').value = '';
+
+
 }
 
 document.getElementById('login').addEventListener('submit', loginUser);
@@ -206,6 +218,72 @@ async function logoutUser(){
 
 }
 
+document.getElementById('createRecipe').addEventListener('submit', createRecipe);
+async function createRecipe(e){
+  e.preventDefault();
+
+  var name = document.getElementById('recipeName').value;
+  var description = document.getElementById('recipeDes').value;
+  var imgUrl = document.getElementById('recipeUrl').value;
+
+  var outputObj = {};
+  outputObj.name = name;
+  outputObj.description = description;
+  outputObj.imgUrl = imgUrl;
+
+  var quantityArray = [];
+  var measurementArray = [];
+  var itemArray = [];
+  var stepArray = [];
+
+  for(i=1; i<16;i++){
+    console.log(i);
+    if( Boolean(document.getElementById('quantity'+ i)) &&
+        Boolean(document.getElementById('measurement'+ i)) &&
+        Boolean(document.getElementById('item'+ i))
+        ){
+          if(
+            (document.getElementById('quantity'+ i).value) &&
+            (document.getElementById('measurement'+ i).value) &&
+            (document.getElementById('item'+ i).value)
+            ){
+            quantityArray.push(document.getElementById('quantity'+ i).value);
+            measurementArray.push(document.getElementById('measurement'+ i).value);
+            itemArray.push(document.getElementById('item'+ i).value);
+          }
+        }
+
+    if(Boolean(document.getElementById('step'+ i))){
+      if((document.getElementById('step'+ i).value)){
+        stepArray.push(document.getElementById('step'+ i).value);
+      }
+    }
+  }
+  
+  for(i=1; i <= quantityArray.length; i++){
+    eval('outputObj.quantity' + i + '= ' + 'quantityArray[i-1]' +';');
+    eval('outputObj.measurement' + i + '= ' + 'measurementArray[i-1]' +';');
+    eval('outputObj.item' + i + '= ' + 'itemArray[i-1]' +';');
+  }
+
+  for(i=1; i<= stepArray.length; i++){
+    eval('outputObj.step' + i + '= ' + 'stepArray[i-1]' +';');
+  }
+
+  let response = await fetch('./api/ws.php?method=crecipe', {
+    method: 'POST',
+    headers: {
+      'Accept': 'applcation/json',
+      'Content-type': 'application/json'
+    },
+    body:JSON.stringify(outputObj)
+  });
+  let data = await response.json();
+  console.log(data);
+
+  friendlyReminder(response.ok, data.message)
+}
+
 function friendlyReminder(responseOK, message) {
   var reminderDiv = document.getElementById('friendly-reminder');
   reminderDiv.removeAttribute('hidden');
@@ -229,7 +307,7 @@ function showLoggedInItem(boo){
   
     welcomebackDiv.innerHTML = insideWelcomebackDiv;
     welcomebackDiv.removeAttribute('hidden');
-    createRecipe.removeAttribute('hidden');
+    createRecipeLink.removeAttribute('hidden');
     document.getElementById('logoutUser').removeAttribute('hidden');
     document.getElementById('loginLink').setAttribute('hidden', 'hidden');
     document.getElementById('registerLink').setAttribute('hidden', 'hidden');
@@ -237,7 +315,7 @@ function showLoggedInItem(boo){
   if(!boo){
     document.getElementsByClassName('offcanvas-collapse')[0].classList.remove('open');
     welcomebackDiv.setAttribute('hidden', 'hidden');
-    createRecipe.setAttribute('hidden', 'hidden');
+    createRecipeLink.setAttribute('hidden', 'hidden');
     document.getElementById('logoutUser').setAttribute('hidden', 'hidden');
     document.getElementById('registerLink').removeAttribute('hidden', 'hidden');
     loginLink.removeAttribute('hidden');

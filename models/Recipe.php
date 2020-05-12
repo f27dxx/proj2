@@ -559,6 +559,7 @@
 
       //save into database
       if($this->conn->commit()){
+        $_SESSION['myLastRecipe'] = $lastRecipeId;
         return true;
       }
 

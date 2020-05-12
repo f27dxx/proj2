@@ -292,8 +292,10 @@
 
           if($recipe->createRecipe()){
             echo json_encode(
-              array('message' => 'recipe added')
+              array('message' => 'recipe added',
+                    'recipe_id' => $_SESSION['myLastRecipe'])
             );
+            unset($_SESSION['myLastRecipe']);
           } else {
             http_response_code(501);
             echo json_encode(

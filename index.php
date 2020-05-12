@@ -49,8 +49,7 @@
   <div class="navbar-collapse offcanvas-collapse">
     <ul class="navbar-nav mr-auto">
       <div id='welcomebackDiv'></div>
-      <!-- <div id='createRecipeDiv'></div> -->
-      <li class="nav-item" id="createRecipe" hidden>
+      <li class="nav-item" id="createRecipeLink" hidden>
         <a class="nav-link showForm" href="#">Create your recipe</a>
       </li>
       <li class="nav-item">
@@ -189,7 +188,7 @@
 <!-- end of search result -->
 <!-- add recipe form element -->
 <div class="container form" hidden id='createRecipeDiv'>
-  <form>
+  <form id='createRecipe'>
     <h5>Create a recipe</h5>
     <hr>
     <div class="form-group">
@@ -199,6 +198,10 @@
     <div class="form-group">
       <label for="recipeDes">Cocktail description:</label>
       <textarea class="form-control" name="recipeDes" id="recipeDes" rows="3" placeholder="Tell us about your cocktail"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="recipeUrl">Cocktail image url:</label>
+      <input type="text" class="form-control" id="recipeUrl" name="recipeUrl" placeholder="Please paste the link here">
     </div>
     <hr>
     <h6>Ingredients</h6>
@@ -212,7 +215,12 @@
         <label for="measurement1">Measurement</label>
         <select class="form-control" name="measurement1" id="measurement1">
           <option value="1">ml</option>
-          <option value="2">dash</option>
+          <option value="2">dash(es)</option>
+          <option value="3">oz</option>
+          <option value="4">drop(s)</option>
+          <option value="5">cup(s)</option>
+          <option value="6">slice(s)</option>
+          <option value="7">fresh</option>
         </select>
       </div>
       <div class="form-group col-12">
@@ -230,7 +238,12 @@
         <label for="measurement2">Measurement</label>
         <select class="form-control" name="measurement2" id="measurement2">
           <option value="1">ml</option>
-          <option value="2">dash</option>
+          <option value="2">dash(es)</option>
+          <option value="3">oz</option>
+          <option value="4">drop(s)</option>
+          <option value="5">cup(s)</option>
+          <option value="6">slice(s)</option>
+          <option value="7">fresh</option>
         </select>
       </div>
       <div class="form-group col-12">
