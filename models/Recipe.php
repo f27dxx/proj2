@@ -1267,20 +1267,23 @@
       $stmt = $this->conn->prepare($query);
       $stmt->bindParam(':username', $this->username);
       $stmt->execute();
-      $row = $stmt->fetch();
-      // $password = $this->password;
-      if(password_verify($this->password, $row['password'])) {
-        // assign session variables
-        $_SESSION['username'] = $this->username;
-        $_SESSION['user_id'] = $row['user_id'];
-        $_SESSION['privilege'] = $row['privilege'];
-        $_SESSION['logged_in'] = true;
-        echo  $_SESSION['username'];
-        echo $_SESSION['user_id'];
-        echo $_SESSION['privilege'];
-        echo $_SESSION['logged_in'];
-        return true;
+      if($stmt->rowCount() > 0 ){
+        $row = $stmt->fetch();
+        // $password = $this->password;
+        if(password_verify($this->password, $row['password'])) {
+          // assign session variables
+          $_SESSION['username'] = $this->username;
+          $_SESSION['user_id'] = $row['user_id'];
+          $_SESSION['privilege'] = $row['privilege'];
+          $_SESSION['logged_in'] = true;
+          // echo  $_SESSION['username'];
+          // echo $_SESSION['user_id'];
+          // echo $_SESSION['privilege'];
+          // echo $_SESSION['logged_in'];
+          return true;
+        }
       }
+
       // printf('Error: %s.\n', $stmt->error);
 
       return false;

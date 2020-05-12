@@ -133,6 +133,7 @@
             array('message' => 'user added')
           );
         } else {
+          http_response_code(409);
           echo json_encode(
             array('message' => 'user not added, user already exist')
           );
@@ -150,6 +151,7 @@
             array('message' => 'Logged in')
           );
         } else {
+          http_response_code(401);
           echo json_encode(
             array('message' => 'Wrong Combination, try again.')
           );
