@@ -150,7 +150,8 @@
           echo json_encode(
             array('message' => 'Logged in',
                   'privilege' => $_SESSION['privilege'],
-                  'user_id' => $_SESSION['user_id'])
+                  'user_id' => $_SESSION['user_id'],
+                  'username' => $_SESSION['username'])
           );
         } else {
           http_response_code(401);

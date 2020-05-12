@@ -29,8 +29,8 @@
         </div>
         <div class="modal-footer">
           <a href="https://www.health.gov.au/health-topics/alcohol/about-alcohol/alcohol-laws-in-australia"><button type="button" class="btn btn-secondary">No</button></a>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">No, but I am not drinking</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Yes</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" onclick='isAdult()'>No, but I am not drinking</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" onclick='isAdult()'>Yes</button>
         </div>
       </div>
     </div>
@@ -48,20 +48,11 @@
 
   <div class="navbar-collapse offcanvas-collapse">
     <ul class="navbar-nav mr-auto">
-      <?php 
-        if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes') {
-          echo '<li class="nav-item" id="nav-username">';
-          echo '<a class="nav-link active" href="#">'.'Welcome back, '.$_SESSION['username'].'</a>';
-          echo '</li>';
-        };
-      ?>
-      <?php 
-        if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'yes') {
-          echo '<li class="nav-item" id="createRecipe">';
-          echo '<a class="nav-link" href="#">Create your recipe</a>';
-          echo '</li>';
-        };
-      ?>
+      <div id='welcomebackDiv'></div>
+      <!-- <div id='createRecipeDiv'></div> -->
+      <li class="nav-item" id="createRecipe" hidden>
+        <a class="nav-link showForm" href="#">Create your recipe</a>
+      </li>
       <li class="nav-item">
         <a class="nav-link spirit" href="#">Vodka</a>
       </li>
@@ -93,11 +84,13 @@
           <div class="dropdown-divider"></div>
         </div>
       </li>
-      <li class="nav-item" style="position: absolute;, left:0; top:92%;">
-        <a class="nav-link" href="#">Login/Sign up</a>
+      <li class="nav-item" style="position: absolute;, left:0; top:92%; display:flex;">
+        <a class="showForm btn btn-primary" href="#" role='button' style='margin-right: 10px;' id='registerLink'>Sign Up</a>
+        <a class="nav-link showForm" href="#" id='loginLink'>Login</a>
+
       </li>
-      <li class="nav-item" style="position: absolute;, left:0; top:89%;">
-        <a class="nav-link" id="logoutUser">Logout</a>
+      <li class="nav-item" style="position: absolute;, left:0; top:92%;">
+        <a class="nav-link" id="logoutUser" hidden>Logout</a>
       </li>
     </ul>
     
@@ -195,8 +188,8 @@
   </div>
 <!-- end of search result -->
 <!-- add recipe form element -->
-<div class="container form">
-  <form action="/UX1/controller/createRecipe.php" method="POST">
+<div class="container form" hidden id='createRecipeDiv'>
+  <form>
     <h5>Create a recipe</h5>
     <hr>
     <div class="form-group">
@@ -265,7 +258,7 @@
 </div>
 <!-- end recipe form -->
 <!-- register form -->
-<div class="container">
+<div class="container form" hidden id='registerFormDiv'>
   <h5>Register form</h5>
   <hr>
   <form id='registerUser'>
@@ -282,7 +275,7 @@
 </div>
 <!-- end of register form -->
 <!-- login form -->
-<div class="container">
+<div class="container form" hidden id='loginFormDiv'>
   <h5>Login form</h5>
   <hr>
   <form id='login'>

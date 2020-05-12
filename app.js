@@ -1,6 +1,9 @@
 // display 'are you over 18' modal on load
 $(window).on('load',function(){
-  $('#staticBackdrop').modal('show');
+  if(window.localStorage.getItem('adult') != 'yes'){
+    $('#staticBackdrop').modal('show');
+  }
+  
 });
 
 // off-canvas menu
@@ -50,23 +53,37 @@ var stepCount = 2;
 //user interaction
 $('.navbar-brand').on('click', function(){
   $('.offcanvas-collapse').removeClass('open');
+  $('.form').attr('hidden', 'hidden');
   $('.content').removeClass('hidden');
   $('.searchResult').addClass('hidden');
-  // $('.form').addClass('hidden');
 })
 
-$('#createRecipe').on('click', function(){
-  $('.offcanvas-collapse').toggleClass('open');
-  $('.form').removeClass('hidden');
-  $('.content').addClass('hidden');
+$('.showForm').on('click', function(){
+  var showFormTarget = this.innerText;
+  console.log(showFormTarget);
+  $('.offcanvas-collapse').removeClass('open');
+  $('.form').attr('hidden', 'hidden');
+  $('.content').attr('hidden', 'hidden');
   $('.searchResult').addClass('hidden');
   $('.newIngre').empty();
   $('.newStep').empty();
+  if(showFormTarget == 'Login'){
+    showFormTarget = '#loginFormDiv';
+  }
+  if(showFormTarget == 'Sign Up'){
+    showFormTarget = '#registerFormDiv';
+  }
+  if(showFormTarget == 'Create your recipe'){
+    showFormTarget = '#createRecipeDiv';
+  }
+  console.log(showFormTarget);
+  $(showFormTarget).removeAttr('hidden');
   ingredientsCount = 3;
   stepCount = 2;
   $("#ingreButton").text('Add more ingredients.');
   $("#stepButton").text('Add more steps.');
 })
+
 
 $('.fa-search').on('click', function(){
   $('#searchbar').toggleClass('hidden');
@@ -160,8 +177,14 @@ async function loginUser(e){
   if(response.ok){
     window.localStorage.setItem('user_id', data.user_id);
     window.localStorage.setItem('privilege', data.privilege);
+    window.localStorage.setItem('username', data.username);
+    
+    //UI control
+    showLoggedInItem(true);
+    showContent(true);
+
   }
-  
+  document.getElementById('l-password').value = '';
   friendlyReminder(response.ok, data.message)
 }
 
@@ -174,10 +197,13 @@ async function logoutUser(){
 
   window.localStorage.removeItem('user_id');
   window.localStorage.removeItem('privilege');
+  window.localStorage.removeItem('username');
 
   // setTimeout(function(){location.reload()}, 200);
   friendlyReminder(true, data.message)
-  $('.offcanvas-collapse').removeClass('open');
+  showLoggedInItem(false);  
+
+
 }
 
 function friendlyReminder(responseOK, message) {
@@ -192,6 +218,52 @@ function friendlyReminder(responseOK, message) {
   setTimeout(function(){
     reminderDiv.setAttribute('hidden', 'hidden')
   }, 3000);
+}
+function showLoggedInItem(boo){
+  if(boo){
+    var username = window.localStorage.getItem('username');
+    // var welcomebackDiv = document.getElementById('welcomebackDiv');
+    var insideWelcomebackDiv = `<li class="nav-item" id="nav-username"></li>`;
+    insideWelcomebackDiv += `<a class="nav-link active" href="#">Welcome back, ${username}</a>`;
+    insideWelcomebackDiv += `</li>`;
+  
+    welcomebackDiv.innerHTML = insideWelcomebackDiv;
+    welcomebackDiv.removeAttribute('hidden');
+    createRecipe.removeAttribute('hidden');
+    document.getElementById('logoutUser').removeAttribute('hidden');
+    document.getElementById('loginLink').setAttribute('hidden', 'hidden');
+    document.getElementById('registerLink').setAttribute('hidden', 'hidden');
+  }
+  if(!boo){
+    document.getElementsByClassName('offcanvas-collapse')[0].classList.remove('open');
+    welcomebackDiv.setAttribute('hidden', 'hidden');
+    createRecipe.setAttribute('hidden', 'hidden');
+    document.getElementById('logoutUser').setAttribute('hidden', 'hidden');
+    document.getElementById('registerLink').removeAttribute('hidden', 'hidden');
+    loginLink.removeAttribute('hidden');
+  }
 
+}
 
+function isAdult(){
+  window.localStorage.setItem('adult', 'yes');
+}
+
+function showContent(boo){
+  var content = document.getElementsByClassName('content');
+  var form = document.getElementsByClassName('form');
+
+  if(boo){
+    for(i=0; i<content.length;i++){
+      content[i].removeAttribute('hidden');
+    }
+    for(i=0; i<form.length; i++){
+      form[i].setAttribute('hidden', 'hidden');
+    }
+  }
+  if(!boo){
+    for(i=0; i<content.length;i++){
+      content[i].setAttribute('hidden', 'hidden');
+    }
+  }
 }
