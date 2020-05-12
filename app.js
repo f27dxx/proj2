@@ -76,12 +76,22 @@ $('.showForm').on('click', function(){
   if(showFormTarget == 'Create your recipe'){
     showFormTarget = '#createRecipeDiv';
   }
-  console.log(showFormTarget);
+  
   $(showFormTarget).removeAttr('hidden');
   ingredientsCount = 3;
   stepCount = 2;
   $("#ingreButton").text('Add more ingredients.');
   $("#stepButton").text('Add more steps.');
+  for(i=1;i<3;i++){
+    document.getElementById('quantity'+ i).value ='';
+    document.getElementById('measurement'+ i).value ='';
+    document.getElementById('item'+ i).value = '';
+  }
+  document.getElementById('recipeName').value = '';
+  document.getElementById('recipeDes').value = '';
+  document.getElementById('recipeUrl').value = '';
+  document.getElementById('step1').value = '';
+
 })
 
 
@@ -324,6 +334,28 @@ async function bringThisRecipe(recipeId){
                   </div>
                 </div>`
 
+  //Desc OK
+  output += `<div class="row mb-1">
+              <p class='col-12 m-0'>
+                <button class="btn btn-primary col-12" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                  Ingredients
+                </button>
+              </p>
+              <div class="collapse col-12" id="collapseExample">
+                <div class="card card-body pt-0 px-0" style="border:0;" >
+                  <ul class="list-group list-group-flush2">`
+
+  for(i = 0; i < result.data[0].ingre_arr.length; i++){
+    output += `<li class="list-group-item">${result.data[0].ingre_arr[i].quantity} ${result.data[0].ingre_arr[i].type} ${result.data[0].ingre_arr[i].item}</li>`
+  }
+        
+  output += `</ul>
+            </div>
+          </div>
+          </div>`
+  //Ingre OK
+
+  
   resultDiv.innerHTML = output;
   resultDiv.removeAttribute('hidden');
   // friendlyReminder(response.ok, data.message)
