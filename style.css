@@ -9,7 +9,10 @@ body {
   padding-top: 56px;
 }
 
-
+* {
+  padding : 0;
+  margin : 0;
+}
 
 
 .offcanvas-collapse {
@@ -175,5 +178,15 @@ body {
 }
 [data-theme="dark"] #stepButton{
   color: #FFF463;
+}
+
+[data-theme="dark"] .list-group-item{
+  background-color: #333 !important;
+  color: #eee;
+}
+
+[data-theme="dark"] .card{
+  background-color: #333 !important;
+  color: #eee;
 }
 /* dark theme css */

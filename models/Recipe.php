@@ -25,7 +25,9 @@
     //Get Recipe
     public function getRecipe(){
       //Query
-      $query = 'SELECT * FROM recipe
+      $query = 'SELECT r.*, l.username FROM recipe r
+                JOIN login l
+                where l.user_id = r.user_id
                 ORDER BY thumbsUp DESC';
 
       //Prepare statment
@@ -87,8 +89,9 @@
 
     //get single post
     public function read_single($id){
-      $query = 'SELECT * FROM recipe
-                WHERE recipe_id = ' .$id ;
+      $query = 'SELECT r.*, l.username FROM recipe r
+                JOIN login l
+                where l.user_id = r.user_id and recipe_id = ' .$id ;
       $stmt = $this->conn->prepare($query);
       //bind id
       // $stmt->bindParam(1, $this->id);

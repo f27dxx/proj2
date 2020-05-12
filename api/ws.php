@@ -56,6 +56,7 @@
             'imgUrl' => $imgUrl,
             'thumbsUp' => $thumbsUp,
             'user_id' => $user_id,
+            'username' => $username,
             'ingre_arr' => $ingre_arr,
             'step_arr'=> $step_arr,
             'comm_arr' => $comm_arr
@@ -612,6 +613,7 @@
                   'description' => $description,
                   'imgUrl' => $imgUrl,
                   'user_id' => $user_id,
+                  'username' => $username,
                   'thumbsUp' => $thumbsUp,
                   'ingre_arr' => $ingre_arr,
                   'step_arr'=> $step_arr,
