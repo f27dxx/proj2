@@ -142,39 +142,56 @@ function registerUser(e){
 }
 
 document.getElementById('login').addEventListener('submit', loginUser);
-function loginUser(e){
+async function loginUser(e){
   e.preventDefault();
 
   let username = document.getElementById('l-username').value;
   let password = document.getElementById('l-password').value;
-  var status;
-  fetch('./api/ws.php?method=login', {
+
+  let response = await fetch('./api/ws.php?method=login', {
     method: 'POST',
     headers: {
       'Accept': 'applcation/json',
       'Content-type': 'application/json'
     },
     body:JSON.stringify({username:username, password:password})
-  })
-  .then((res)=> {
-    status = res.status;
-    return res.json();
-  })
-  .then(data=>{console.log(data); console.log(status + '1'); });
-  setTimeout(function(){console.log(status + '2');}, 200);
-
-  console.log(status + '2');
-  // setTimeout(function(){location.reload()}, 200);
+  });
+  let data = await response.json();
+  if(response.ok){
+    window.localStorage.setItem('user_id', data.user_id);
+    window.localStorage.setItem('privilege', data.privilege);
+  }
+  
+  friendlyReminder(response.ok, data.message)
 }
 
 document.getElementById('logoutUser').addEventListener('click', logoutUser);
-function logoutUser(){
-  fetch('./api/ws.php?method=logout', {
+async function logoutUser(){
+  let response = await fetch('./api/ws.php?method=logout', {
     method: 'POST'
-  })
-  .then((res)=>res.json())
-  .then((data)=>console.log(data));
+  });
+  let data = await response.json();
+
+  window.localStorage.removeItem('user_id');
+  window.localStorage.removeItem('privilege');
 
   // setTimeout(function(){location.reload()}, 200);
+  friendlyReminder(true, data.message)
+  $('.offcanvas-collapse').removeClass('open');
+}
+
+function friendlyReminder(responseOK, message) {
+  var reminderDiv = document.getElementById('friendly-reminder');
+  reminderDiv.removeAttribute('hidden');
+  if(responseOK){
+    reminderDiv.style.backgroundColor = 'green';
+  } else {
+    reminderDiv.style.backgroundColor = 'red';
+  }
+  reminderDiv.innerText = message;
+  setTimeout(function(){
+    reminderDiv.setAttribute('hidden', 'hidden')
+  }, 3000);
+
 
 }
