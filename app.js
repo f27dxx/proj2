@@ -86,7 +86,11 @@ $('.showForm').on('click', function(){
 
 
 $('.fa-search').on('click', function(){
-  $('#searchbar').toggleClass('hidden');
+  $('#searchbarDiv').toggleClass('hidden');
+})
+
+$('#addCommentButton').on('click', function(){
+  $('#addCommentDiv').toggleClass('hidden');
 })
 //end of user interaction
 
@@ -212,7 +216,7 @@ async function logoutUser(){
   window.localStorage.removeItem('username');
 
   // setTimeout(function(){location.reload()}, 200);
-  friendlyReminder(true, data.message)
+  friendlyReminder(response.ok, data.message)
   showLoggedInItem(false);  
 
 
@@ -279,9 +283,51 @@ async function createRecipe(e){
     body:JSON.stringify(outputObj)
   });
   let data = await response.json();
-  console.log(data);
 
-  friendlyReminder(response.ok, data.message)
+  friendlyReminder(response.ok, data.message);
+
+  bringThisRecipe(data.recipe_id);
+}
+
+async function bringThisRecipe(recipeId){
+  let response = await fetch('./api/ws.php?method=rrecipe&id=' + recipeId, {
+    method: 'GET'
+  });
+  let result = await response.json();
+  console.log(result.data[0]);
+  let output;
+  output = `  <img src="${result.data[0].imgUrl}" style="width:100%;" class="img-fluid" alt="Responsive image">
+                <div class="row">
+                  <div class="col-12">
+                    <h3 style="margin-top:10px;"><strong>${result.data[0].name}</strong></h3>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-9">
+                    <p class='mb-2'>by <i>${result.data[0].username}</i></p>
+                  </div>
+                  <div class="col-3">
+                    <span><i class="far fa-heart"></i> ${result.data[0].thumbsUp}</span>
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col-12">
+
+                    <button type="button" class="btn btn-secondary btn-sm">Update</button>
+                    <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                  </div>
+                
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <p>${result.data[0].description}</p>
+                  </div>
+                </div>`
+
+  resultDiv.innerHTML = output;
+  resultDiv.removeAttribute('hidden');
+  // friendlyReminder(response.ok, data.message)
+
 }
 
 function friendlyReminder(responseOK, message) {
@@ -297,6 +343,7 @@ function friendlyReminder(responseOK, message) {
     reminderDiv.setAttribute('hidden', 'hidden')
   }, 3000);
 }
+
 function showLoggedInItem(boo){
   if(boo){
     var username = window.localStorage.getItem('username');

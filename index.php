@@ -43,7 +43,10 @@
 </button>
 <a class="navbar-brand mx-auto" href="#">Cocktailer</a>
 <label for="searchbar"><span><i class="fas fa-search"></i></span></label>
-<input class='hidden' type="search" name="searchbar" id="searchbar">
+<div class="input-icons mb-0 hidden" id='searchbarDiv'> 
+  <i class="fas fa-level-down-alt mt-3" style="left:90%; transform:rotate(90deg);" onclick="console.log('click')"></i> 
+  <input class="input-field" type="text" id="searchbar">
+</div>
 
 
   <div class="navbar-collapse offcanvas-collapse">
@@ -186,7 +189,7 @@
     <div id='searchResult10'></div>
   </div>
 <!-- end of search result -->
-<div class="container" id='resultDiv'>
+<div class="container" id='resultDiv' hidden>
   <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gettyimages-957892610-1554995400.jpg?resize=480:*" style="width:100%;" class="img-fluid" alt="Responsive image">
   <div class="row">
     <div class="col-12">
@@ -198,7 +201,7 @@
       <p class='mb-2'>by <i>Someone</i></p>
     </div>
     <div class="col-3">
-      <span>< 3 : 86</span>
+      <span><i class="far fa-heart"></i> 86</span>
     </div>
   </div>
   <div class="row mb-2">
@@ -266,17 +269,21 @@
   <!-- end of ingre and step -->
   <div class="row">
     <p class="col-12 m-0">
-      <button class="btn btn-primary col-12" type="button" data-toggle="collapse" data-target="#commentShowPage" aria-expanded="false" aria-controls="collapseExample">
-        Comment <span class='float-right'>+</span>
+      <button class="btn btn-primary col-12" type="button" data-toggle="collapse" data-target="#none" aria-expanded="false" aria-controls="collapseExample">
+        Comment <span class='float-right' id="addCommentButton">+</span>
       </button>
     </p>
     <div class="collapse show col-12" id="commentShowPage">
       <div class="card card-body pt-0 px-0" style="border:0;">
         <ul class="list-group list-group-flush2">
-            <li class="list-group-item">Comment 1</li>
-            <li class="list-group-item">Comment 2</li>
-            <li class="list-group-item">Comment 3<span class='float-right'>x</span></li>
-          </ul>
+          <div class="input-icons mb-0 hidden" id="addCommentDiv"> 
+            <i class="fas fa-level-down-alt mt-3" style="left:90%; transform:rotate(90deg);"></i> 
+            <input class="input-field" type="text">
+          </div>
+          <li class="list-group-item">Comment 1</li>
+          <li class="list-group-item">Comment 2</li>
+          <li class="list-group-item">Comment 3<span class='float-right'>x</span></li>
+        </ul>
       </div>
     </div>
   </div>
