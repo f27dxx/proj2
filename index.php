@@ -187,7 +187,7 @@
 
 <!-- end of search result -->
 <div class="container form" id='resultDiv' hidden>
-  <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gettyimages-957892610-1554995400.jpg?resize=480:*" style="width:100%;" class="img-fluid" alt="Responsive image">
+  <!-- <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gettyimages-957892610-1554995400.jpg?resize=480:*" style="width:100%;" class="img-fluid" alt="Responsive image">
   <div class="row">
     <div class="col-12">
       <h3 style="margin-top:10px;"><strong>Margarita</strong></h3>
@@ -213,10 +213,10 @@
     <div class="col-12">
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat officiis ea temporibus repellat laborum nisi rerum atque quia voluptate adipisci?</p>
     </div>
-  </div>
+  </div> -->
 
   <!-- endDESC -->
-  <div class="row mb-1">
+  <!-- <div class="row mb-1">
     <p class='col-12 m-0'>
       <button class="btn btn-primary col-12" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
         Ingredients
@@ -262,9 +262,9 @@
           </ul>
       </div>
     </div>
-  </div>
+  </div> -->
   <!-- end of ingre and step -->
-  <div class="row">
+  <!-- <div class="row">
     <p class="col-12 m-0">
       <button class="btn btn-primary col-12" type="button" data-toggle="collapse" data-target="#none" aria-expanded="false" aria-controls="collapseExample">
         Comment <span class='float-right' id="addCommentButton">+</span>
@@ -283,7 +283,7 @@
         </ul>
       </div>
     </div>
-  </div>
+  </div> -->
 
 
   <!-- before div end -->

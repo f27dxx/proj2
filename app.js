@@ -8,7 +8,7 @@ $(window).on('load',function(){
   }
 });
 // off-canvas menu
-showContent(false);
+
 $(document).ready(function() {
  // executes when HTML-Document is loaded and DOM is ready
   console.log("document is ready");
@@ -314,7 +314,7 @@ async function bringThisRecipe(recipeId){
     output += `<div class="row mb-2">
                 <div class="col-12">
                   <button type="button" class="btn btn-secondary btn-sm">Update</button>
-                  <button type="button" class="btn btn-danger btn-sm" onclick="showConfirmModal(${result.data[0].recipe_id}, 'recipe')">Delete</button>
+                  <button type="button" class="btn btn-danger btn-sm" onclick="showConfirmModal(${result.data[0].recipe_id}, false)">Delete</button>
                 </div>
               </div>`
   }
@@ -379,12 +379,14 @@ async function bringThisRecipe(recipeId){
                 <div class="card card-body pt-0 px-0" style="border:0;">
                   <ul class="list-group list-group-flush2">
                     <div class="input-icons mb-0 hidden" id="addCommentDiv"> 
-                      <i class="fas fa-level-down-alt mt-3" style="left:90%; transform:rotate(90deg);"></i> 
-                      <input class="input-field" type="text">
+                      <i id="addCommentIcon" class="fas fa-level-down-alt mt-3" style="left:90%; transform:rotate(90deg);"></i> 
+                      <form id="addCommentForm">
+                        <input class="input-field" type="text" id="commentContent">
+                      </form>
                     </div>`
   for(i=0; i < result.data[0].comm_arr.length; i++ ){
-    if(window.localStorage.getItem('username') == result.data[0].comm_arr[i].username){
-      output += `<li class="list-group-item">${result.data[0].comm_arr[i].content}<span class='float-right'>x</span></li>`;
+    if(window.localStorage.getItem('username') == result.data[0].comm_arr[i].username || window.localStorage.getItem('privilege') == 1){
+      output += `<li class="list-group-item">${result.data[0].comm_arr[i].content}<span onclick="showConfirmModal(${result.data[0].comm_arr[i].c_id}, ${result.data[0].recipe_id})" class='float-right'>x</span></li>`;
     } else {
       output += `<li class="list-group-item">${result.data[0].comm_arr[i].content}<span class='float-right' style="font-size : .8em;"><i>${result.data[0].comm_arr[i].username}</i></span></li>`;
     }
@@ -399,8 +401,18 @@ async function bringThisRecipe(recipeId){
   showContent(false);
   hideAllForm();
   resultDiv.removeAttribute('hidden');
+
+  //// linking function
   $('#addCommentButton').on('click', function(){
     $('#addCommentDiv').toggleClass('hidden');
+  })
+
+  addCommentForm.addEventListener('submit', function(e){
+    createComment(e);
+  })
+
+  addCommentIcon.addEventListener('click', function(e){
+    createComment(e);
   })
 }
 
@@ -458,7 +470,48 @@ async function searchThis(searchItem){
   searchDiv.removeAttribute('hidden');
 
 }
+////// comment related //////////////////////////////
 
+
+async function createComment(e){
+  e.preventDefault();
+
+  let recipe_id = document.querySelector('#resultDiv h3').id;
+  let content = commentContent.value;
+
+  let response = await fetch('./api/ws.php?method=ccomment&id=' + recipe_id, {
+    method: 'POST',
+    headers: {
+      'Accept': 'applcation/json',
+      'Content-type': 'application/json'
+    },
+    body:JSON.stringify({content:content})
+  });
+  let result = await response.json();
+
+  friendlyReminder(response.ok, result.message);
+  setTimeout(function(){bringThisRecipe(recipe_id)}, 1000);
+
+}
+
+async function deleteThisComment(cId, recipeId){
+  let response = await fetch('./api/ws.php?method=dcomment&id=' + recipeId, {
+    method: 'DELETE',
+    headers: {
+      'Accept': 'applcation/json',
+      'Content-type': 'application/json'
+    },
+    body:JSON.stringify({c_id:cId})
+  });
+  let result = await response.json();
+
+  friendlyReminder(response.ok, result.message);
+  
+  confirmModal.innerHTML = '';
+  setTimeout(function(){bringThisRecipe(recipeId);}, 1000); 
+}
+
+////// search related ///////////////////////////////
 searchbarForm.addEventListener('submit', function(e){
   searchbarSubmit(e);
 });
@@ -549,7 +602,7 @@ function hideAllForm(){
   }
 }
 
-function showConfirmModal(id, which){
+function showConfirmModal(id, boo){
   
   var output = '';
   output += `<div class="modal" style="display:block;">
@@ -563,11 +616,11 @@ function showConfirmModal(id, which){
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn" onclick='confirmModal.innerHTML=""'>No</button>`
-  if(which == 'recipe'){
+  if(!boo){
     output += `<button type="button" class="btn btn-danger" onclick="deleteThisRecipe(${id})">Delete</button>`
   }
-  if(which == 'comment'){
-    console.log('test ok');
+  if(boo){
+    output += `<button type="button" class="btn btn-danger" onclick="deleteThisComment(${id}, ${boo})">Delete</button>`
   }
   output +=       `</div>
                 </div>
