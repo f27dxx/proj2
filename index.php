@@ -44,8 +44,10 @@
 <a class="navbar-brand mx-auto" href="#">Cocktailer</a>
 <label for="searchbar"><span><i class="fas fa-search"></i></span></label>
 <div class="input-icons mb-0 hidden" id='searchbarDiv'> 
-  <i class="fas fa-level-down-alt mt-3" style="left:90%; transform:rotate(90deg);" onclick="console.log('click')"></i> 
-  <input class="input-field" type="text" id="searchbar">
+<i id="searchbarIcon" class="fas fa-level-down-alt mt-3" style="left:90%; transform:rotate(90deg);"></i> 
+  <form id='searchbarForm' name="searchbarForm">
+    <input class="input-field" type="text" id="searchbar">
+  </form>
 </div>
 
 

@@ -447,6 +447,25 @@ async function searchThis(searchItem){
 
 }
 
+searchbarForm.addEventListener('submit', function(e){
+  searchbarSubmit(e);
+});
+
+searchbarIcon.addEventListener('click', function(){
+  var searchItem = searchbar.value;
+  searchbarDiv.classList.add('hidden');
+  searchbar.value = '';
+  searchThis(searchItem);
+});
+
+function searchbarSubmit(e){
+  e.preventDefault();
+  var searchItem = searchbar.value;
+  searchbarDiv.classList.add('hidden');
+  searchbar.value = '';
+  searchThis(searchItem);
+}
+
 ////////// UX function below /////////////////////////
 function friendlyReminder(responseOK, message) {
   var reminderDiv = document.getElementById('friendly-reminder');
