@@ -181,112 +181,11 @@
 <!-- end of recommandation -->
 <!-- searchDiv -->
   <div class="container form "id="searchDiv" hidden>
-
   </div>
 <!-- end search result -->
 
 <!-- end of search result -->
 <div class="container form" id='resultDiv' hidden>
-  <!-- <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gettyimages-957892610-1554995400.jpg?resize=480:*" style="width:100%;" class="img-fluid" alt="Responsive image">
-  <div class="row">
-    <div class="col-12">
-      <h3 style="margin-top:10px;"><strong>Margarita</strong></h3>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-9">
-      <p class='mb-2'>by <i>Someone</i></p>
-    </div>
-    <div class="col-3">
-      <span><i class="far fa-heart"></i> 86</span>
-    </div>
-  </div>
-  <div class="row mb-2">
-    <div class="col-12">
-
-      <button type="button" class="btn btn-secondary btn-sm">Update</button>
-      <button type="button" class="btn btn-danger btn-sm">Delete</button>
-    </div>
-   
-  </div>
-  <div class="row">
-    <div class="col-12">
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat officiis ea temporibus repellat laborum nisi rerum atque quia voluptate adipisci?</p>
-    </div>
-  </div> -->
-
-  <!-- endDESC -->
-  <!-- <div class="row mb-1">
-    <p class='col-12 m-0'>
-      <button class="btn btn-primary col-12" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-        Ingredients
-      </button>
-    </p>
-    <div class="collapse col-12" id="collapseExample">
-      <div class="card card-body pt-0 px-0" style="border:0;" >
-        <ul class="list-group list-group-flush2">
-          <li class="list-group-item">Cras justo odio</li>
-          <li class="list-group-item">Dapibus ac facilisis in</li>
-          <li class="list-group-item">Morbi leo risus</li>
-          <li class="list-group-item">Porta ac consectetur ac</li>
-          <li class="list-group-item">Vestibulum at eros</li>
-          <li class="list-group-item">Cras justo odio</li>
-          <li class="list-group-item">Dapibus ac facilisis in</li>
-          <li class="list-group-item">Morbi leo risus</li>
-          <li class="list-group-item">Porta ac consectetur ac</li>
-          <li class="list-group-item">Vestibulum at eros</li>
-          <li class="list-group-item">Cras justo odio</li>
-          <li class="list-group-item">Dapibus ac facilisis in</li>
-          <li class="list-group-item">Morbi leo risus</li>
-          <li class="list-group-item">Porta ac consectetur ac</li>
-          <li class="list-group-item">Vestibulum at eros</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-5">
-    <p class="col-12 m-0">
-      <button class="btn btn-primary col-12" type="button" data-toggle="collapse" data-target="#stepShowPage" aria-expanded="false" aria-controls="collapseExample">
-        Steps
-      </button>
-    </p>
-    <div class="collapse col-12" id="stepShowPage">
-      <div class="card card-body pt-0 px-0" style="border:0;">
-        <ul class="list-group list-group-flush2">
-            <li class="list-group-item">step1</li>
-            <li class="list-group-item">Step2</li>
-            <li class="list-group-item">Step3</li>
-            <li class="list-group-item">Step4</li>
-            <li class="list-group-item">Step5</li>
-          </ul>
-      </div>
-    </div>
-  </div> -->
-  <!-- end of ingre and step -->
-  <!-- <div class="row">
-    <p class="col-12 m-0">
-      <button class="btn btn-primary col-12" type="button" data-toggle="collapse" data-target="#none" aria-expanded="false" aria-controls="collapseExample">
-        Comment <span class='float-right' id="addCommentButton">+</span>
-      </button>
-    </p>
-    <div class="collapse show col-12" id="commentShowPage">
-      <div class="card card-body pt-0 px-0" style="border:0;">
-        <ul class="list-group list-group-flush2">
-          <div class="input-icons mb-0 hidden" id="addCommentDiv"> 
-            <i class="fas fa-level-down-alt mt-3" style="left:90%; transform:rotate(90deg);"></i> 
-            <input class="input-field" type="text">
-          </div>
-          <li class="list-group-item">Comment 1</li>
-          <li class="list-group-item">Comment 2</li>
-          <li class="list-group-item">Comment 3<span class='float-right'>x</span></li>
-        </ul>
-      </div>
-    </div>
-  </div> -->
-
-
-  <!-- before div end -->
 </div>
 
 
