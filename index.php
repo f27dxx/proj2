@@ -105,7 +105,7 @@
 <!-- slide show -->
 <div style='height:25px; width: 100%; color:white; text-align:center; position:fixed; top:56px; z-index:1;' id='friendly-reminder' hidden></div>
 
-<div hidden id="carouselExampleCaptions" class="carousel slide content " data-ride="carousel">
+<div id="carouselExampleCaptions" class="carousel slide content " data-ride="carousel">
   <ol class="carousel-indicators">
     <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
     <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
@@ -145,7 +145,7 @@
 </div>
 <!-- end slide show -->
 <!-- recommandation -->
-<div hidden class="container content">
+<div class="container content">
   <div class="row" style="padding-top: 5%;">
     <div class="col-5">
       <img src="https://www.bbcgoodfood.com/sites/default/files/editor_files/2017/11/bloody_mary.jpg" class="rounded img-thumbnail p-0" style="height: 100px;" alt="...">
@@ -189,7 +189,7 @@
     <div id='searchResult10'></div>
   </div>
 <!-- end of search result -->
-<div class="container" id='resultDiv' hidden>
+<div class="container form" id='resultDiv' hidden>
   <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gettyimages-957892610-1554995400.jpg?resize=480:*" style="width:100%;" class="img-fluid" alt="Responsive image">
   <div class="row">
     <div class="col-12">

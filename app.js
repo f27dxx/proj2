@@ -84,7 +84,7 @@ $('.showForm').on('click', function(){
   $("#stepButton").text('Add more steps.');
   for(i=1;i<3;i++){
     document.getElementById('quantity'+ i).value ='';
-    document.getElementById('measurement'+ i).value ='';
+    document.getElementById('measurement'+ i).value = 1;
     document.getElementById('item'+ i).value = '';
   }
   document.getElementById('recipeName').value = '';
@@ -99,9 +99,6 @@ $('.fa-search').on('click', function(){
   $('#searchbarDiv').toggleClass('hidden');
 })
 
-$('#addCommentButton').on('click', function(){
-  $('#addCommentDiv').toggleClass('hidden');
-})
 //end of user interaction
 
 //form ingredients count
@@ -304,12 +301,16 @@ async function bringThisRecipe(recipeId){
     method: 'GET'
   });
   let result = await response.json();
-  console.log(result.data[0]);
+
+  if(!response.ok){
+    return friendlyReminder(response.ok, result.message);
+  }
+
   let output;
   output = `  <img src="${result.data[0].imgUrl}" style="width:100%;" class="img-fluid" alt="Responsive image">
                 <div class="row">
                   <div class="col-12">
-                    <h3 style="margin-top:10px;"><strong>${result.data[0].name}</strong></h3>
+                    <h3 style="margin-top:10px;" id="${result.data[0].recipe_id}"><strong>${result.data[0].name}</strong></h3>
                   </div>
                 </div>
                 <div class="row">
@@ -319,16 +320,21 @@ async function bringThisRecipe(recipeId){
                   <div class="col-3">
                     <span><i class="far fa-heart"></i> ${result.data[0].thumbsUp}</span>
                   </div>
-                </div>
-                <div class="row mb-2">
-                  <div class="col-12">
+                </div>`
 
-                    <button type="button" class="btn btn-secondary btn-sm">Update</button>
-                    <button type="button" class="btn btn-danger btn-sm">Delete</button>
-                  </div>
-                
+  if (window.localStorage.getItem('user_id') == result.data[0].user_id ||
+      window.localStorage.getItem('privilege') == 1 ){
+    
+    output += `<div class="row mb-2">
+                <div class="col-12">
+                  <button type="button" class="btn btn-secondary btn-sm">Update</button>
+                  <button type="button" class="btn btn-danger btn-sm">Delete</button>
                 </div>
-                <div class="row">
+              </div>`
+  }
+
+
+    output +=  `<div class="row">
                   <div class="col-12">
                     <p>${result.data[0].description}</p>
                   </div>
@@ -354,12 +360,62 @@ async function bringThisRecipe(recipeId){
           </div>
           </div>`
   //Ingre OK
+  output += `<div class="row mb-5">
+              <p class="col-12 m-0">
+                <button class="btn btn-primary col-12" type="button" data-toggle="collapse" data-target="#stepShowPage" aria-expanded="false" aria-controls="collapseExample">
+                  Steps
+                </button>
+              </p>
+              <div class="collapse col-12" id="stepShowPage">
+                <div class="card card-body pt-0 px-0" style="border:0;">
+                  <ul class="list-group list-group-flush2">`
 
-  
+  for(i=0; i < result.data[0].step_arr.length; i++ ){
+    output += `<li class="list-group-item">${result.data[0].step_arr[i].step}</li>`
+  }
+    
+  output += `</ul>
+          </div>
+        </div>
+      </div>`
+  //Step OK
+
+  output += `<div class="row">
+              <p class="col-12 m-0">
+                <button class="btn btn-primary col-12" type="button" data-toggle="collapse" data-target="#none" aria-expanded="false" aria-controls="collapseExample">Comment`;
+  if(window.localStorage.getItem('user_id')){
+    output += `<span class='float-right' id="addCommentButton">+</span>`;
+  }
+
+  output += `</button>
+              </p>
+              <div class="collapse show col-12" id="commentShowPage">
+                <div class="card card-body pt-0 px-0" style="border:0;">
+                  <ul class="list-group list-group-flush2">
+                    <div class="input-icons mb-0 hidden" id="addCommentDiv"> 
+                      <i class="fas fa-level-down-alt mt-3" style="left:90%; transform:rotate(90deg);"></i> 
+                      <input class="input-field" type="text">
+                    </div>`
+  for(i=0; i < result.data[0].comm_arr.length; i++ ){
+    if(window.localStorage.getItem('username') == result.data[0].comm_arr[i].username){
+      output += `<li class="list-group-item">${result.data[0].comm_arr[i].content}<span class='float-right'>x</span></li>`;
+    } else {
+      output += `<li class="list-group-item">${result.data[0].comm_arr[i].content}<span class='float-right' style="font-size : .8em;"><i>${result.data[0].comm_arr[i].username}</i></span></li>`;
+    }
+  }
+
+  output += `</ul>
+          </div>
+        </div>
+        </div>`;
+
   resultDiv.innerHTML = output;
+  showContent(false);
+  hideAllForm();
   resultDiv.removeAttribute('hidden');
-  // friendlyReminder(response.ok, data.message)
-
+  $('#addCommentButton').on('click', function(){
+    $('#addCommentDiv').toggleClass('hidden');
+  })
 }
 
 function friendlyReminder(responseOK, message) {
@@ -422,5 +478,12 @@ function showContent(boo){
     for(i=0; i<content.length;i++){
       content[i].setAttribute('hidden', 'hidden');
     }
+  }
+}
+
+function hideAllForm(){
+  var form = document.getElementsByClassName('form');
+  for(i=0; i<form.length; i++){
+    form[i].setAttribute('hidden', 'hidden');
   }
 }
