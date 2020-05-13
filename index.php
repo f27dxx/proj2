@@ -300,15 +300,15 @@
     <hr>
     <div class="form-group">
       <label for="recipeName">Cocktail name:</label>
-      <input type="text" class="form-control" id="recipeName" name="recipeName" placeholder="What's the name of your cocktail?">
+      <input required pattern="[A-Za-z0-9 ']{2,30}" title="Name must within 2-30 English letters or numbers" type="text" class="form-control" id="recipeName" name="recipeName" placeholder="What's the name of your cocktail?">
     </div>
     <div class="form-group">
       <label for="recipeDes">Cocktail description:</label>
-      <textarea class="form-control" name="recipeDes" id="recipeDes" rows="3" placeholder="Please briefly tell us about your cocktail"></textarea>
+      <textarea required pattern="[A-Za-z0-9' ]{20,600}" title="Description must within 20-600 English letters or numbers" class="form-control" name="recipeDes" id="recipeDes" rows="3" placeholder="Please briefly tell us about your cocktail (within 100 words)"></textarea>
     </div>
     <div class="form-group">
       <label for="recipeUrl">Cocktail image url:</label>
-      <input type="text" class="form-control" id="recipeUrl" name="recipeUrl" placeholder="Please paste the link here">
+      <input required pattern="https://.+" title="Must input a valid link with https://" type="text" class="form-control" id="recipeUrl" name="recipeUrl" placeholder="Please paste the link here">
     </div>
     <hr>
     <h6>Ingredients</h6>
@@ -316,11 +316,11 @@
     <div class="form-row">
       <div class="form-group col-6">
         <label for="quantity1">Quantity</label>
-        <input type="text" class="form-control" name="quantity1" id="quantity1">
+        <input required pattern="[0-9/ ]{1,6}" title="Must within 1-6 numbers or '/'" type="text" class="form-control" name="quantity1" id="quantity1">
       </div>
       <div class="form-group col-6">
         <label for="measurement1">Measurement</label>
-        <select class="form-control" name="measurement1" id="measurement1">
+        <select required class="form-control" name="measurement1" id="measurement1">
           <option value="1">ml</option>
           <option value="2">dash(es)</option>
           <option value="3">oz</option>
@@ -338,18 +338,18 @@
       </div>
       <div class="form-group col-12">
         <label for="item1">Item</label>
-        <input type="text" class="form-control" name="item1" id="item1">
+        <input required pattern="[a-zA-Z '.]{3,50}" title="Item must within 3-50 English letters" type="text" class="form-control" name="item1" id="item1">
       </div>
     </div>
 
     <div class="form-row">
       <div class="form-group col-6">
         <label for="quantity2">Quantity</label>
-        <input type="text" class="form-control" name="quantity2" id="quantity2">
+        <input required pattern="[0-9/ ]{1,6}" title="Must within 1-6 numbers or '/'" type="text" class="form-control" name="quantity2" id="quantity2">
       </div>
       <div class="form-group col-6">
         <label for="measurement2">Measurement</label>
-        <select class="form-control" name="measurement2" id="measurement2">
+        <select required class="form-control" name="measurement2" id="measurement2">
           <option value="1">ml</option>
           <option value="2">dash(es)</option>
           <option value="3">oz</option>
@@ -367,7 +367,7 @@
       </div>
       <div class="form-group col-12">
         <label for="item2">Item</label>
-        <input type="text" class="form-control" name="item2" id="item2">
+        <input required pattern="[a-zA-Z '.]{3,50}" title="Item must within 3-50 English letters" type="text" class="form-control" name="item2" id="item2">
       </div>
     </div>
     <div class="newIngre"></div>
@@ -379,7 +379,7 @@
     <!-- method -->
     <div class="form-group">
       <label for="step1">step 1</label>
-      <textarea class="form-control" id="step1" name="step1" rows="3"></textarea>
+      <textarea required pattern="[A-Za-z0-9' ]{20,600}" title="Each step must within 20-600 English letters or numbers" class="form-control" id="step1" name="step1" rows="3"></textarea>
     </div>
     <div class="newStep"></div>
     <button type="button" class="btn btn-link btn-lg btn-block" id='stepButton'>Add more steps</button>
@@ -391,16 +391,16 @@
 <!-- end recipe form -->
 <!-- register form -->
 <div class="container form" hidden id='registerFormDiv'>
-  <h5>Register form</h5>
+  <h4 class="mt-5">Register</h4>
   <hr>
   <form id='registerUser'>
     <div class="form-group">
       <label for="username">Username</label>
-      <input type="text" class="form-control" id="r-username" name="username">
+      <input required pattern="^[a-zA-Z0-9]{3,17}[a-zA-Z0-9]$" title="Username must between 4-18 english letters or numbers" type="text" class="form-control" id="r-username" name="username">
     </div>
     <div class="form-group">
       <label for="password">Password</label>
-      <input type="password" class="form-control" id='r-password' name="password">
+      <input required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,60}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 characters" type="password" class="form-control" id='r-password' name="password">
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
@@ -408,16 +408,16 @@
 <!-- end of register form -->
 <!-- login form -->
 <div class="container form" hidden id='loginFormDiv'>
-  <h5>Login form</h5>
+  <h4 class="mt-5">Login</h4>
   <hr>
   <form id='login'>
     <div class="form-group">
       <label for="l-username">Username</label>
-      <input type="text" class="form-control" id="l-username" name="l-username">
+      <input required pattern="^[a-zA-Z0-9]{3,17}[a-zA-Z0-9]$" title="Username must between 4-18 english letters or numbers" type="text" class="form-control" id="l-username" name="l-username">
     </div>
     <div class="form-group">
       <label for="l-password">Password</label>
-      <input type="password" class="form-control" name="l-password" id="l-password">
+      <input required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,60}" title="Please enter a valid password" type="password" class="form-control" name="l-password" id="l-password">
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>

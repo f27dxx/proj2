@@ -7,7 +7,6 @@ $(window).on('load',function(){
     showLoggedInItem(true);
   }
 });
-
 // off-canvas menu
 
 $(document).ready(function() {
@@ -106,7 +105,7 @@ $('#ingreButton').on('click', function(){
   var html = `<div class="form-row">
                 <div class="form-group col-6">
                   <label for="quantity${ingredientsCount}">Quantity</label>
-                  <input type="text" class="form-control" name="quantity${ingredientsCount}" id="quantity${ingredientsCount}">
+                  <input pattern="[0-9/ ]{1,6}" title="Must within 1-6 numbers or '/'" type="text" class="form-control" name="quantity${ingredientsCount}" id="quantity${ingredientsCount}">
                 </div>
                 <div class="form-group col-6">
                   <label for="measurement${ingredientsCount}">Measurement</label>
@@ -128,7 +127,7 @@ $('#ingreButton').on('click', function(){
                 </div>
                 <div class="form-group col-12">
                   <label for="item${ingredientsCount}">Item</label>
-                  <input type="text" class="form-control" name="item${ingredientsCount}" id="item${ingredientsCount}">
+                  <input pattern="[a-zA-Z '.]{3,50}" title="Item must within 3-50 English letters" type="text" class="form-control" name="item${ingredientsCount}" id="item${ingredientsCount}">
                 </div>
               </div>`
   if(ingredientsCount<16) {
@@ -144,7 +143,7 @@ $('#ingreButton').on('click', function(){
 $('#stepButton').on('click', function(){
   var html = `<div class="form-group">
                 <label for="step${stepCount}">step ${stepCount}</label>
-                <textarea class="form-control" id="step${stepCount}" name="step${stepCount}" rows="3"></textarea>
+                <textarea pattern="[A-Za-z0-9' ]{20,600}" title="Each step must within 20-600 English letters or numbers" class="form-control" id="step${stepCount}" name="step${stepCount}" rows="3"></textarea>
               </div>`
   if(stepCount<6) {
     $(".newStep").append(html);
@@ -298,8 +297,9 @@ async function createRecipe(e){
   let data = await response.json();
 
   friendlyReminder(response.ok, data.message);
-
-  bringThisRecipe(data.recipe_id);
+  if(response.ok){
+    setTimeout(function(){bringThisRecipe(data.recipe_id)}, 1000); 
+  }
 }
 
 async function bringThisRecipe(recipeId){
