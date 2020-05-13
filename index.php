@@ -304,7 +304,7 @@
     </div>
     <div class="form-group">
       <label for="recipeDes">Cocktail description:</label>
-      <textarea class="form-control" name="recipeDes" id="recipeDes" rows="3" placeholder="Tell us about your cocktail"></textarea>
+      <textarea class="form-control" name="recipeDes" id="recipeDes" rows="3" placeholder="Please briefly tell us about your cocktail"></textarea>
     </div>
     <div class="form-group">
       <label for="recipeUrl">Cocktail image url:</label>
@@ -316,7 +316,7 @@
     <div class="form-row">
       <div class="form-group col-6">
         <label for="quantity1">Quantity</label>
-        <input type="number" class="form-control" name="quantity1" id="quantity1">
+        <input type="text" class="form-control" name="quantity1" id="quantity1">
       </div>
       <div class="form-group col-6">
         <label for="measurement1">Measurement</label>
@@ -328,6 +328,12 @@
           <option value="5">cup(s)</option>
           <option value="6">slice(s)</option>
           <option value="7">fresh</option>
+          <option value="8">cube(s)</option>
+          <option value="9">tsp</option>
+          <option value="10">tbsp</option>
+          <option value="11">bottle(s)</option>
+          <option value="12">can(s)</option>
+          <option value="13">pinch</option>
         </select>
       </div>
       <div class="form-group col-12">
@@ -339,7 +345,7 @@
     <div class="form-row">
       <div class="form-group col-6">
         <label for="quantity2">Quantity</label>
-        <input type="number" class="form-control" name="quantity2" id="quantity2">
+        <input type="text" class="form-control" name="quantity2" id="quantity2">
       </div>
       <div class="form-group col-6">
         <label for="measurement2">Measurement</label>
@@ -351,6 +357,12 @@
           <option value="5">cup(s)</option>
           <option value="6">slice(s)</option>
           <option value="7">fresh</option>
+          <option value="8">cube(s)</option>
+          <option value="9">tsp</option>
+          <option value="10">tbsp</option>
+          <option value="11">bottle(s)</option>
+          <option value="12">can(s)</option>
+          <option value="13">pinch</option>
         </select>
       </div>
       <div class="form-group col-12">

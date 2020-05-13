@@ -106,7 +106,7 @@ $('#ingreButton').on('click', function(){
   var html = `<div class="form-row">
                 <div class="form-group col-6">
                   <label for="quantity${ingredientsCount}">Quantity</label>
-                  <input type="number" class="form-control" name="quantity${ingredientsCount}" id="quantity${ingredientsCount}">
+                  <input type="text" class="form-control" name="quantity${ingredientsCount}" id="quantity${ingredientsCount}">
                 </div>
                 <div class="form-group col-6">
                   <label for="measurement${ingredientsCount}">Measurement</label>
@@ -118,6 +118,12 @@ $('#ingreButton').on('click', function(){
                     <option value="5">cup(s)</option>
                     <option value="6">slice(s)</option>
                     <option value="7">fresh</option>
+                    <option value="8">cube(s)</option>
+                    <option value="9">tsp</option>
+                    <option value="10">tbsp</option>
+                    <option value="11">bottle(s)</option>
+                    <option value="12">can(s)</option>
+                    <option value="13">pinch</option>
                   </select>
                 </div>
                 <div class="form-group col-12">
