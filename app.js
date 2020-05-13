@@ -215,7 +215,7 @@ async function logoutUser(){
 }
 
 document.getElementById('createRecipe').addEventListener('submit', createRecipe);
-async function createRecipe(e){
+async function createRecipe(e, isUpdate){
   e.preventDefault();
 
   var name = document.getElementById('recipeName').value;
@@ -232,6 +232,11 @@ async function createRecipe(e){
   var itemArray = [];
   var stepArray = [];
 
+  if(isUpdate){
+    var i_idArray = [];
+    var met_idArray = [];
+  }
+
   for(i=1; i<16;i++){
     console.log(i);
     if( Boolean(document.getElementById('quantity'+ i)) &&
@@ -246,12 +251,18 @@ async function createRecipe(e){
             quantityArray.push(document.getElementById('quantity'+ i).value);
             measurementArray.push(document.getElementById('measurement'+ i).value);
             itemArray.push(document.getElementById('item'+ i).value);
+            if(isUpdate){
+              i_idArray.push(document.getElementById('quantity'+ i).getAttribute('data-iid'));
+            }
           }
         }
 
     if(Boolean(document.getElementById('step'+ i))){
       if((document.getElementById('step'+ i).value)){
         stepArray.push(document.getElementById('step'+ i).value);
+        if(isUpdate){
+          met_idArray.push(document.getElementById('step'+ i).getAttribute('data-metId'));
+        }
       }
     }
   }
@@ -260,26 +271,51 @@ async function createRecipe(e){
     eval('outputObj.quantity' + i + '= ' + 'quantityArray[i-1]' +';');
     eval('outputObj.measurement' + i + '= ' + 'measurementArray[i-1]' +';');
     eval('outputObj.item' + i + '= ' + 'itemArray[i-1]' +';');
+    if(isUpdate){
+      eval('outputObj.i_id' + i + '= ' + 'i_idArray[i-1]' +';');
+    }
   }
 
   for(i=1; i<= stepArray.length; i++){
     eval('outputObj.step' + i + '= ' + 'stepArray[i-1]' +';');
+    if(isUpdate){
+      eval('outputObj.met_id' + i + '= ' + 'met_idArray[i-1]' +';');
+    }
   }
 
-  let response = await fetch('./api/ws.php?method=crecipe', {
-    method: 'POST',
-    headers: {
-      'Accept': 'applcation/json',
-      'Content-type': 'application/json'
-    },
-    body:JSON.stringify(outputObj)
-  });
-  let data = await response.json();
+  if(isUpdate){
+    let response = await fetch('./api/ws.php?method=urecipe&id=' + isUpdate, {
+      method: 'PUT',
+      headers: {
+        'Accept': 'applcation/json',
+        'Content-type': 'application/json'
+      },
+      body:JSON.stringify(outputObj)
+    });
+    let data = await response.json();
+    friendlyReminder(response.ok, data.message);
+    if(response.ok){
+      setTimeout(function(){bringThisRecipe(isUpdate)}, 1000);
+    }
 
-  friendlyReminder(response.ok, data.message);
-  if(response.ok){
-    setTimeout(function(){bringThisRecipe(data.recipe_id)}, 1000); 
   }
+  if(!isUpdate){
+    let response = await fetch('./api/ws.php?method=crecipe', {
+      method: 'POST',
+      headers: {
+        'Accept': 'applcation/json',
+        'Content-type': 'application/json'
+      },
+      body:JSON.stringify(outputObj)
+    });
+    let data = await response.json();
+    friendlyReminder(response.ok, data.message);
+    if(response.ok){
+      setTimeout(function(){bringThisRecipe(data.recipe_id)}, 1000); 
+    }
+  }
+  
+  
 }
 
 async function bringThisRecipe(recipeId){
@@ -583,6 +619,9 @@ async function bringUpdatePage(recipeId){
         </form>`
 
   resultDiv.innerHTML = output;
+  updateRecipe.addEventListener('submit', function(e){
+    createRecipe(e, result.data[0].recipe_id);
+  });
 }
 
 ////// search related ///////////////////////////////
