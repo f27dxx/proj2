@@ -17,6 +17,7 @@
 </head>
 <body>
 <?php session_start(); ?>
+
   <!-- modal -->
   <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -293,5 +294,6 @@
 </div>
 <!-- end of login form -->
 
+<div id="spinner" class="show" hidden></div> 
 </body>
 </html>

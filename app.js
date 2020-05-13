@@ -25,6 +25,7 @@ $('.spirit').on('click', function(){
   console.log(spiritName);
 
   searchThis(spiritName);
+  showSpinner(true);
 })
 
 //end of off-canvas menu
@@ -144,6 +145,7 @@ $('#stepButton').on('click', function(){
 document.getElementById('registerUser').addEventListener('submit', registerUser);
 async function registerUser(e){
   e.preventDefault();
+  showSpinner(true);
 
   let username = document.getElementById('r-username').value;
   let password = document.getElementById('r-password').value;
@@ -164,12 +166,14 @@ async function registerUser(e){
   friendlyReminder(response.ok, data.message);
   document.getElementById('r-password').value = '';
 
+  showSpinner(false);
 
 }
 
 document.getElementById('login').addEventListener('submit', loginUser);
 async function loginUser(e){
   e.preventDefault();
+  showSpinner(true);
 
   let username = document.getElementById('l-username').value;
   let password = document.getElementById('l-password').value;
@@ -194,11 +198,15 @@ async function loginUser(e){
 
   }
   document.getElementById('l-password').value = '';
-  friendlyReminder(response.ok, data.message)
+  friendlyReminder(response.ok, data.message);
+  showSpinner(false);
+
 }
 
 document.getElementById('logoutUser').addEventListener('click', logoutUser);
 async function logoutUser(){
+  showSpinner(true);
+
   let response = await fetch('./api/ws.php?method=logout', {
     method: 'POST'
   });
@@ -212,12 +220,14 @@ async function logoutUser(){
   friendlyReminder(response.ok, data.message)
   showLoggedInItem(false);  
 
+  showSpinner(false);
 
 }
 
 document.getElementById('createRecipe').addEventListener('submit', createRecipe);
 async function createRecipe(e, isUpdate){
   e.preventDefault();
+  showSpinner(true);
 
   var name = document.getElementById('recipeName').value;
   var description = document.getElementById('recipeDes').value;
@@ -316,10 +326,13 @@ async function createRecipe(e, isUpdate){
     }
   }
   
-  
+  showSpinner(false);
+
 }
 
 async function bringThisRecipe(recipeId){
+  showSpinner(true);
+
   let response = await fetch('./api/ws.php?method=rrecipe&id=' + recipeId, {
     method: 'GET'
   });
@@ -439,6 +452,7 @@ async function bringThisRecipe(recipeId){
   hideAllForm();
   resultDiv.removeAttribute('hidden');
 
+  showSpinner(false);
   //// linking function
   $('#addCommentButton').on('click', function(){
     $('#addCommentDiv').toggleClass('hidden');
@@ -454,6 +468,9 @@ async function bringThisRecipe(recipeId){
 }
 
 async function deleteThisRecipe(recipe_id){
+  showSpinner(true);
+
+
   let response = await fetch('./api/ws.php?method=drecipe&id=' + recipe_id, {
     method: 'DELETE'
   });
@@ -464,10 +481,15 @@ async function deleteThisRecipe(recipe_id){
     showContent(true);
   }
   confirmModal.innerHTML = '';
+
+  showSpinner(false);
+
 }
 
 
 async function searchThis(searchItem, forMainPage){
+  showSpinner(true);
+
   if(!forMainPage){
     var response = await fetch('./api/ws.php?method=search&searchfield=' + searchItem, {
       method: 'GET'
@@ -527,13 +549,15 @@ async function searchThis(searchItem, forMainPage){
     searchDiv.removeAttribute('hidden');
   }
 
-
+  showSpinner(false);
 }
 ////// comment related //////////////////////////////
 
 
 async function createComment(e){
   e.preventDefault();
+  showSpinner(true);
+
 
   let recipe_id = document.querySelector('#resultDiv h3').id;
   let content = commentContent.value;
@@ -550,10 +574,13 @@ async function createComment(e){
 
   friendlyReminder(response.ok, result.message);
   setTimeout(function(){bringThisRecipe(recipe_id)}, 1000);
+  showSpinner(false);
 
 }
 
 async function deleteThisComment(cId, recipeId){
+  showSpinner(true);
+
   let response = await fetch('./api/ws.php?method=dcomment&id=' + recipeId, {
     method: 'DELETE',
     headers: {
@@ -570,9 +597,13 @@ async function deleteThisComment(cId, recipeId){
   if(response.ok){
     setTimeout(function(){bringThisRecipe(recipeId);}, 1000); 
   }
+  showSpinner(false);
+
 }
 /////// update related //////////////////////////////
 async function bringUpdatePage(recipeId){
+  showSpinner(true);
+
   let response = await fetch('./api/ws.php?method=rrecipe&id=' + recipeId, {
     method: 'GET'
   });
@@ -638,11 +669,13 @@ async function bringUpdatePage(recipeId){
   output += `<hr>
           <input class="btn btn-primary mx-auto" type="submit" value="Submit">
         </form>`
-
+  
   resultDiv.innerHTML = output;
   updateRecipe.addEventListener('submit', function(e){
     createRecipe(e, result.data[0].recipe_id);
   });
+  showSpinner(false);
+
 }
 
 ////// search related ///////////////////////////////
@@ -768,3 +801,13 @@ function showConfirmModal(id, boo){
 darkSwitch.addEventListener('click', function(){
   document.querySelector('.offcanvas-collapse').classList.remove('open');
 })
+
+function showSpinner(boo) {
+  var spinner = document.getElementById("spinner");
+  if(boo){
+    spinner.removeAttribute('hidden');
+  }
+  if(!boo){
+    spinner.setAttribute('hidden', 'hidden');
+  }
+}
