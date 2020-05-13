@@ -423,7 +423,9 @@ async function deleteThisRecipe(recipe_id){
   let result = await response.json();
 
   friendlyReminder(response.ok, result.message);
-  showContent(true);
+  if(response.ok){
+    showContent(true);
+  }
   confirmModal.innerHTML = '';
 }
 
@@ -508,7 +510,9 @@ async function deleteThisComment(cId, recipeId){
   friendlyReminder(response.ok, result.message);
   
   confirmModal.innerHTML = '';
-  setTimeout(function(){bringThisRecipe(recipeId);}, 1000); 
+  if(response.ok){
+    setTimeout(function(){bringThisRecipe(recipeId);}, 1000); 
+  }
 }
 
 ////// search related ///////////////////////////////
