@@ -104,6 +104,8 @@
   </div>
 </nav>
 <!--  END NAVBAR   -->
+<div id="confirmModal">
+</div>
 <!-- slide show -->
 <div style='height:25px; width: 100%; color:white; text-align:center; position:fixed; top:56px; z-index:1;' id='friendly-reminder' hidden></div>
 

@@ -196,6 +196,11 @@ body {
   border-style: solid;
   border-color: #6c757d;
 }
+
+[data-theme="dark"] .modal-footer button{
+  color: #eee !important;
+ 
+}
 /* dark theme css */
 
 

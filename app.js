@@ -8,7 +8,7 @@ $(window).on('load',function(){
   }
 });
 // off-canvas menu
-
+showContent(false);
 $(document).ready(function() {
  // executes when HTML-Document is loaded and DOM is ready
   console.log("document is ready");
@@ -314,7 +314,7 @@ async function bringThisRecipe(recipeId){
     output += `<div class="row mb-2">
                 <div class="col-12">
                   <button type="button" class="btn btn-secondary btn-sm">Update</button>
-                  <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                  <button type="button" class="btn btn-danger btn-sm" onclick="showConfirmModal(${result.data[0].recipe_id})">Delete</button>
                 </div>
               </div>`
   }
@@ -404,6 +404,18 @@ async function bringThisRecipe(recipeId){
   })
 }
 
+async function deleteThisRecipe(recipe_id){
+  let response = await fetch('./api/ws.php?method=drecipe&id=' + recipe_id, {
+    method: 'DELETE'
+  });
+  let result = await response.json();
+
+  friendlyReminder(response.ok, result.message);
+  showContent(true);
+  confirmModal.innerHTML = '';
+}
+
+
 async function searchThis(searchItem){
   let response = await fetch('./api/ws.php?method=search&searchfield=' + searchItem, {
     method: 'GET'
@@ -411,7 +423,7 @@ async function searchThis(searchItem){
   let result = await response.json();
 
   if(!response.ok){
-    return friendlyReminder(response.ok, message);
+    return friendlyReminder(response.ok, result.message);
   }
 
   let output = '';
@@ -535,4 +547,27 @@ function hideAllForm(){
   for(i=0; i<form.length; i++){
     form[i].setAttribute('hidden', 'hidden');
   }
+}
+
+function showConfirmModal(recipe_id){
+  var output = '';
+  output += `<div class="modal" style="display:block;">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Delete confirmation</h5>
+                  </div>
+                  <div class="modal-body">
+                    <p>Are you sure you want to delete this?</p><p> This can't be undone</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn" onclick='confirmModal.innerHTML=""'>No</button>
+                    <button type="button" class="btn btn-danger" onclick="deleteThisRecipe(${recipe_id})">Delete</button>
+                  </div>
+                </div>
+              </div>
+            </div>`
+
+  confirmModal.innerHTML = output;
+
 }

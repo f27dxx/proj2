@@ -3,6 +3,10 @@ you will have to change the $username and $password matching your configuration 
 
 Some of the answer was included in doc/PROJ2.doc
 
+Frederick Frederick0
+uxboi thisisuxboI0
+uxgurl thisisuxgurL0
+
 There are rules to use the API:
 1. Everyone can read recipe
 2. Everyone can search recipe
