@@ -431,7 +431,7 @@ async function bringThisRecipe(recipeId){
                     <div class="input-icons mb-0 hidden" id="addCommentDiv"> 
                       <i id="addCommentIcon" class="fas fa-level-down-alt mt-3" style="left:90%; transform:rotate(90deg);"></i> 
                       <form id="addCommentForm">
-                        <input class="input-field" type="text" id="commentContent">
+                        <input required maxlength="50" title="Comment cannot be blank." class="input-field" type="text" id="commentContent">
                       </form>
                     </div>`
   for(i=0; i < result.data[0].comm_arr.length; i++ ){
