@@ -1331,7 +1331,7 @@
       }
 
 
-      $query = 'SELECT i.recipe_id FROM ingredient i
+      $query = 'SELECT DISTINCT r.thumbsUp, i.recipe_id FROM ingredient i
                 JOIN recipe r
                 WHERE item LIKE :item and i.recipe_id = r.recipe_id
                 ORDER BY thumbsUp DESC';

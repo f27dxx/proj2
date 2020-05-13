@@ -175,19 +175,12 @@
   </div>
 </div>
 <!-- end of recommandation -->
-<!-- search result -->
-  <div class="container searchResult hidden">
-    <div id='searchResult1'></div>
-    <div id='searchResult2'></div>
-    <div id='searchResult3'></div>
-    <div id='searchResult4'></div>
-    <div id='searchResult5'></div>
-    <div id='searchResult6'></div>
-    <div id='searchResult7'></div>
-    <div id='searchResult8'></div>
-    <div id='searchResult9'></div>
-    <div id='searchResult10'></div>
+<!-- searchDiv -->
+  <div class="container form "id="searchDiv" hidden>
+
   </div>
+<!-- end search result -->
+
 <!-- end of search result -->
 <div class="container form" id='resultDiv' hidden>
   <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gettyimages-957892610-1554995400.jpg?resize=480:*" style="width:100%;" class="img-fluid" alt="Responsive image">

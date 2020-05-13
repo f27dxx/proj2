@@ -19,31 +19,11 @@ $(document).ready(function() {
 
 $('.spirit').on('click', function(){
   $('.offcanvas-collapse').toggleClass('open');
-  $('.content').addClass('hidden');
-  $('.form').addClass('hidden');
-  $('.searchResult').removeClass('hidden');
 
   var spiritName = this.innerText;
   console.log(spiritName);
 
-  $.getJSON('https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=' + spiritName, function(data) {
-    for(i=0; i<data.drinks.length; i++){
-
-    
-    var text = `<div class="row" style="padding-top: 5%;">
-                <div class="col-5">
-                  <img src="${data.drinks[i].strDrinkThumb}" class="rounded img-thumbnail p-0" style="height: 100px;" alt="...">
-                </div>
-                <div class="col-7">
-                  <p>${data.drinks[i].strDrink}</p>
-                  <a class="btn btn-primary btn-sm" href="#" role="button">more</a>
-                </div>
-                </div>`
-                
-    $("#searchResult"+i).html(text);
-    }
-    console.log(data)
-});
+  searchThis(spiritName);
 })
 
 //end of off-canvas menu
@@ -316,7 +296,7 @@ async function bringThisRecipe(recipeId){
   output = `  <img src="${result.data[0].imgUrl}" style="width:100%;" class="img-fluid" alt="Responsive image">
                 <div class="row">
                   <div class="col-12">
-                    <h3 style="margin-top:10px;" id="${result.data[0].recipe_id}"><strong>${result.data[0].name}</strong></h3>
+                    <h3 style="margin-top:10px;" id="${result.data[0].recipe_id}"><b>${result.data[0].name}</b></h3>
                   </div>
                 </div>
                 <div class="row">
@@ -424,6 +404,50 @@ async function bringThisRecipe(recipeId){
   })
 }
 
+async function searchThis(searchItem){
+  let response = await fetch('./api/ws.php?method=search&searchfield=' + searchItem, {
+    method: 'GET'
+  });
+  let result = await response.json();
+
+  if(!response.ok){
+    return friendlyReminder(response.ok, message);
+  }
+
+  let output = '';
+
+  for( i = 0; i < result.data.length; i++){
+    output += `<div class="row mt-3">
+                <div class="col-5">
+                  <img src="${result.data[i].imgUrl}" class="rounded img-thumbnail p-0" style="height: 100px;" alt="...">
+                </div>
+                <div class="col-7">
+                  <div class="row h-25 mh-25">
+                    <p class="mb-1" onclick="bringThisRecipe(${result.data[i].recipe_id})"><strong><u>${result.data[i].name}</u></strong></p>
+                  </div>
+                  <div class="row h-50 mh-50">`
+    if(result.data[i].ingre_arr.length >2 ){
+      output += `<p style="font-size:.8em;" class="m-0"><i>${result.data[i].ingre_arr[0].item}, ${result.data[i].ingre_arr[1].item}, ${result.data[i].ingre_arr[2].item} ...</i></p>`
+    } else {
+      output += `<p style="font-size:.8em;" class="m-0"><i>${result.data[i].ingre_arr[0].item}, ${result.data[i].ingre_arr[1].item}</i></p>`
+    }
+      output +=  `</div>
+                  <div class="row h-25 mh-25">
+                    <span><i class="far fa-heart"></i> ${result.data[i].thumbsUp}</span>
+                  </div>
+                </div>
+              </div>
+              <hr>`
+
+  }
+  searchDiv.innerHTML = output;
+  showContent(false);
+  hideAllForm();
+  searchDiv.removeAttribute('hidden');
+
+}
+
+////////// UX function below /////////////////////////
 function friendlyReminder(responseOK, message) {
   var reminderDiv = document.getElementById('friendly-reminder');
   reminderDiv.removeAttribute('hidden');
