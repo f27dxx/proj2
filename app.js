@@ -313,7 +313,7 @@ async function bringThisRecipe(recipeId){
     
     output += `<div class="row mb-2">
                 <div class="col-12">
-                  <button type="button" class="btn btn-secondary btn-sm">Update</button>
+                  <button type="button" class="btn btn-secondary btn-sm" onclick="bringUpdatePage(${result.data[0].recipe_id})">Update</button>
                   <button type="button" class="btn btn-danger btn-sm" onclick="showConfirmModal(${result.data[0].recipe_id}, false)">Delete</button>
                 </div>
               </div>`
@@ -513,6 +513,76 @@ async function deleteThisComment(cId, recipeId){
   if(response.ok){
     setTimeout(function(){bringThisRecipe(recipeId);}, 1000); 
   }
+}
+/////// update related //////////////////////////////
+async function bringUpdatePage(recipeId){
+  let response = await fetch('./api/ws.php?method=rrecipe&id=' + recipeId, {
+    method: 'GET'
+  });
+  let result = await response.json();
+  let output = '';
+
+  output += `<form id='updateRecipe'>
+              <h5>Update recipe</h5>
+              <hr>
+              <div class="form-group">
+                <label for="recipeName">Cocktail name:</label>
+                <input value="${result.data[0].name}" required pattern="[A-Za-z0-9 ']{2,30}" title="Name must within 2-30 English letters or numbers" type="text" class="form-control" id="recipeName" name="recipeName" placeholder="What's the name of your cocktail?">
+              </div>
+              <div class="form-group">
+                <label for="recipeDes">Cocktail description:</label>
+                <textarea required pattern="[A-Za-z0-9' ]{20,600}" title="Description must within 20-600 English letters or numbers" class="form-control" name="recipeDes" id="recipeDes" rows="3" placeholder="Please briefly tell us about your cocktail (within 100 words)">${result.data[0].description}</textarea>
+              </div>
+              <div class="form-group">
+                <label for="recipeUrl">Cocktail image url:</label>
+                <input value="${result.data[0].imgUrl}" required pattern="https://.+" title="Must input a valid link with https://" type="text" class="form-control" id="recipeUrl" name="recipeUrl" placeholder="Please paste the link here">
+              </div>
+              <hr>
+              <h6>Ingredients</h6>`;
+  for( i=1; i <= result.data[0].ingre_arr.length; i++){
+    output += `<div class="form-row">
+                <div class="form-group col-6">
+                  <label for="quantity${i}">Quantity</label>
+                  <input data-iid="${result.data[0].ingre_arr[i-1].i_id}" value="${result.data[0].ingre_arr[i-1].quantity}" required pattern="[0-9/ ]{1,6}" title="Must within 1-6 numbers or '/'" type="text" class="form-control" name="quantity${i}" id="quantity${i}">
+                </div>
+                <div class="form-group col-6">
+                  <label for="measurement${i}">Measurement</label>
+                  <select  required class="form-control" name="measurement1" id="measurement${i}">
+                    <option value="1">ml</option>
+                    <option value="2">dash(es)</option>
+                    <option value="3">oz</option>
+                    <option value="4">drop(s)</option>
+                    <option value="5">cup(s)</option>
+                    <option value="6">slice(s)</option>
+                    <option value="7">fresh</option>
+                    <option value="8">cube(s)</option>
+                    <option value="9">tsp</option>
+                    <option value="10">tbsp</option>
+                    <option value="11">bottle(s)</option>
+                    <option value="12">can(s)</option>
+                    <option value="13">pinch</option>
+                  </select>
+                </div>
+                <div class="form-group col-12">
+                  <label for="item${i}">Item</label>
+                  <input value="${result.data[0].ingre_arr[i-1].item}" required pattern="[a-zA-Z '.]{3,50}" title="Item must within 3-50 English letters" type="text" class="form-control" name="item${i}" id="item${i}">
+                </div>
+              </div>`;
+  }
+  output += `<hr>
+  <h6>Please update your recipe</h6>`;
+  for( i=1; i<= result.data[0].step_arr.length; i++){
+    output += `<div class="form-group">
+                <label for="step${i}">step ${i}</label>
+                <textarea data-metId="${result.data[0].step_arr[i-1].met_id}" required pattern="[A-Za-z0-9' ]{20,600}" title="Each step must within 20-600 English letters or numbers" class="form-control" id="step${i}" name="step${i}" rows="3">${result.data[0].step_arr[i-1].step}</textarea>
+              </div>`;
+  }
+  
+  output += `<hr>
+          <input class="btn btn-primary mx-auto" type="submit" value="Submit">
+        </form>`
+
+  resultDiv.innerHTML = output;
 }
 
 ////// search related ///////////////////////////////
