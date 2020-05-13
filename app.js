@@ -6,6 +6,7 @@ $(window).on('load',function(){
   if(window.localStorage.getItem('user_id')){
     showLoggedInItem(true);
   }
+  searchThis(false, true);
 });
 // off-canvas menu
 
@@ -340,7 +341,7 @@ async function bringThisRecipe(recipeId){
                     <p class='mb-2'>by <i>${result.data[0].username}</i></p>
                   </div>
                   <div class="col-3">
-                    <span><i class="far fa-heart"></i> ${result.data[0].thumbsUp}</span>
+                    <span><i class="far fa-heart" onclick="this.style.color='red'"></i> ${result.data[0].thumbsUp}</span>
                   </div>
                 </div>`
 
@@ -466,19 +467,32 @@ async function deleteThisRecipe(recipe_id){
 }
 
 
-async function searchThis(searchItem){
-  let response = await fetch('./api/ws.php?method=search&searchfield=' + searchItem, {
-    method: 'GET'
-  });
-  let result = await response.json();
+async function searchThis(searchItem, forMainPage){
+  if(!forMainPage){
+    var response = await fetch('./api/ws.php?method=search&searchfield=' + searchItem, {
+      method: 'GET'
+    });
+    var result = await response.json();
+  
+    if(!response.ok){
+      return friendlyReminder(response.ok, result.message);
+    }
+  }
 
-  if(!response.ok){
-    return friendlyReminder(response.ok, result.message);
+  
+  if(forMainPage){
+    response = await fetch('./api/ws.php?method=rrecipe', {
+      method: 'GET'
+    });
+    result = await response.json();
   }
 
   let output = '';
-
-  for( i = 0; i < result.data.length; i++){
+  var loopTime = result.data.length;
+  if(forMainPage){
+    loopTime = 3;
+  }
+  for( i = 0; i < loopTime; i++){
     output += `<div class="row mt-3">
                 <div class="col-5">
                   <img src="${result.data[i].imgUrl}" class="rounded img-thumbnail p-0" style="height: 100px;" alt="...">
@@ -495,17 +509,24 @@ async function searchThis(searchItem){
     }
       output +=  `</div>
                   <div class="row h-25 mh-25">
-                    <span><i class="far fa-heart"></i> ${result.data[i].thumbsUp}</span>
+                    <span><i class="far fa-heart" onclick="this.style.color='red'"></i> ${result.data[i].thumbsUp}</span>
                   </div>
                 </div>
               </div>
               <hr>`
 
   }
-  searchDiv.innerHTML = output;
-  showContent(false);
-  hideAllForm();
-  searchDiv.removeAttribute('hidden');
+
+  if(forMainPage){
+    mainPageDiv.innerHTML = output;
+  }
+  if(!forMainPage){
+    searchDiv.innerHTML = output;
+    showContent(false);
+    hideAllForm();
+    searchDiv.removeAttribute('hidden');
+  }
+
 
 }
 ////// comment related //////////////////////////////
@@ -743,3 +764,7 @@ function showConfirmModal(id, boo){
   confirmModal.innerHTML = output;
 
 }
+
+darkSwitch.addEventListener('click', function(){
+  document.querySelector('.offcanvas-collapse').classList.remove('open');
+})

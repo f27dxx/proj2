@@ -149,34 +149,7 @@
 </div>
 <!-- end slide show -->
 <!-- recommandation -->
-<div class="container content">
-  <div class="row" style="padding-top: 5%;">
-    <div class="col-5">
-      <img src="https://www.bbcgoodfood.com/sites/default/files/editor_files/2017/11/bloody_mary.jpg" class="rounded img-thumbnail p-0" style="height: 100px;" alt="...">
-    </div>
-    <div class="col-7">
-      <p>Lorem ipsum dolor sit amet consectetu...</p>
-      <a class="btn btn-primary btn-sm" href="#" role="button">more</a>
-    </div>
-  </div>
-  <div class="row" style="padding-top: 5%;">
-    <div class="col-5">
-      <img src="https://www.bbcgoodfood.com/sites/default/files/editor_files/2017/11/cosmo.jpg" class="rounded img-thumbnail p-0" style="height: 100px;" alt="...">
-    </div>
-    <div class="col-7">
-      <p>Lorem ipsum dolor sit amet consectetu...</p>
-      <a class="btn btn-primary btn-sm" href="#" role="button">more</a>
-    </div>
-  </div>
-  <div class="row" style="padding-top: 5%;">
-    <div class="col-5">
-      <img src="https://www.bbcgoodfood.com/sites/default/files/guide/guide-image/2017/11/five.jpg" class="rounded img-thumbnail p-0" style="height: 100px;" alt="...">
-    </div>
-    <div class="col-7">
-      <p>Lorem ipsum dolor sit amet consectetu...</p>
-      <a class="btn btn-primary btn-sm" href="#" role="button">more</a>
-    </div>
-  </div>
+<div class="container content" id="mainPageDiv">
 </div>
 <!-- end of recommandation -->
 <!-- searchDiv -->
