@@ -314,7 +314,7 @@ async function bringThisRecipe(recipeId){
     output += `<div class="row mb-2">
                 <div class="col-12">
                   <button type="button" class="btn btn-secondary btn-sm">Update</button>
-                  <button type="button" class="btn btn-danger btn-sm" onclick="showConfirmModal(${result.data[0].recipe_id})">Delete</button>
+                  <button type="button" class="btn btn-danger btn-sm" onclick="showConfirmModal(${result.data[0].recipe_id}, 'recipe')">Delete</button>
                 </div>
               </div>`
   }
@@ -549,7 +549,8 @@ function hideAllForm(){
   }
 }
 
-function showConfirmModal(recipe_id){
+function showConfirmModal(id, which){
+  
   var output = '';
   output += `<div class="modal" style="display:block;">
               <div class="modal-dialog modal-dialog-centered">
@@ -561,9 +562,14 @@ function showConfirmModal(recipe_id){
                     <p>Are you sure you want to delete this?</p><p> This can't be undone</p>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn" onclick='confirmModal.innerHTML=""'>No</button>
-                    <button type="button" class="btn btn-danger" onclick="deleteThisRecipe(${recipe_id})">Delete</button>
-                  </div>
+                    <button type="button" class="btn" onclick='confirmModal.innerHTML=""'>No</button>`
+  if(which == 'recipe'){
+    output += `<button type="button" class="btn btn-danger" onclick="deleteThisRecipe(${id})">Delete</button>`
+  }
+  if(which == 'comment'){
+    console.log('test ok');
+  }
+  output +=       `</div>
                 </div>
               </div>
             </div>`
