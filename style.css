@@ -197,7 +197,12 @@ body {
   border-color: #6c757d;
 }
 
-[data-theme="dark"] .modal-footer button{
+[data-theme="dark"] .modal-footer button.btn-danger{
+  color: #eee !important;
+ 
+}
+
+[data-theme="dark"] #confirmModalNo{
   color: #eee !important;
  
 }

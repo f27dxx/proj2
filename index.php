@@ -208,7 +208,7 @@
       </div>
       <div class="form-group col-12">
         <label for="item1">Item</label>
-        <input required pattern="[a-zA-Z '.]{3,50}" title="Item must within 3-50 English letters" type="text" class="form-control" name="item1" id="item1">
+        <input required pattern="[a-zA-Z0-9 '.]{3,50}" title="Item must within 3-50 English letters" type="text" class="form-control" name="item1" id="item1">
       </div>
     </div>
 
@@ -237,7 +237,7 @@
       </div>
       <div class="form-group col-12">
         <label for="item2">Item</label>
-        <input required pattern="[a-zA-Z '.]{3,50}" title="Item must within 3-50 English letters" type="text" class="form-control" name="item2" id="item2">
+        <input required pattern="[a-zA-Z0-9 '.]{3,50}" title="Item must within 3-50 English letters" type="text" class="form-control" name="item2" id="item2">
       </div>
     </div>
     <div class="newIngre"></div>

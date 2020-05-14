@@ -431,7 +431,7 @@ async function bringThisRecipe(recipeId){
                     <div class="input-icons mb-0 hidden" id="addCommentDiv"> 
                       <i id="addCommentIcon" class="fas fa-level-down-alt mt-3" style="left:90%; transform:rotate(90deg);"></i> 
                       <form id="addCommentForm">
-                        <input required maxlength="50" title="Comment cannot be blank." class="input-field" type="text" id="commentContent">
+                        <input required pattern="[a-zA-Z '.!\?]{3,50}" title="Comment must within 3-50 characters" class="input-field" type="text" id="commentContent">
                       </form>
                     </div>`
   for(i=0; i < result.data[0].comm_arr.length; i++ ){
@@ -653,7 +653,7 @@ async function bringUpdatePage(recipeId){
                 </div>
                 <div class="form-group col-12">
                   <label for="item${i}">Item</label>
-                  <input value="${result.data[0].ingre_arr[i-1].item}" required pattern="[a-zA-Z '.]{3,50}" title="Item must within 3-50 English letters" type="text" class="form-control" name="item${i}" id="item${i}">
+                  <input value="${result.data[0].ingre_arr[i-1].item}" required pattern="[a-zA-Z0-9 '.]{3,50}" title="Item must within 3-50 English letters" type="text" class="form-control" name="item${i}" id="item${i}">
                 </div>
               </div>`;
   }
@@ -782,7 +782,7 @@ function showConfirmModal(id, boo){
                     <p>Are you sure you want to delete this?</p><p> This can't be undone</p>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn" onclick='confirmModal.innerHTML=""'>No</button>`
+                    <button type="button" class="btn" onclick='confirmModal.innerHTML=""' id="confirmModalNo">No</button>`
   if(!boo){
     output += `<button type="button" class="btn btn-danger" onclick="deleteThisRecipe(${id})">Delete</button>`
   }
