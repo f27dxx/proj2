@@ -497,6 +497,7 @@ async function searchThis(searchItem, forMainPage){
     var result = await response.json();
   
     if(!response.ok){
+      showSpinner(false);
       return friendlyReminder(response.ok, result.message);
     }
   }
