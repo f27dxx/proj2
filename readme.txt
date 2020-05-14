@@ -12,17 +12,21 @@ Add comment icon will only show after user login.
 
 All screenshots will be provided in UX2.doc in doc/
 
-please import good_ux2_cocktailer.sql in doc/ in your database name as cocktailer to get the dummy data.
+please import ux2_cocktailer.sql in doc/ in your database name as cocktailer to get the dummy data.
 you may have to change the $username and $password matching your configuration in /config/Database.php
 
 you can search 'manhattan'(cocktail name) or 'bitter'(cocktail ingredient) to get dummy data.
-you can also search for your own cocktail by the item or cocktail name after created.
+you can also search for your own cocktail recipe by the ingredient or cocktail name after created.
 the searchbar will show after you click the search icon on top right corner.
 click on the recipe name at the search result to access the show page.
 Update / Delete button in show page will only show if the user own the recipe or user has admin privilege.
 
 you can only create recipe after login.
 
+All recipe was created by uxboi on purpose.
+For checking showpage UI with the cocktail recipe owner, login to uxboi (username: uxboi, password: thisisuxboI0)
+For checking showpage UI with a normal user login to uxgurl (username: uxgurl, password: thisisuxgurL0)
+For checking showpage UI with admin user, login to admin (username: admin, password: thisisadmiN0)
 
 ///////////////////////////////////////////////  PROJ2 below ////////////////////////////////////////
 
