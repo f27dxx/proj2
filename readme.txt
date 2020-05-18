@@ -1,7 +1,44 @@
+/////////////////////////////////////////////// For UX2 /////////////////////////////////////////////
+This app will need jQuery, Bootstrap 4, Bootstrap javascript, fontawesome to run properly.
+Data exchange will be handled by fetch API to implement AJAX, no refresh page.
+A modal will pop-up to ask if the visitor is over 18 years old, if choose no, it will redirect visitor to see the alcohol law in Aus.
+If visitor answer 'yes' / 'no, but i'm not drink', set a localStorage item 'isAdult' to prevent the modal pop up again.
+dark theme selection will be include in the setting tab in navbar, user preference will be saved at localStorage.
+A friendly reminder will show up to provider feedback to user, green = action success, red = action fail.
+spinner will show before json object renderd from web server.
+three recipe with the most thumbs up will show in the main page.
+Login/Logout/Sign Up options are included in the left bottom corner of navbar.
+Add comment icon will only show after user login.
+
+All screenshots will be provided in UX2.doc in doc/
+
+please import ux2_cocktailer.sql in doc/ in your database name as cocktailer to get the dummy data.
+you may have to change the $username and $password matching your configuration in /config/Database.php
+
+you can search 'manhattan'(cocktail name) or 'bitter'(cocktail ingredient) to get dummy data.
+you can also search for your own cocktail recipe by the ingredient or cocktail name after created.
+the searchbar will show after you click the search icon on top right corner.
+click on the recipe name at the search result to access the show page.
+Update / Delete button in show page will only show if the user own the recipe or user has admin privilege.
+
+you can only create recipe after login.
+
+All recipe was created by uxboi on purpose.
+For checking showpage UI with the cocktail recipe owner, login to uxboi (username: uxboi, password: thisisuxboI0)
+For checking showpage UI with a normal user login to uxgurl (username: uxgurl, password: thisisuxgurL0)
+For checking showpage UI with admin user, login to admin (username: admin, password: thisisadmiN0)
+
+///////////////////////////////////////////////  PROJ2 below ////////////////////////////////////////
+
+
 i'm using MAMP for mac. it has Apache, MySQL, PHP, phpMyAdmin built-in as a package. 
 you will have to change the $username and $password matching your configuration in /config/Database.php
 
 Some of the answer was included in doc/PROJ2.doc
+
+Frederick Frederick0
+uxboi thisisuxboI0
+uxgurl thisisuxgurL0
 
 There are rules to use the API:
 1. Everyone can read recipe

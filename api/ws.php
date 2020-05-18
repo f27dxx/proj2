@@ -56,6 +56,7 @@
             'imgUrl' => $imgUrl,
             'thumbsUp' => $thumbsUp,
             'user_id' => $user_id,
+            'username' => $username,
             'ingre_arr' => $ingre_arr,
             'step_arr'=> $step_arr,
             'comm_arr' => $comm_arr
@@ -130,11 +131,12 @@
 
         if($recipe->createUser()){
           echo json_encode(
-            array('message' => 'user added')
+            array('message' => 'User added')
           );
         } else {
+          http_response_code(409);
           echo json_encode(
-            array('message' => 'user not added, user already exist')
+            array('message' => 'Username already exist, try again')
           );
         }
       break;
@@ -147,9 +149,13 @@
 
         if($recipe->validateUser()){
           echo json_encode(
-            array('message' => 'Logged in')
+            array('message' => 'Welcome back, my friend',
+                  'privilege' => $_SESSION['privilege'],
+                  'user_id' => $_SESSION['user_id'],
+                  'username' => $_SESSION['username'])
           );
         } else {
+          http_response_code(401);
           echo json_encode(
             array('message' => 'Wrong Combination, try again.')
           );
@@ -161,7 +167,7 @@
         unset($_SESSION['privilege']);
         unset($_SESSION['logged_in']);
         echo json_encode(
-          array('message' => 'You have logged out')
+          array('message' => 'Successfully logged out')
         );
         // echo  $_SESSION['username'];
         // echo $_SESSION['user_id'];
@@ -287,12 +293,14 @@
 
           if($recipe->createRecipe()){
             echo json_encode(
-              array('message' => 'recipe added')
+              array('message' => 'Recipe added',
+                    'recipe_id' => $_SESSION['myLastRecipe'])
             );
+            unset($_SESSION['myLastRecipe']);
           } else {
             http_response_code(501);
             echo json_encode(
-              array('message' => 'recipe not added')
+              array('message' => 'Recipe not added')
             );
           }
         } else {
@@ -318,12 +326,12 @@
             //delete recipe
             if($recipe->deleteRecipe()){
               echo json_encode(
-                array('message' => 'recipe Delete')
+                array('message' => 'Recipe delete')
               );
             } else {
               //if somehow the user own the recipe cannot delete it
               echo json_encode(
-                array('message' => 'recipe not Delete')
+                array('message' => 'Recipe not delete')
               );
             }
             
@@ -485,11 +493,11 @@
 
             if($recipe->updateRecipe()){
               echo json_encode(
-                array('message' => 'recipe updated')
+                array('message' => 'Recipe updated')
               );
             } else {
               echo json_encode(
-                array('message' => 'recipe NOT updated')
+                array('message' => 'Recipe NOT updated')
               );
             }
 
@@ -605,6 +613,7 @@
                   'description' => $description,
                   'imgUrl' => $imgUrl,
                   'user_id' => $user_id,
+                  'username' => $username,
                   'thumbsUp' => $thumbsUp,
                   'ingre_arr' => $ingre_arr,
                   'step_arr'=> $step_arr,

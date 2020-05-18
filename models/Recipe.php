@@ -25,7 +25,9 @@
     //Get Recipe
     public function getRecipe(){
       //Query
-      $query = 'SELECT * FROM recipe
+      $query = 'SELECT r.*, l.username FROM recipe r
+                JOIN login l
+                where l.user_id = r.user_id
                 ORDER BY thumbsUp DESC';
 
       //Prepare statment
@@ -87,8 +89,9 @@
 
     //get single post
     public function read_single($id){
-      $query = 'SELECT * FROM recipe
-                WHERE recipe_id = ' .$id ;
+      $query = 'SELECT r.*, l.username FROM recipe r
+                JOIN login l
+                where l.user_id = r.user_id and recipe_id = ' .$id ;
       $stmt = $this->conn->prepare($query);
       //bind id
       // $stmt->bindParam(1, $this->id);
@@ -559,6 +562,7 @@
 
       //save into database
       if($this->conn->commit()){
+        $_SESSION['myLastRecipe'] = $lastRecipeId;
         return true;
       }
 
@@ -1267,20 +1271,23 @@
       $stmt = $this->conn->prepare($query);
       $stmt->bindParam(':username', $this->username);
       $stmt->execute();
-      $row = $stmt->fetch();
-      // $password = $this->password;
-      if(password_verify($this->password, $row['password'])) {
-        // assign session variables
-        $_SESSION['username'] = $this->username;
-        $_SESSION['user_id'] = $row['user_id'];
-        $_SESSION['privilege'] = $row['privilege'];
-        $_SESSION['logged_in'] = true;
-        echo  $_SESSION['username'];
-        echo $_SESSION['user_id'];
-        echo $_SESSION['privilege'];
-        echo $_SESSION['logged_in'];
-        return true;
+      if($stmt->rowCount() > 0 ){
+        $row = $stmt->fetch();
+        // $password = $this->password;
+        if(password_verify($this->password, $row['password'])) {
+          // assign session variables
+          $_SESSION['username'] = $this->username;
+          $_SESSION['user_id'] = $row['user_id'];
+          $_SESSION['privilege'] = $row['privilege'];
+          $_SESSION['logged_in'] = true;
+          // echo  $_SESSION['username'];
+          // echo $_SESSION['user_id'];
+          // echo $_SESSION['privilege'];
+          // echo $_SESSION['logged_in'];
+          return true;
+        }
       }
+
       // printf('Error: %s.\n', $stmt->error);
 
       return false;
@@ -1324,7 +1331,7 @@
       }
 
 
-      $query = 'SELECT i.recipe_id FROM ingredient i
+      $query = 'SELECT DISTINCT r.thumbsUp, i.recipe_id FROM ingredient i
                 JOIN recipe r
                 WHERE item LIKE :item and i.recipe_id = r.recipe_id
                 ORDER BY thumbsUp DESC';
