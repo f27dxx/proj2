@@ -152,6 +152,8 @@ async function registerUser(e){
 
   let response = await fetch('./api/ws.php?method=register', {
     method: 'POST',
+    cache: 'no-cache',
+    credentials: 'include',
     headers: {
       'Accept': 'applcation/json',
       'Content-type': 'application/json'
@@ -180,6 +182,8 @@ async function loginUser(e){
 
   let response = await fetch('./api/ws.php?method=login', {
     method: 'POST',
+    cache: 'no-cache',
+    credentials: 'include',
     headers: {
       'Accept': 'applcation/json',
       'Content-type': 'application/json'
@@ -208,7 +212,9 @@ async function logoutUser(){
   showSpinner(true);
 
   let response = await fetch('./api/ws.php?method=logout', {
-    method: 'POST'
+    method: 'POST',
+    cache: 'no-cache',
+    credentials: 'include'
   });
   let data = await response.json();
 
@@ -297,6 +303,8 @@ async function createRecipe(e, isUpdate){
   if(isUpdate){
     let response = await fetch('./api/ws.php?method=urecipe&id=' + isUpdate, {
       method: 'PUT',
+      cache: 'no-cache',
+      credentials: 'include',
       headers: {
         'Accept': 'applcation/json',
         'Content-type': 'application/json'
@@ -313,6 +321,8 @@ async function createRecipe(e, isUpdate){
   if(!isUpdate){
     let response = await fetch('./api/ws.php?method=crecipe', {
       method: 'POST',
+      cache: 'no-cache',
+      credentials: 'include',
       headers: {
         'Accept': 'applcation/json',
         'Content-type': 'application/json'
@@ -334,7 +344,9 @@ async function bringThisRecipe(recipeId){
   showSpinner(true);
 
   let response = await fetch('./api/ws.php?method=rrecipe&id=' + recipeId, {
-    method: 'GET'
+    method: 'GET',
+    cache: 'no-cache',
+    credentials: 'include'
   });
   let result = await response.json();
 
@@ -472,7 +484,9 @@ async function deleteThisRecipe(recipe_id){
 
 
   let response = await fetch('./api/ws.php?method=drecipe&id=' + recipe_id, {
-    method: 'DELETE'
+    method: 'DELETE',
+    cache: 'no-cache',
+    credentials: 'include'
   });
   let result = await response.json();
 
@@ -492,7 +506,9 @@ async function searchThis(searchItem, forMainPage){
 
   if(!forMainPage){
     var response = await fetch('./api/ws.php?method=search&searchfield=' + searchItem, {
-      method: 'GET'
+      method: 'GET',
+      cache: 'no-cache',
+      credentials: 'include'
     });
     var result = await response.json();
   
@@ -505,7 +521,9 @@ async function searchThis(searchItem, forMainPage){
   
   if(forMainPage){
     response = await fetch('./api/ws.php?method=rrecipe', {
-      method: 'GET'
+      method: 'GET',
+      cache: 'no-cache',
+      credentials: 'include'
     });
     result = await response.json();
   }
@@ -565,6 +583,8 @@ async function createComment(e){
 
   let response = await fetch('./api/ws.php?method=ccomment&id=' + recipe_id, {
     method: 'POST',
+    cache: 'no-cache',
+    credentials: 'include',
     headers: {
       'Accept': 'applcation/json',
       'Content-type': 'application/json'
@@ -584,6 +604,8 @@ async function deleteThisComment(cId, recipeId){
 
   let response = await fetch('./api/ws.php?method=dcomment&id=' + recipeId, {
     method: 'DELETE',
+    cache: 'no-cache',
+    credentials: 'include',
     headers: {
       'Accept': 'applcation/json',
       'Content-type': 'application/json'
@@ -606,7 +628,9 @@ async function bringUpdatePage(recipeId){
   showSpinner(true);
 
   let response = await fetch('./api/ws.php?method=rrecipe&id=' + recipeId, {
-    method: 'GET'
+    method: 'GET',
+    cache: 'no-cache',
+    credentials: 'include'
   });
   let result = await response.json();
   let output = '';
@@ -812,3 +836,9 @@ function showSpinner(boo) {
     spinner.setAttribute('hidden', 'hidden');
   }
 }
+
+window.addEventListener('unload', function(){
+  window.localStorage.removeItem('user_id');
+  window.localStorage.removeItem('privilege');
+  window.localStorage.removeItem('username');
+})
