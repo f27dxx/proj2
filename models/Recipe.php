@@ -178,7 +178,7 @@
       $stmt->bindParam(':item', $this->item2);
       $stmt->execute();
 
-      if(isset($this->quantity3) && isset($this->measurement3) && isset($this->item3)){
+      if(!empty($this->quantity3) && !empty($this->measurement3) && !empty($this->item3)){
         $query = 'INSERT INTO ingredient
                 SET
                 recipe_id = :recipe_id,
@@ -201,7 +201,7 @@
         $stmt->execute();
       }
 
-      if(isset($this->quantity4) && isset($this->measurement4) && isset($this->item4)){
+      if(!empty($this->quantity4) && !empty($this->measurement4) && !empty($this->item4)){
         $query = 'INSERT INTO ingredient
                 SET
                 recipe_id = :recipe_id,
@@ -224,7 +224,7 @@
         $stmt->execute();
       }
 
-      if(isset($this->quantity5) && isset($this->measurement5) && isset($this->item5)){
+      if(!empty($this->quantity5) && !empty($this->measurement5) && !empty($this->item5)){
         $query = 'INSERT INTO ingredient
                 SET
                 recipe_id = :recipe_id,
@@ -247,7 +247,7 @@
         $stmt->execute();
       }
     
-      if(isset($this->quantity6) && isset($this->measurement6) && isset($this->item6)){
+      if(!empty($this->quantity6) && !empty($this->measurement6) && !empty($this->item6)){
         $query = 'INSERT INTO ingredient
                 SET
                 recipe_id = :recipe_id,
@@ -270,7 +270,7 @@
         $stmt->execute();
       }
 
-      if(isset($this->quantity7) && isset($this->measurement7) && isset($this->item7)){
+      if(!empty($this->quantity7) && !empty($this->measurement7) && !empty($this->item7)){
         $query = 'INSERT INTO ingredient
                 SET
                 recipe_id = :recipe_id,
@@ -293,7 +293,7 @@
         $stmt->execute();
       }
 
-      if(isset($this->quantity8) && isset($this->measurement8) && isset($this->item8)){
+      if(!empty($this->quantity8) && !empty($this->measurement8) && !empty($this->item8)){
         $query = 'INSERT INTO ingredient
                 SET
                 recipe_id = :recipe_id,
@@ -316,7 +316,7 @@
         $stmt->execute();
       }
 
-      if(isset($this->quantity9) && isset($this->measurement9) && isset($this->item9)){
+      if(!empty($this->quantity9) && !empty($this->measurement9) && !empty($this->item9)){
         $query = 'INSERT INTO ingredient
                 SET
                 recipe_id = :recipe_id,
@@ -339,7 +339,7 @@
         $stmt->execute();
       }
 
-      if(isset($this->quantity10) && isset($this->measurement10) && isset($this->item10)){
+      if(!empty($this->quantity10) && !empty($this->measurement10) && !empty($this->item10)){
         $query = 'INSERT INTO ingredient
                 SET
                 recipe_id = :recipe_id,
@@ -362,7 +362,7 @@
         $stmt->execute();
       }
 
-      if(isset($this->quantity11) && isset($this->measurement11) && isset($this->item11)){
+      if(!empty($this->quantity11) && !empty($this->measurement11) && !empty($this->item11)){
         $query = 'INSERT INTO ingredient
                 SET
                 recipe_id = :recipe_id,
@@ -385,7 +385,7 @@
         $stmt->execute();
       }
 
-      if(isset($this->quantity12) && isset($this->measurement12) && isset($this->item12)){
+      if(!empty($this->quantity12) && !empty($this->measurement12) && !empty($this->item12)){
         $query = 'INSERT INTO ingredient
                 SET
                 recipe_id = :recipe_id,
@@ -408,7 +408,7 @@
         $stmt->execute();
       }
 
-      if(isset($this->quantity13) && isset($this->measurement13) && isset($this->item13)){
+      if(!empty($this->quantity13) && !empty($this->measurement13) && !empty($this->item13)){
         $query = 'INSERT INTO ingredient
                 SET
                 recipe_id = :recipe_id,
@@ -431,7 +431,7 @@
         $stmt->execute();
       }
 
-      if(isset($this->quantity14) && isset($this->measurement14) && isset($this->item14)){
+      if(!empty($this->quantity14) && !empty($this->measurement14) && !empty($this->item14)){
         $query = 'INSERT INTO ingredient
                 SET
                 recipe_id = :recipe_id,
@@ -454,7 +454,7 @@
         $stmt->execute();
       }
 
-      if(isset($this->quantity15) && isset($this->measurement15) && isset($this->item15)){
+      if(!empty($this->quantity15) && !empty($this->measurement15) && !empty($this->item15)){
         $query = 'INSERT INTO ingredient
                 SET
                 recipe_id = :recipe_id,
@@ -494,7 +494,7 @@
       $stmt->bindParam(':step', $this->step1);
       $stmt->execute();
 
-      if(isset($this->step2)){
+      if(!empty($this->step2)){
         $query = 'INSERT INTO method
         SET
         recipe_id = :recipe_id,
@@ -510,7 +510,7 @@
         $stmt->execute();
       }
 
-      if(isset($this->step3)){
+      if(!empty($this->step3)){
         $query = 'INSERT INTO method
         SET
         recipe_id = :recipe_id,
@@ -526,7 +526,7 @@
         $stmt->execute();
       }
 
-      if(isset($this->step4)){
+      if(!empty($this->step4)){
         $query = 'INSERT INTO method
         SET
         recipe_id = :recipe_id,
@@ -543,7 +543,7 @@
       }
 
 
-      if(isset($this->step5)){
+      if(!empty($this->step5)){
         $query = 'INSERT INTO method
         SET
         recipe_id = :recipe_id,
@@ -650,7 +650,7 @@
       $stmt->bindParam(':i_id', $this->i_id2);
       $stmt->execute();
 
-      if(isset($this->quantity3) && isset($this->measurement3) && isset($this->item3) && isset($this->i_id3)){
+      if(!empty($this->quantity3) && !empty($this->measurement3) && !empty($this->item3) && !empty($this->i_id3)){
         $query = 'UPDATE ingredient
         SET
         quantity = :quantity,
@@ -676,7 +676,7 @@
 
       }
 
-      if(isset($this->quantity4) && isset($this->measurement4) && isset($this->item4) && isset($this->i_id4)){
+      if(!empty($this->quantity4) && !empty($this->measurement4) && !empty($this->item4) && !empty($this->i_id4)){
         $query = 'UPDATE ingredient
         SET
         quantity = :quantity,
@@ -702,7 +702,7 @@
 
       }
 
-      if(isset($this->quantity5) && isset($this->measurement5) && isset($this->item5) && isset($this->i_id5)){
+      if(!empty($this->quantity5) && !empty($this->measurement5) && !empty($this->item5) && !empty($this->i_id5)){
         $query = 'UPDATE ingredient
         SET
         quantity = :quantity,
@@ -728,7 +728,7 @@
 
       }
 
-      if(isset($this->quantity6) && isset($this->measurement6) && isset($this->item6) && isset($this->i_id6)){
+      if(!empty($this->quantity6) && !empty($this->measurement6) && !empty($this->item6) && !empty($this->i_id6)){
         $query = 'UPDATE ingredient
         SET
         quantity = :quantity,
@@ -754,7 +754,7 @@
 
       }
 
-      if(isset($this->quantity7) && isset($this->measurement7) && isset($this->item7) && isset($this->i_id7)){
+      if(!empty($this->quantity7) && !empty($this->measurement7) && !empty($this->item7) && !empty($this->i_id7)){
         $query = 'UPDATE ingredient
         SET
         quantity = :quantity,
@@ -780,7 +780,7 @@
 
       }
     
-      if(isset($this->quantity8) && isset($this->measurement8) && isset($this->item8) && isset($this->i_id8)){
+      if(!empty($this->quantity8) && !empty($this->measurement8) && !empty($this->item8) && !empty($this->i_id8)){
         $query = 'UPDATE ingredient
         SET
         quantity = :quantity,
@@ -806,7 +806,7 @@
 
       }
 
-      if(isset($this->quantity9) && isset($this->measurement9) && isset($this->item9) && isset($this->i_id9)){
+      if(!empty($this->quantity9) && !empty($this->measurement9) && !empty($this->item9) && !empty($this->i_id9)){
         $query = 'UPDATE ingredient
         SET
         quantity = :quantity,
@@ -832,7 +832,7 @@
 
       }
 
-      if(isset($this->quantity10) && isset($this->measurement10) && isset($this->item10) && isset($this->i_id10)){
+      if(!empty($this->quantity10) && !empty($this->measurement10) && !empty($this->item10) && !empty($this->i_id10)){
         $query = 'UPDATE ingredient
         SET
         quantity = :quantity,
@@ -858,7 +858,7 @@
 
       }
 
-      if(isset($this->quantity11) && isset($this->measurement11) && isset($this->item11) && isset($this->i_id11)){
+      if(!empty($this->quantity11) && !empty($this->measurement11) && !empty($this->item11) && !empty($this->i_id11)){
         $query = 'UPDATE ingredient
         SET
         quantity = :quantity,
@@ -884,7 +884,7 @@
 
       }
 
-      if(isset($this->quantity12) && isset($this->measurement12) && isset($this->item12) && isset($this->i_id12)){
+      if(!empty($this->quantity12) && !empty($this->measurement12) && !empty($this->item12) && !empty($this->i_id12)){
         $query = 'UPDATE ingredient
         SET
         quantity = :quantity,
@@ -910,7 +910,7 @@
 
       }
 
-      if(isset($this->quantity13) && isset($this->measurement13) && isset($this->item13) && isset($this->i_id13)){
+      if(!empty($this->quantity13) && !empty($this->measurement13) && !empty($this->item13) && !empty($this->i_id13)){
         $query = 'UPDATE ingredient
         SET
         quantity = :quantity,
@@ -936,7 +936,7 @@
 
       }
 
-      if(isset($this->quantity14) && isset($this->measurement14) && isset($this->item14) && isset($this->i_id14)){
+      if(!empty($this->quantity14) && !empty($this->measurement14) && !empty($this->item14) && !empty($this->i_id14)){
         $query = 'UPDATE ingredient
         SET
         quantity = :quantity,
@@ -962,7 +962,7 @@
 
       }
 
-      if(isset($this->quantity15) && isset($this->measurement15) && isset($this->item15) && isset($this->i_id15)){
+      if(!empty($this->quantity15) && !empty($this->measurement15) && !empty($this->item15) && !empty($this->i_id15)){
         $query = 'UPDATE ingredient
         SET
         quantity = :quantity,
@@ -1006,7 +1006,7 @@
       $stmt->bindParam(':met_id', $this->met_id1);
       $stmt->execute();
 
-      if(isset($this->step2) && isset($this->met_id2)){
+      if(!empty($this->step2) && !empty($this->met_id2)){
         $query = 'UPDATE method
         SET
         step = :step
@@ -1026,7 +1026,7 @@
 
       }
 
-      if(isset($this->step3) && isset($this->met_id3)){
+      if(!empty($this->step3) && !empty($this->met_id3)){
         $query = 'UPDATE method
         SET
         step = :step
@@ -1046,7 +1046,7 @@
 
       }
 
-      if(isset($this->step4) && isset($this->met_id4)){
+      if(!empty($this->step4) && !empty($this->met_id4)){
         $query = 'UPDATE method
         SET
         step = :step
@@ -1066,7 +1066,7 @@
 
       }
 
-      if(isset($this->step5) && isset($this->met_id5)){
+      if(!empty($this->step5) && !empty($this->met_id5)){
         $query = 'UPDATE method
         SET
         step = :step
