@@ -56,6 +56,7 @@ $('.showForm').on('click', function(){
   }
   if(showFormTarget == 'Create your recipe'){
     showFormTarget = '#createRecipeDiv';
+    resultDiv.innerHTML = '';
   }
   
   $(showFormTarget).removeAttr('hidden');
@@ -149,6 +150,9 @@ $('#stepButton').on('click', function(){
 document.getElementById('registerUser').addEventListener('submit', registerUser);
 async function registerUser(e){
   e.preventDefault();
+  if(!loginFormValidation(false)){
+    return;
+  }
   showSpinner(true);
 
   let username = document.getElementById('r-username').value;
@@ -179,6 +183,9 @@ async function registerUser(e){
 document.getElementById('login').addEventListener('submit', loginUser);
 async function loginUser(e){
   e.preventDefault();
+  if(!loginFormValidation(true)){
+    return;
+  }
   showSpinner(true);
 
   let username = document.getElementById('l-username').value;
@@ -238,8 +245,8 @@ document.getElementById('createRecipe').addEventListener('submit', createRecipe)
 async function createRecipe(e, isUpdate){
   e.preventDefault();
   showSpinner(true);
-  formValidation();
-  if(!formValidation()){
+  
+  if(!formValidation(isUpdate)){
     return showSpinner(false);
   }
   var name = document.getElementById('recipeName').value;
@@ -449,8 +456,9 @@ async function bringThisRecipe(recipeId){
                   <ul class="list-group list-group-flush2">
                     <div class="input-icons mb-0 hidden" id="addCommentDiv"> 
                       <i id="addCommentIcon" class="fas fa-level-down-alt mt-3" style="left:90%; transform:rotate(90deg);"></i> 
-                      <form id="addCommentForm">
+                      <form id="addCommentForm" novalidate>
                         <input required pattern="[a-zA-Z '.!\?]{3,50}" title="Comment must within 3-50 characters" class="input-field" type="text" id="commentContent">
+                        <div class="errorMsg" hidden>3 - 50 characters</div>
                       </form>
                     </div>`
   for(i=0; i < result.data[0].comm_arr.length; i++ ){
@@ -582,6 +590,9 @@ async function searchThis(searchItem, forMainPage){
 
 async function createComment(e){
   e.preventDefault();
+  if(!validateComment()){
+    return;
+  }
   showSpinner(true);
 
 
@@ -642,7 +653,7 @@ async function bringUpdatePage(recipeId){
   let result = await response.json();
   let output = '';
 
-  output += `<form id='updateRecipe'>
+  output += `<form id='updateRecipe' novalidate>
               <h5>Update recipe</h5>
               <hr>
               <div class="form-group">
@@ -857,7 +868,7 @@ window.addEventListener('unload', function(){
   window.localStorage.removeItem('username');
 })
 
-function formValidation() {
+function formValidation(isUpdate) {
   var allGood = true;
   const nameRex = /^[\w][a-zA-Z0-9 ']{1,29}$/;
   const descRex = /^[\w][a-zA-Z0-9 !?.']{14,599}$/;
@@ -865,18 +876,27 @@ function formValidation() {
   const quanRex = /^\d{1,3}$/;
   const meaRex = /^\d{1,2}$/;
   const itemRex = /^[\w][a-zA-Z0-9 ?!.']{1,49}$/;
-  const stepRex = /^[\w][a-zA-Z0-9 ?!.']{14,199}$/;
+  const stepRex = /^[\w][a-zA-Z0-9 ?!.'(),]{14,199}$/;
   var quanTarget;
   var meaTarget;
   var itemTarget;
   var stepTarget;
-
+  var recipeName = document.getElementById('recipeName');
+  var recipeDes = document.getElementById('recipeDes');
+  var recipeUrl = document.getElementById('recipeUrl');
+  if(isUpdate) {
+    recipeName = document.querySelectorAll('#recipeName')[0];
+    recipeDes = document.querySelectorAll('#recipeDes')[0];
+    recipeUrl = document.querySelectorAll('#recipeUrl')[0];
+  }
   // validate create / update form
   if(recipeName){
     document.querySelector("#recipeName + div.errorMsg").setAttribute('hidden', 'hidden');
-    if(!nameRex.test(recipeName.value)){
+    if(nameRex.test(recipeName.value)){
+    } else {
       document.querySelector("#recipeName + div.errorMsg").removeAttribute('hidden');
       allGood = false;
+      console.log(recipeName.value)
     }
   }
   if(recipeDes){
@@ -884,6 +904,7 @@ function formValidation() {
     if(!descRex.test(recipeDes.value)){
       document.querySelector("#recipeDes + div.errorMsg").removeAttribute('hidden');
       allGood = false;
+      console.log(recipeDes.value)
     }
   }
   if(recipeUrl){
@@ -891,6 +912,7 @@ function formValidation() {
     if(!urlRex.test(recipeUrl.value)){
       document.querySelector("#recipeUrl + div.errorMsg").removeAttribute('hidden');
       allGood = false;
+      console.log(recipeUrl.value)
     }
   }
 
@@ -908,6 +930,10 @@ function formValidation() {
           document.querySelector(`#quantity${i} + div.errorMsg`).removeAttribute('hidden');
           allGood = false
         }
+      }
+      if(i<3 && !quanTarget.value){
+        document.querySelector(`#quantity${i} + div.errorMsg`).removeAttribute('hidden');
+        allGood = false
       }
     }
     if(meaTarget){
@@ -929,6 +955,10 @@ function formValidation() {
           allGood = false
         }
       }
+      if(i<3 && !itemTarget.value){
+        document.querySelector(`#item${i} + div.errorMsg`).removeAttribute('hidden');
+        allGood = false
+      }
     }
   }
   //validate steps
@@ -943,11 +973,68 @@ function formValidation() {
           allGood = false
         }
       }
+      if(i<2 && !stepTarget.value) {
+        document.querySelector(`#step${i} + div.errorMsg`).removeAttribute('hidden');
+        allGood = false
+      }
     }
   }
   allError = document.querySelectorAll(".errorMsg");
   for (i=0; i<allError.length;i++) {
     allError[i].style.color = "red";
   }
+  return allGood;
+}
+
+function loginFormValidation(boo) {
+  var allGood = true;
+  const usernameRex = /^[a-zA-Z0-9]{3,17}[a-zA-Z0-9]$/;
+  const passwordRex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,60}/;
+  if (boo) {
+    document.querySelector('#l-username + div.errorMsg').setAttribute('hidden', 'hidden');
+    document.querySelector('#l-password + div.errorMsg').setAttribute('hidden', 'hidden');
+    if(usernameRex.test(document.getElementById('l-username').value)){
+    } else {
+      document.querySelector('#l-username + div.errorMsg').removeAttribute('hidden');
+      allGood = false;
+    }
+    if(passwordRex.test(document.getElementById('l-password').value)){
+    } else {
+      document.querySelector('#l-password + div.errorMsg').removeAttribute('hidden');
+      allGood = false;
+    }
+  }
+  if (!boo) {
+    document.querySelector('#r-username + div.errorMsg').setAttribute('hidden', 'hidden');
+    document.querySelector('#r-password + div.errorMsg').setAttribute('hidden', 'hidden');
+    if(usernameRex.test(document.getElementById('r-username').value)){
+    } else {
+      document.querySelector('#r-username + div.errorMsg').removeAttribute('hidden');
+      allGood = false;
+      console.log('r-u')
+    }
+    if(passwordRex.test(document.getElementById('r-password').value)){
+    } else {
+      document.querySelector('#r-password + div.errorMsg').removeAttribute('hidden');
+      allGood = false;
+      console.log('r-p')
+    }
+  }
+  allError = document.querySelectorAll(".errorMsg");
+  for (i=0; i<allError.length;i++) {
+    allError[i].style.color = "red";
+  }
+  return allGood;
+}
+
+function validateComment() {
+  var allGood = true;
+  var content = document.getElementById('commentContent').value;
+  document.querySelector('#commentContent + div.errorMsg').setAttribute('hidden', 'hidden');
+  if(content.length < 4 || content.length > 50) {
+    allGood = false
+    document.querySelector('#commentContent + div.errorMsg').removeAttribute('hidden');
+  }
+
   return allGood;
 }
