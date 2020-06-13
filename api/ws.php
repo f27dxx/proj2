@@ -140,10 +140,12 @@
         }
 
         if($recipe->createUser()){
+          $recipe->logging('register', 'success');
           echo json_encode(
             array('message' => 'User added')
           );
         } else {
+          $recipe->logging('register', 'fail');
           http_response_code(409);
           echo json_encode(
             array('message' => 'Username already exist, try again')
@@ -169,6 +171,7 @@
 
 
         if($recipe->validateUser()){
+          $recipe->logging('login', 'success');
           echo json_encode(
             array('message' => 'Welcome back, my friend',
                   'privilege' => $_SESSION['privilege'],
@@ -176,6 +179,7 @@
                   'username' => $_SESSION['username'])
           );
         } else {
+          $recipe->logging('login', 'fail');
           http_response_code(401);
           echo json_encode(
             array('message' => 'Wrong Combination, try again.')
@@ -187,6 +191,7 @@
         unset($_SESSION['user_id']);
         unset($_SESSION['privilege']);
         unset($_SESSION['logged_in']);
+        $recipe->logging('logout', 'success');
         echo json_encode(
           array('message' => 'Successfully logged out')
         );
@@ -216,80 +221,106 @@
           }
           $recipe->item2 = $data->item2;
 
-          if(is_numeric($data->quantity3) && isset($data->quantity3) && isset($data->measurement3) && isset($data->item3)){
-            $recipe->quantity3 = $data->quantity3;
+          if(isset($data->quantity3) && isset($data->measurement3) && isset($data->item3)){
+            if(is_numeric($data->quantity3)){
+              $recipe->quantity3 = $data->quantity3;
+            }
             $recipe->measurement3 = $data->measurement3;
             $recipe->item3 = $data->item3;
           }
 
-          if(is_numeric($data->quantity4) && isset($data->quantity4) && isset($data->measurement4) && isset($data->item4)){
-            $recipe->quantity4 = $data->quantity4;
+          if(isset($data->quantity4) && isset($data->measurement4) && isset($data->item4)){
+            if(is_numeric($data->quantity4)){
+              $recipe->quantity4 = $data->quantity4;
+            }
             $recipe->measurement4 = $data->measurement4;
             $recipe->item4 = $data->item4;
           }
 
-          if(is_numeric($data->quantity5) && isset($data->quantity5) && isset($data->measurement5) && isset($data->item5)){
-            $recipe->quantity5 = $data->quantity5;
+          if(isset($data->quantity5) && isset($data->measurement5) && isset($data->item5)){
+            if(is_numeric($data->quantity5)){
+              $recipe->quantity5 = $data->quantity5;
+            }
             $recipe->measurement5 = $data->measurement5;
             $recipe->item5 = $data->item5;
           }
 
-          if(is_numeric($data->quantity6) && isset($data->quantity6) && isset($data->measurement6) && isset($data->item6)){
-            $recipe->quantity6 = $data->quantity6;
+          if(isset($data->quantity6) && isset($data->measurement6) && isset($data->item6)){
+            if(is_numeric($data->quantity6)){
+              $recipe->quantity6 = $data->quantity6;
+            }
             $recipe->measurement6 = $data->measurement6;
             $recipe->item6 = $data->item6;
           }
 
-          if(is_numeric($data->quantity7) && isset($data->quantity7) && isset($data->measurement7) && isset($data->item7)){
-            $recipe->quantity7 = $data->quantity7;
+          if(isset($data->quantity7) && isset($data->measurement7) && isset($data->item7)){
+            if(is_numeric($data->quantity7)){
+              $recipe->quantity7 = $data->quantity7;
+            }
             $recipe->measurement7 = $data->measurement7;
             $recipe->item7 = $data->item7;
           }
 
-          if(is_numeric($data->quantity8) && isset($data->quantity8) && isset($data->measurement8) && isset($data->item8)){
-            $recipe->quantity8 = $data->quantity8;
+          if(isset($data->quantity8) && isset($data->measurement8) && isset($data->item8)){
+            if(is_numeric($data->quantity8)){
+              $recipe->quantity8 = $data->quantity8;
+            }
             $recipe->measurement8 = $data->measurement8;
             $recipe->item8 = $data->item8;
           }
 
-          if(is_numeric($data->quantity9) && isset($data->quantity9) && isset($data->measurement9) && isset($data->item9)){
-            $recipe->quantity9 = $data->quantity9;
+          if(isset($data->quantity9) && isset($data->measurement9) && isset($data->item9)){
+            if(is_numeric($data->quantity9)){
+              $recipe->quantity9 = $data->quantity9;
+            }
             $recipe->measurement9 = $data->measurement9;
             $recipe->item9 = $data->item9;
           }
 
-          if(is_numeric($data->quantity10) && isset($data->quantity10) && isset($data->measurement10) && isset($data->item10)){
-            $recipe->quantity10 = $data->quantity10;
+          if(isset($data->quantity10) && isset($data->measurement10) && isset($data->item10)){
+            if(is_numeric($data->quantity10)){
+              $recipe->quantity10 = $data->quantity10;
+            }
             $recipe->measurement10 = $data->measurement10;
             $recipe->item10 = $data->item10;
           }
 
-          if(is_numeric($data->quantity11) && isset($data->quantity11) && isset($data->measurement11) && isset($data->item11)){
-            $recipe->quantity11 = $data->quantity11;
+          if(isset($data->quantity11) && isset($data->measurement11) && isset($data->item11)){
+            if(is_numeric($data->quantity11)){
+              $recipe->quantity11 = $data->quantity11;
+            }
             $recipe->measurement11 = $data->measurement11;
             $recipe->item11 = $data->item11;
           }
 
-          if(is_numeric($data->quantity12) && isset($data->quantity12) && isset($data->measurement12) && isset($data->item12)){
-            $recipe->quantity12 = $data->quantity12;
+          if(isset($data->quantity12) && isset($data->measurement12) && isset($data->item12)){
+            if(is_numeric($data->quantity12)){
+              $recipe->quantity12 = $data->quantity12;
+            }
             $recipe->measurement12 = $data->measurement12;
             $recipe->item12 = $data->item12;
           }
 
-          if(is_numeric($data->quantity13) && isset($data->quantity13) && isset($data->measurement13) && isset($data->item13)){
-            $recipe->quantity13 = $data->quantity13;
+          if(isset($data->quantity13) && isset($data->measurement13) && isset($data->item13)){
+            if(is_numeric($data->quantity13)){
+              $recipe->quantity13 = $data->quantity13;
+            }
             $recipe->measurement13 = $data->measurement13;
             $recipe->item13 = $data->item13;
           }
 
-          if(is_numeric($data->quantity14) && isset($data->quantity14) && isset($data->measurement14) && isset($data->item14)){
-            $recipe->quantity14 = $data->quantity14;
+          if(isset($data->quantity14) && isset($data->measurement14) && isset($data->item14)){
+            if(is_numeric($data->quantity14)){
+              $recipe->quantity14 = $data->quantity14;
+            }
             $recipe->measurement14 = $data->measurement14;
             $recipe->item14 = $data->item14;
           }
 
-          if(is_numeric($data->quantity15) && isset($data->quantity15) && isset($data->measurement15) && isset($data->item15)){
-            $recipe->quantity15 = $data->quantity15;
+          if(isset($data->quantity15) && isset($data->measurement15) && isset($data->item15)){
+            if(is_numeric($data->quantity15)){
+              $recipe->quantity15 = $data->quantity15;
+            }
             $recipe->measurement15 = $data->measurement15;
             $recipe->item15 = $data->item15;
           }
@@ -318,18 +349,21 @@
 
 
           if($recipe->createRecipe()){
+            $recipe->logging('create recipe', 'success');
             echo json_encode(
               array('message' => 'Recipe added',
                     'recipe_id' => $_SESSION['myLastRecipe'])
             );
             unset($_SESSION['myLastRecipe']);
           } else {
+            $recipe->logging('create recipe', 'fail');
             http_response_code(501);
             echo json_encode(
               array('message' => 'Recipe not added')
             );
           }
         } else {
+          $recipe->logging('create recipe', 'fail');
           //if user is not logged in
           http_response_code(403);
           echo json_encode(
@@ -351,11 +385,13 @@
             $recipe->recipe_id = $_GET['id'];
             //delete recipe
             if($recipe->deleteRecipe()){
+              $recipe->logging('delete recipe', 'success');
               echo json_encode(
                 array('message' => 'Recipe delete')
               );
             } else {
               //if somehow the user own the recipe cannot delete it
+              $recipe->logging('delete recipe', 'fail');
               echo json_encode(
                 array('message' => 'Recipe not delete')
               );
@@ -363,6 +399,7 @@
             
           } else {
             //if logged in but user does not own the recipe
+            $recipe->logging('delete recipe', 'fail');
             http_response_code(403);
             echo json_encode(
               array('message' => 'Access denied')
@@ -371,6 +408,7 @@
 
         } else {
           //if get access to delete recipe but not logged in
+          $recipe->logging('delete recipe', 'fail');
           http_response_code(401);
           echo json_encode(
             array('message' => 'Not authorized.')
@@ -518,10 +556,12 @@
             }
 
             if($recipe->updateRecipe()){
+              $recipe->logging('update recipe', 'success');
               echo json_encode(
                 array('message' => 'Recipe updated')
               );
             } else {
+              $recipe->logging('update recipe', 'fail');
               echo json_encode(
                 array('message' => 'Recipe NOT updated')
               );
@@ -531,6 +571,7 @@
           ////////////////////////////////////////////////////////
             
           } else {
+            $recipe->logging('update recipe', 'fail');
             //if logged in but user does not own the recipe
             http_response_code(403);
             echo json_encode(
@@ -539,6 +580,7 @@
           }
 
         } else {
+          $recipe->logging('update recipe', 'fail');
           //if get access to delete recipe but not logged in
           http_response_code(401);
           echo json_encode(
@@ -558,16 +600,19 @@
         
         
           if($recipe->createComment()){
+            $recipe->logging('create comment', 'success');
             echo json_encode(
               array('message' => 'Comment added')
             );
           } else {
+            $recipe->logging('create comment', 'fail');
             echo json_encode(
               array('message' => 'Comment not added')
             );
           }
 
         } else {
+          $recipe->logging('create comment', 'success');
           //if get access to delete recipe but not logged in
           http_response_code(401);
           echo json_encode(
@@ -587,16 +632,19 @@
             $recipe->c_id = $data->c_id;
           
             if($recipe->deleteComment()){
+              $recipe->logging('delete comment', 'success');
               echo json_encode(
                 array('message' => 'Comment Delete')
               );
             } else {
+              $recipe->logging('delete comment', 'fail');
               echo json_encode(
                 array('message' => 'Comment not Delete')
               );
             }
             
           } else {
+            $recipe->logging('delete comment', 'fail');
             //if logged in but user does not own the recipe
             http_response_code(403);
             echo json_encode(
@@ -605,6 +653,7 @@
           }
 
         } else {
+          $recipe->logging('delete comment', 'fail');
           //if get access to delete recipe but not logged in
           http_response_code(401);
           echo json_encode(

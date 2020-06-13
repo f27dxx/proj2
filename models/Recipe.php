@@ -1344,4 +1344,33 @@
       return $stmt;
       
     }
+
+    public function logging($action, $success) {
+      $query = 'INSERT INTO log
+                SET
+                ip = :ip,
+                browser = :browser,
+                action = :action,
+                success= :success';
+
+      //prepate statement
+      $stmt = $this->conn->prepare($query);
+
+      //bind data
+      $stmt->bindParam(':ip', $_SERVER['REMOTE_ADDR']);
+      $stmt->bindParam(':browser', $_SERVER['HTTP_USER_AGENT']);
+      $stmt->bindParam(':action', $action);
+      $stmt->bindParam(':success', $success);
+
+      //save into database
+      if($stmt->execute()){
+
+        return true;
+      }
+
+      //print error if something goes wrong
+      // printf('Error: %s.\n', $stmt->error);
+
+      return false;
+    }
   }
