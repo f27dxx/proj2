@@ -896,14 +896,14 @@ function formValidation(isUpdate) {
     } else {
       document.querySelector("#recipeName + div.errorMsg").removeAttribute('hidden');
       allGood = false;
-      console.log(recipeName.value)
+      // console.log(recipeName.value)
     }
   }
   if(recipeDes){
     document.querySelector("#recipeDes + div.errorMsg").setAttribute('hidden', 'hidden');
     if(!descRex.test(recipeDes.value)){
       document.querySelector("#recipeDes + div.errorMsg").removeAttribute('hidden');
-      allGood = false;
+      // allGood = false;
       console.log(recipeDes.value)
     }
   }
@@ -912,7 +912,7 @@ function formValidation(isUpdate) {
     if(!urlRex.test(recipeUrl.value)){
       document.querySelector("#recipeUrl + div.errorMsg").removeAttribute('hidden');
       allGood = false;
-      console.log(recipeUrl.value)
+      // console.log(recipeUrl.value)
     }
   }
 
