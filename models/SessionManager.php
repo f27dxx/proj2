@@ -40,7 +40,7 @@
     }
 
     public function secLimit(){
-      // date_default_timezone_set ('Australia/Brisbane');
+      date_default_timezone_set ('Australia/Brisbane');
 
       if (isset($_SESSION['LAST_CALL'])) {
         $last = strtotime($_SESSION['LAST_CALL']);
