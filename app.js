@@ -12,7 +12,7 @@ $(window).on('load',function(){
 
 $(document).ready(function() {
  // executes when HTML-Document is loaded and DOM is ready
-  console.log("document is ready");
+  // console.log("document is ready");
   $('[data-toggle="offcanvas"], #navToggle').on('click', function () {
   $('.offcanvas-collapse').toggleClass('open');
   })
@@ -22,7 +22,7 @@ $('.spirit').on('click', function(){
   $('.offcanvas-collapse').toggleClass('open');
 
   var spiritName = this.innerText;
-  console.log(spiritName);
+  // console.log(spiritName);
 
   searchThis(spiritName);
   showSpinner(true);
@@ -41,7 +41,7 @@ $('.navbar-brand').on('click', function(){
 
 $('.showForm').on('click', function(){
   var showFormTarget = this.innerText;
-  console.log(showFormTarget);
+  // console.log(showFormTarget);
   $('.offcanvas-collapse').removeClass('open');
   $('.form').attr('hidden', 'hidden');
   $('.content').attr('hidden', 'hidden');
@@ -88,6 +88,7 @@ $('#ingreButton').on('click', function(){
                 <div class="form-group col-6">
                   <label for="quantity${ingredientsCount}">Quantity</label>
                   <input pattern="[0-9/ ]{1,6}" title="Must within 1-6 numbers or '/'" type="text" class="form-control" name="quantity${ingredientsCount}" id="quantity${ingredientsCount}">
+                  <div class="errorMsg" hidden>number only</div>
                 </div>
                 <div class="form-group col-6">
                   <label for="measurement${ingredientsCount}">Measurement</label>
@@ -105,11 +106,13 @@ $('#ingreButton').on('click', function(){
                     <option value="11">bottle(s)</option>
                     <option value="12">can(s)</option>
                     <option value="13">pinch</option>
-                  </select>
+                    </select>
+                    <div class="errorMsg" hidden></div>
                 </div>
                 <div class="form-group col-12">
                   <label for="item${ingredientsCount}">Item</label>
                   <input pattern="[a-zA-Z '.]{3,50}" title="Item must within 3-50 English letters" type="text" class="form-control" name="item${ingredientsCount}" id="item${ingredientsCount}">
+                  <div class="errorMsg" hidden>within 3 - 50 letters</div>
                 </div>
               </div>`
   if(ingredientsCount<16) {
@@ -125,7 +128,8 @@ $('#ingreButton').on('click', function(){
 $('#stepButton').on('click', function(){
   var html = `<div class="form-group">
                 <label for="step${stepCount}">step ${stepCount}</label>
-                <textarea pattern="[A-Za-z0-9' ]{20,600}" title="Each step must within 20-600 English letters or numbers" class="form-control" id="step${stepCount}" name="step${stepCount}" rows="3"></textarea>
+                <textarea pattern="[A-Za-z0-9' ]{20,600}" title="Each step must within 15-200 English letters or numbers" class="form-control" id="step${stepCount}" name="step${stepCount}" rows="3"></textarea>
+                <div class="errorMsg" hidden>within 15 - 200 letters</div>
               </div>`
   if(stepCount<6) {
     $(".newStep").append(html);
@@ -234,7 +238,10 @@ document.getElementById('createRecipe').addEventListener('submit', createRecipe)
 async function createRecipe(e, isUpdate){
   e.preventDefault();
   showSpinner(true);
-
+  formValidation();
+  if(!formValidation()){
+    return showSpinner(false);
+  }
   var name = document.getElementById('recipeName').value;
   var description = document.getElementById('recipeDes').value;
   var imgUrl = document.getElementById('recipeUrl').value;
@@ -255,7 +262,7 @@ async function createRecipe(e, isUpdate){
   }
 
   for(i=1; i<16;i++){
-    console.log(i);
+    // console.log(i);
     if( Boolean(document.getElementById('quantity'+ i)) &&
         Boolean(document.getElementById('measurement'+ i)) &&
         Boolean(document.getElementById('item'+ i))
@@ -641,14 +648,17 @@ async function bringUpdatePage(recipeId){
               <div class="form-group">
                 <label for="recipeName">Cocktail name:</label>
                 <input value="${result.data[0].name}" required pattern="[A-Za-z0-9 ']{2,30}" title="Name must within 2-30 English letters or numbers" type="text" class="form-control" id="recipeName" name="recipeName" placeholder="What's the name of your cocktail?">
+                <div class="errorMsg" hidden>Required, within 2-30 letters, no symbols</div>
               </div>
               <div class="form-group">
                 <label for="recipeDes">Cocktail description:</label>
                 <textarea required pattern="[A-Za-z0-9' ]{20,600}" title="Description must within 20-600 English letters or numbers" class="form-control" name="recipeDes" id="recipeDes" rows="3" placeholder="Please briefly tell us about your cocktail (within 100 words)">${result.data[0].description}</textarea>
+                <div class="errorMsg" hidden>required, within 15 - 600 letters</div>
               </div>
               <div class="form-group">
                 <label for="recipeUrl">Cocktail image url:</label>
                 <input value="${result.data[0].imgUrl}" required pattern="https://.+" title="Must input a valid link with https://" type="text" class="form-control" id="recipeUrl" name="recipeUrl" placeholder="Please paste the link here">
+                <div class="errorMsg" hidden>Required, must start with https://</div>
               </div>
               <hr>
               <h6>Ingredients</h6>`;
@@ -657,6 +667,7 @@ async function bringUpdatePage(recipeId){
                 <div class="form-group col-6">
                   <label for="quantity${i}">Quantity</label>
                   <input data-iid="${result.data[0].ingre_arr[i-1].i_id}" value="${result.data[0].ingre_arr[i-1].quantity}" required pattern="[0-9/ ]{1,6}" title="Must within 1-6 numbers or '/'" type="text" class="form-control" name="quantity${i}" id="quantity${i}">
+                  <div class="errorMsg" hidden>number only</div>
                 </div>
                 <div class="form-group col-6">
                   <label for="measurement${i}">Measurement</label>
@@ -675,10 +686,12 @@ async function bringUpdatePage(recipeId){
                     <option value="12">can(s)</option>
                     <option value="13">pinch</option>
                   </select>
+                  <div class="errorMsg" hidden></div>
                 </div>
                 <div class="form-group col-12">
                   <label for="item${i}">Item</label>
                   <input value="${result.data[0].ingre_arr[i-1].item}" required pattern="[a-zA-Z0-9 '.]{3,50}" title="Item must within 3-50 English letters" type="text" class="form-control" name="item${i}" id="item${i}">
+                  <div class="errorMsg" hidden>within 3 - 50 letters</div>
                 </div>
               </div>`;
   }
@@ -688,6 +701,7 @@ async function bringUpdatePage(recipeId){
     output += `<div class="form-group">
                 <label for="step${i}">step ${i}</label>
                 <textarea data-metId="${result.data[0].step_arr[i-1].met_id}" required pattern="[A-Za-z0-9' ]{20,600}" title="Each step must within 20-600 English letters or numbers" class="form-control" id="step${i}" name="step${i}" rows="3">${result.data[0].step_arr[i-1].step}</textarea>
+                <div class="errorMsg" hidden>within 15 - 200 letters</div>
               </div>`;
   }
   
@@ -842,3 +856,98 @@ window.addEventListener('unload', function(){
   window.localStorage.removeItem('privilege');
   window.localStorage.removeItem('username');
 })
+
+function formValidation() {
+  var allGood = true;
+  const nameRex = /^[\w][a-zA-Z0-9 ']{1,29}$/;
+  const descRex = /^[\w][a-zA-Z0-9 !?.']{14,599}$/;
+  const urlRex = /^(https:\/\/)/;
+  const quanRex = /^\d{1,3}$/;
+  const meaRex = /^\d{1,2}$/;
+  const itemRex = /^[\w][a-zA-Z0-9 ?!.']{1,49}$/;
+  const stepRex = /^[\w][a-zA-Z0-9 ?!.']{14,199}$/;
+  var quanTarget;
+  var meaTarget;
+  var itemTarget;
+  var stepTarget;
+
+  // validate create / update form
+  if(recipeName){
+    document.querySelector("#recipeName + div.errorMsg").setAttribute('hidden', 'hidden');
+    if(!nameRex.test(recipeName.value)){
+      document.querySelector("#recipeName + div.errorMsg").removeAttribute('hidden');
+      allGood = false;
+    }
+  }
+  if(recipeDes){
+    document.querySelector("#recipeDes + div.errorMsg").setAttribute('hidden', 'hidden');
+    if(!descRex.test(recipeDes.value)){
+      document.querySelector("#recipeDes + div.errorMsg").removeAttribute('hidden');
+      allGood = false;
+    }
+  }
+  if(recipeUrl){
+    document.querySelector("#recipeUrl + div.errorMsg").setAttribute('hidden', 'hidden');
+    if(!urlRex.test(recipeUrl.value)){
+      document.querySelector("#recipeUrl + div.errorMsg").removeAttribute('hidden');
+      allGood = false;
+    }
+  }
+
+  //validate ingredients
+  for(i=1; i<16; i++){
+    quanTarget = document.getElementById('quantity' + i);
+    meaTarget = document.getElementById('measurement' + i);
+    itemTarget = document.getElementById('item' + i);
+    // validate quantity
+    if(quanTarget){
+      document.querySelector(`#quantity${i} + div.errorMsg`).setAttribute('hidden', 'hidden');
+      if(quanTarget && quanTarget.value) {
+        if(quanRex.test(quanTarget.value)) {
+        } else {
+          document.querySelector(`#quantity${i} + div.errorMsg`).removeAttribute('hidden');
+          allGood = false
+        }
+      }
+    }
+    if(meaTarget){
+      document.querySelector(`#measurement${i} + div.errorMsg`).setAttribute('hidden', 'hidden');
+      if(meaTarget && meaTarget.value) {
+        if(meaRex.test(meaTarget.value)) {
+        } else {
+          document.querySelector(`#measurement${i} + div.errorMsg`).removeAttribute('hidden');
+          allGood = false
+        }
+      }
+    }
+    if(itemTarget){
+      document.querySelector(`#item${i} + div.errorMsg`).setAttribute('hidden', 'hidden');
+      if(itemTarget && itemTarget.value) {
+        if(itemRex.test(itemTarget.value)) {
+        } else {
+          document.querySelector(`#item${i} + div.errorMsg`).removeAttribute('hidden');
+          allGood = false
+        }
+      }
+    }
+  }
+  //validate steps
+  for(i=1; i < 6; i++){
+    stepTarget = document.getElementById('step' + i);
+    if(stepTarget){
+      document.querySelector(`#step${i} + div.errorMsg`).setAttribute('hidden', 'hidden');
+      if(stepTarget && stepTarget.value) {
+        if(stepRex.test(stepTarget.value)) {
+        } else {
+          document.querySelector(`#step${i} + div.errorMsg`).removeAttribute('hidden');
+          allGood = false
+        }
+      }
+    }
+  }
+  allError = document.querySelectorAll(".errorMsg");
+  for (i=0; i<allError.length;i++) {
+    allError[i].style.color = "red";
+  }
+  return allGood;
+}

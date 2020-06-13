@@ -13,6 +13,8 @@
   <script src="https://kit.fontawesome.com/e0994be304.js" crossorigin="anonymous"></script>
   <script defer src="app.js"></script>
   <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="./public/favicon_io/favicon.ico" type="image/gif" sizes="16x16">
   <title>Cocktailer</title>
 </head>
 <body>
@@ -164,20 +166,23 @@
 
 <!-- add recipe form element -->
 <div class="container form" hidden id='createRecipeDiv'>
-  <form id='createRecipe'>
+  <form id='createRecipe' novalidate>
     <h5>Create a recipe</h5>
     <hr>
     <div class="form-group">
       <label for="recipeName">Cocktail name:</label>
       <input required pattern="[A-Za-z0-9 ']{2,30}" title="Name must within 2-30 English letters or numbers" type="text" class="form-control" id="recipeName" name="recipeName" placeholder="What's the name of your cocktail?">
+      <div class="errorMsg" hidden>Required, within 2-30 letters, no symbols</div>
     </div>
     <div class="form-group">
       <label for="recipeDes">Cocktail description:</label>
       <textarea required pattern="[A-Za-z0-9' ]{20,600}" title="Description must within 20-600 English letters or numbers" class="form-control" name="recipeDes" id="recipeDes" rows="3" placeholder="Please briefly tell us about your cocktail (within 100 words)"></textarea>
+      <div class="errorMsg" hidden>Required, within 15 - 600 letters</div>
     </div>
     <div class="form-group">
       <label for="recipeUrl">Cocktail image url:</label>
       <input required pattern="https://.+" title="Must input a valid link with https://" type="text" class="form-control" id="recipeUrl" name="recipeUrl" placeholder="Please paste the link here">
+      <div class="errorMsg" hidden>Required, must start with https://</div>
     </div>
     <hr>
     <h6>Ingredients</h6>
@@ -186,6 +191,7 @@
       <div class="form-group col-6">
         <label for="quantity1">Quantity</label>
         <input required pattern="[0-9/ ]{1,6}" title="Must within 1-6 numbers or '/'" type="text" class="form-control" name="quantity1" id="quantity1">
+        <div class="errorMsg" hidden>required, number only</div>
       </div>
       <div class="form-group col-6">
         <label for="measurement1">Measurement</label>
@@ -204,10 +210,12 @@
           <option value="12">can(s)</option>
           <option value="13">pinch</option>
         </select>
+        <div class="errorMsg" hidden>required</div>
       </div>
       <div class="form-group col-12">
         <label for="item1">Item</label>
         <input required pattern="[a-zA-Z0-9 '.]{3,50}" title="Item must within 3-50 English letters" type="text" class="form-control" name="item1" id="item1">
+        <div class="errorMsg" hidden>required, within 3 - 50 letters </div>
       </div>
     </div>
 
@@ -215,6 +223,7 @@
       <div class="form-group col-6">
         <label for="quantity2">Quantity</label>
         <input required pattern="[0-9/ ]{1,6}" title="Must within 1-6 numbers or '/'" type="text" class="form-control" name="quantity2" id="quantity2">
+        <div class="errorMsg" hidden>required, number only</div>
       </div>
       <div class="form-group col-6">
         <label for="measurement2">Measurement</label>
@@ -233,10 +242,12 @@
           <option value="12">can(s)</option>
           <option value="13">pinch</option>
         </select>
+        <div class="errorMsg" hidden>required</div>
       </div>
       <div class="form-group col-12">
         <label for="item2">Item</label>
         <input required pattern="[a-zA-Z0-9 '.]{3,50}" title="Item must within 3-50 English letters" type="text" class="form-control" name="item2" id="item2">
+        <div class="errorMsg" hidden>required, with 3 - 50 letters</div>
       </div>
     </div>
     <div class="newIngre"></div>
@@ -249,6 +260,7 @@
     <div class="form-group">
       <label for="step1">step 1</label>
       <textarea required pattern="[A-Za-z0-9' ]{20,600}" title="Each step must within 20-600 English letters or numbers" class="form-control" id="step1" name="step1" rows="3"></textarea>
+      <div class="errorMsg" hidden>required, within 15 - 200 letters</div>
     </div>
     <div class="newStep"></div>
     <button type="button" class="btn btn-link btn-lg btn-block" id='stepButton'>Add more steps</button>
