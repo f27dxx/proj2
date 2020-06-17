@@ -682,7 +682,7 @@ async function bringUpdatePage(recipeId){
                 </div>
                 <div class="form-group col-6">
                   <label for="measurement${i}">Measurement</label>
-                  <select  required class="form-control" name="measurement1" id="measurement${i}">
+                  <select value="${result.data[0].ingre_arr[i-1].measurement}" required class="form-control" name="measurement1" id="measurement${i}">
                     <option value="1">ml</option>
                     <option value="2">dash(es)</option>
                     <option value="3">oz</option>
@@ -871,12 +871,12 @@ window.addEventListener('unload', function(){
 function formValidation(isUpdate) {
   var allGood = true;
   const nameRex = /^[\w][a-zA-Z0-9 ']{1,29}$/;
-  const descRex = /^[\w][a-zA-Z0-9 !?.']{14,599}$/;
+  const descRex = /^[\w][a-zA-Z0-9 !?.',\-]{14,599}$/;
   const urlRex = /^(https:\/\/)/;
   const quanRex = /^\d{1,3}$/;
   const meaRex = /^\d{1,2}$/;
   const itemRex = /^[\w][a-zA-Z0-9 ?!.']{1,49}$/;
-  const stepRex = /^[\w][a-zA-Z0-9 ?!.'(),]{14,199}$/;
+  const stepRex = /^[\w][a-zA-Z0-9 ?\-!\.'\(\),]{14,199}$/;
   var quanTarget;
   var meaTarget;
   var itemTarget;

@@ -43,7 +43,7 @@
     public function getIngre($recipe_id){
       //Query
       // $query = 'SELECT CONCAT(i.quantity, " ", m.type, " " ,i.item) AS ingredients
-      $query = 'SELECT i.i_id, i.quantity, m.type, i.item
+      $query = 'SELECT i.i_id, i.quantity, m.type, i.item, i.measurement
       FROM recipe r 
       JOIN ingredient i on i.recipe_id = r.recipe_id 
       JOIN measurement m on m.mea_id = i.measurement 
@@ -1329,8 +1329,6 @@
       if($stmt->rowCount() > 0){
         return $stmt;
       }
-
-
       $query = 'SELECT DISTINCT r.thumbsUp, i.recipe_id FROM ingredient i
                 JOIN recipe r
                 WHERE item LIKE :item and i.recipe_id = r.recipe_id
@@ -1364,13 +1362,8 @@
 
       //save into database
       if($stmt->execute()){
-
         return true;
       }
-
-      //print error if something goes wrong
-      // printf('Error: %s.\n', $stmt->error);
-
       return false;
     }
   }
